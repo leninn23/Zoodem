@@ -25,7 +25,7 @@ public class TerrainGenerator : MonoBehaviour
     private Perlin _heatMap;
     private Perlin _humidityMap;
 
-    [SerializeField] private bool generateMap;
+    // [SerializeField] private bool generateMap;
     public enum Biome
     {
         Glacier,
@@ -40,16 +40,16 @@ public class TerrainGenerator : MonoBehaviour
     private Dictionary<Vector2Int, TerrainUnit> _terrainDictionary;
     private Vector2Int _minCorner;
 
-    private void OnValidate()
-    {
-        if(!generateMap)    return;
-        UnityEditor.EditorApplication.delayCall += () =>
-        {
-            DestroyMap();
-            GenerateMap();
-        };
-        generateMap = false;
-    }
+    // private void OnValidate()
+    // {
+    //     if(!generateMap)    return;
+    //     UnityEditor.EditorApplication.delayCall += () =>
+    //     {
+    //         DestroyMap();
+    //         GenerateMap();
+    //     };
+    //     generateMap = false;
+    // }
 
     // Start is called before the first frame update
     void Awake()
@@ -70,7 +70,7 @@ public class TerrainGenerator : MonoBehaviour
         
     }
 
-    /**/
+    /**
     private int selected = -1;
     private Vector3 ssadas;
     private void OnGUI()
