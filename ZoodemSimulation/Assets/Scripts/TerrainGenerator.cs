@@ -265,5 +265,22 @@ public class TerrainGenerator : MonoBehaviour
                                                           Vector3.Distance(terrainUnit.realPosition, origin)));
         return list[0].realPosition;
     }
+
+    
+    public Nido GetClosestNest(Vector3 origin, float maxSearchDistance)
+    {
+        var nidos = _terrainDictionary.Values.Where(tu => tu.nest && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance).ToList();
+        nidos.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
+                                                           Vector3.Distance(terrainUnit.realPosition, origin)));
+        return nidos.First().nest;
+    }
+    // public Nido GetClosestNest(Vector3 origin, float maxSearchDistance, IAnimal animal)
+    // {
+    //     var nidos = _terrainDictionary.Values.Where(tu => tu.nest && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance && typeof(tu.nest.owner) == typeof(animal)).ToList();
+    //     nidos.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
+    //                                                        Vector3.Distance(terrainUnit.realPosition, origin)));
+    //     return nidos.First().nest;
+    // }
+    
     #endregion
 }
