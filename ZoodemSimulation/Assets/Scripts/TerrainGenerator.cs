@@ -38,7 +38,7 @@ public class TerrainGenerator : MonoBehaviour
     
     private Dictionary<Biome, List<TerrainUnit>> _biomes;
     private Dictionary<Vector2Int, TerrainUnit> _terrainDictionary;
-    private Vector2Int _minCorner;
+    public Vector2Int _minCorner;
 
     // private void OnValidate()
     // {
@@ -59,7 +59,8 @@ public class TerrainGenerator : MonoBehaviour
         _heatMap.SetSeed(Random.Range(0, 10000000));
         _humidityMap = new Perlin();
         _humidityMap.SetSeed(Random.Range(0, 10000000));
-        //
+        _minCorner = mapSize / 2;
+
         // DestroyMap();
         // GenerateMap();
     }
@@ -90,6 +91,30 @@ public class TerrainGenerator : MonoBehaviour
         }
         GUILayout.EndArea();
     }//*/
+    public Nido nest;
+    private Vector3 aaaa;
+    private void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(10, 10, 1000, 500));
+        
+        var a = GUILayout.TextArea(aaaa.x.ToString(CultureInfo.InvariantCulture));
+        var aa = GUILayout.TextArea(aaaa.z.ToString(CultureInfo.InvariantCulture));
+        if(float.TryParse(a, out var asa))
+        {
+            aaaa.x = asa;
+        }
+        if(float.TryParse(aa, out var asa2))
+        {
+            aaaa.z = asa2;
+        }
+        if (GUILayout.Button("Spawn nest at " + aaaa))
+        {
+            // aaaa.x = float.Parse(a);
+            // aaaa.y = float.Parse(aa);
+            SpawnNest(aaaa, nest, nest.gameObject);
+        }
+        GUILayout.EndArea();
+    }
 
     #region Map Generation
 
@@ -109,7 +134,6 @@ public class TerrainGenerator : MonoBehaviour
     {
         // _heatMap.SetSeed(Random.Range(0, 10000000));
         // _humidityMap.SetSeed(Random.Range(0, 10000000));
-        _minCorner = mapSize / 2;
         for (var x = 0; x < mapSize.x; x++)
         {
             for (var y = 0; y < mapSize.y; y++)
@@ -200,6 +224,28 @@ public class TerrainGenerator : MonoBehaviour
         };
     }
 
+    public Vector2Int RealPosToMapPos(Vector3 pos)
+    {
+        return new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z)) - _minCorner;
+    }
+    
+    public bool SpawnNest(Vector3 pos, Nido nido, GameObject owner)
+    {
+        var mapPos = RealPosToMapPos(pos);
+        Debug.Log("Map pos: " + mapPos);
+        if (_terrainDictionary.TryGetValue(mapPos, out var tu))
+        {
+            if(tu.nest) return false;
+
+            var tuNest = Instantiate(nido, pos, Quaternion.identity);
+            tu.nest = tuNest;
+            // TODO: SET OWNER OF NEST
+            return true;
+        }
+
+        return false;
+    }
+    #region  Perceptions
     public TerrainUnit GetTerrainAt(Vector3 pos)
     {
         var posInt = new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z));
@@ -219,4 +265,5 @@ public class TerrainGenerator : MonoBehaviour
                                                           Vector3.Distance(terrainUnit.realPosition, origin)));
         return list[0].realPosition;
     }
+    #endregion
 }
