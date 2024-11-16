@@ -91,30 +91,30 @@ public class TerrainGenerator : MonoBehaviour
         }
         GUILayout.EndArea();
     }//*/
-    public Nido nest;
-    private Vector3 aaaa;
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 1000, 500));
-        
-        var a = GUILayout.TextArea(aaaa.x.ToString(CultureInfo.InvariantCulture));
-        var aa = GUILayout.TextArea(aaaa.z.ToString(CultureInfo.InvariantCulture));
-        if(float.TryParse(a, out var asa))
-        {
-            aaaa.x = asa;
-        }
-        if(float.TryParse(aa, out var asa2))
-        {
-            aaaa.z = asa2;
-        }
-        if (GUILayout.Button("Spawn nest at " + aaaa))
-        {
-            // aaaa.x = float.Parse(a);
-            // aaaa.y = float.Parse(aa);
-            SpawnNest(aaaa, nest, nest.gameObject);
-        }
-        GUILayout.EndArea();
-    }
+    // public Nido nest;
+    // private Vector3 aaaa;
+    // private void OnGUI()
+    // {
+    //     GUILayout.BeginArea(new Rect(10, 10, 1000, 500));
+    //     
+    //     var a = GUILayout.TextArea(aaaa.x.ToString(CultureInfo.InvariantCulture));
+    //     var aa = GUILayout.TextArea(aaaa.z.ToString(CultureInfo.InvariantCulture));
+    //     if(float.TryParse(a, out var asa))
+    //     {
+    //         aaaa.x = asa;
+    //     }
+    //     if(float.TryParse(aa, out var asa2))
+    //     {
+    //         aaaa.z = asa2;
+    //     }
+    //     if (GUILayout.Button("Spawn nest at " + aaaa))
+    //     {
+    //         // aaaa.x = float.Parse(a);
+    //         // aaaa.y = float.Parse(aa);
+    //         SpawnNest(aaaa, nest, nest.gameObject);
+    //     }
+    //     GUILayout.EndArea();
+    // }
 
     #region Map Generation
 
