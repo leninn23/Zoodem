@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviourAPI.Core;
 using UnityEngine;
 
 public class Eagle : MonoBehaviour
 {
-    //public bool isInBiome;
+    public TerrainGenerator terrainGenerator;
+
+    public TerrainGenerator.Biome biomePreference = TerrainGenerator.Biome.Mountain;
+
+    public float speed;
+
+    public float distanceWalk;
+
+    private float currentDistanceWalk = 0;
+    public const float maxDistanceNest = 5f;
+
+    public Nido nidoPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,30 +29,32 @@ public class Eagle : MonoBehaviour
         
     }
 
-    public bool isInBiome(){
-        return true;
+    public bool IsInBiome(){
+        return terrainGenerator.IsBiomeOfPreference(transform.position, biomePreference);
+    }
+    
+    public Status TravelBiome() {
+        var direction = (terrainGenerator.LocateBiome(biomePreference, transform.position) - transform.position).normalized;
+        transform.Translate(direction*Time.deltaTime*speed);
+        
+        return IsInBiome() ? Status.Success : Status.Running;
     }
 
-    public void detectBiome() {
-        Debug.Log("Detectando bioma");
+    public Status Walk()
+    {
+        currentDistanceWalk += Time.deltaTime;
+        return currentDistanceWalk > distanceWalk ? Status.Success : Status.Running;
     }
 
-    public void travelBiome() {
-        Debug.Log("Viajando a bioma");
+    public void CreateNest() 
+    {
+        terrainGenerator.SpawnNest(transform.position, nidoPrefab, gameObject);
+    }
+    public bool NearNest() 
+    {
+        return terrainGenerator.GetClosestNest(transform.position, maxDistanceNest);
     }
 
-    public void walk() {
-
-        Debug.Log("Deambulando");
-    }
-
-    public void createNest() {
-        Debug.Log("Crear nido");
-    }
-    public void nearNest() {
-        Debug.Log("Detectando nido");
-    }
-
-
+    
 }
 
