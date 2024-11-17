@@ -67,8 +67,14 @@ public class TimeManaegr : MonoBehaviour
             Temperature -= Random.Range(0, NightTemperatureOffset);
         }
     }
-    
-    
+
+    // private IEnumerator TemperatureChanges()
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitUntil(da);
+    //     }
+    // }
     
     
     private void UpdateTime()
