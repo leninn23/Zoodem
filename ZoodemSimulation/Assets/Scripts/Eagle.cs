@@ -7,7 +7,13 @@ public class Eagle : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
 
-    public TerrainGenerator.Biome biomePreference = TerrainGenerator.Biome.Mountain;
+    //public TerrainGenerator.Biome biomePreference = TerrainGenerator.Biome.Mountain;
+    public List<TerrainGenerator.Biome> biomePreferences = new List<TerrainGenerator.Biome>
+    {
+        TerrainGenerator.Biome.Mountain,
+        TerrainGenerator.Biome.Forest,
+        TerrainGenerator.Biome.Desert
+    };
 
     public float speed;
     public Nido myNest;
@@ -32,15 +38,45 @@ public class Eagle : MonoBehaviour
     }
 
     public bool IsInBiome(){
-        return terrainGenerator.IsBiomeOfPreference(transform.position, biomePreference);
+        foreach (var biome in biomePreferences)
+        {
+            if (terrainGenerator.IsBiomeOfPreference(transform.position, biome))
+            {
+                return true;
+            }
+        }
+        return false;
     }
-    
+
     public Status TravelBiome() {
-        var direction = (terrainGenerator.LocateBiome(biomePreference, transform.position) - transform.position).normalized;
-        transform.Translate(direction*Time.deltaTime*speed);
-        
+        Vector3 closestBiomePosition = Vector3.zero;
+        float closestDistance = float.MaxValue;
+
+        foreach (var biome in biomePreferences)
+        {
+            var biomePosition = terrainGenerator.LocateBiome(biome, transform.position);
+            if (biomePosition != Vector3.zero)
+            {
+                float distance = Vector3.Distance(transform.position, biomePosition);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestBiomePosition = biomePosition;
+                }
+            }
+        }
+
+        if (closestDistance == float.MaxValue)
+        {
+            return Status.Running;
+        }
+
+        var direction = (closestBiomePosition - transform.position).normalized;
+        transform.Translate(direction * Time.deltaTime * speed);
+
         return IsInBiome() ? Status.Success : Status.Running;
     }
+
 
     public void StartWalk()
     {
