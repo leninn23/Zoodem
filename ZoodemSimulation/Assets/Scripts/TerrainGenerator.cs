@@ -65,11 +65,6 @@ public class TerrainGenerator : MonoBehaviour
         // GenerateMap();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /**
     private int selected = -1;
@@ -195,7 +190,7 @@ public class TerrainGenerator : MonoBehaviour
         {
             _biomes[tr.biome].Add(tr);
         }
-        _terrainDictionary.Add(new Vector2Int(tr.mapPosition.x, tr.mapPosition.y), tr);
+        _terrainDictionary.Add(tr.mapPosition, tr);
     }
     
     private void CreateDictionary()
@@ -229,7 +224,7 @@ public class TerrainGenerator : MonoBehaviour
         return new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z)) - _minCorner;
     }
     
-    public bool SpawnNest(Vector3 pos, Nido nido, GameObject owner)
+    public bool SpawnNest(Vector3 pos, Nido nido, Eagle owner)
     {
         var mapPos = RealPosToMapPos(pos);
         Debug.Log("Map pos: " + mapPos);
@@ -239,6 +234,7 @@ public class TerrainGenerator : MonoBehaviour
 
             var tuNest = Instantiate(nido, pos, Quaternion.identity);
             tu.nest = tuNest;
+            owner.myNest = tuNest;
             // TODO: SET OWNER OF NEST
             return true;
         }
@@ -248,14 +244,18 @@ public class TerrainGenerator : MonoBehaviour
     #region  Perceptions
     public TerrainUnit GetTerrainAt(Vector3 pos)
     {
-        var posInt = new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z));
-        posInt -= _minCorner;
-        return _terrainDictionary[posInt];
+        var posInt = RealPosToMapPos(pos);
+        if (_terrainDictionary.TryGetValue(posInt, out var tu))
+        {
+            return tu;
+        }
+
+        return null;
     }
     
     public bool IsBiomeOfPreference(Vector3 pos, Biome biome)
     {
-        return GetTerrainAt(pos).biome == biome;
+        return GetTerrainAt(pos)?.biome == biome;
     }
     
     public Vector3 LocateBiome(Biome biome, Vector3 origin)
@@ -272,7 +272,7 @@ public class TerrainGenerator : MonoBehaviour
         var nidos = _terrainDictionary.Values.Where(tu => tu.nest && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance).ToList();
         nidos.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
                                                            Vector3.Distance(terrainUnit.realPosition, origin)));
-        return nidos.First().nest;
+        return nidos.Count == 0 ? null : nidos.First().nest;
     }
     // public Nido GetClosestNest(Vector3 origin, float maxSearchDistance, IAnimal animal)
     // {

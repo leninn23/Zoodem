@@ -20,6 +20,12 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.TravelBiome();;
     }
 
+    public void StartWalk()
+    {
+        Debug.Log("Start Walk");
+        eagle.StartWalk();;
+    }
+    
     public Status Walk() {
 
         Debug.Log("Deambulando");

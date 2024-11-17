@@ -15,7 +15,7 @@ public class TimeManaegr : MonoBehaviour
     /// <summary>
     /// Real time of each day. Half of it will be night and half day
     /// </summary>
-    public const float LenghtOfDay = 4 * 60f; 
+    public const float LenghtOfDay = 30f; 
     public const float StartOfDaylight = LenghtOfDay*6/24;
     public const float EndOfDaylight = LenghtOfDay*22/24;
     public bool IsDay => TimeOfTheDay is >= StartOfDaylight and <= EndOfDaylight;
@@ -35,7 +35,7 @@ public class TimeManaegr : MonoBehaviour
     void Start()
     {
         _light = FindObjectOfType<Light>();
-        Time.timeScale = 5f;
+        // Time.timeScale = 5f;
     }
 
     // Update is called once per frame
