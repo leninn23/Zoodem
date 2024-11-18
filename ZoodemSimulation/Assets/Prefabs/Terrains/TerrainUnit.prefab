@@ -122,7 +122,7 @@ MonoBehaviour:
   mapPosition: {x: 0, y: 0}
   realPosition: {x: 0, y: 0, z: 0}
   biome: 4
-  nest: {fileID: 0}
+  den: {fileID: 0}
   biomeMaterials:
   - {fileID: 2100000, guid: f904fb26a802c054fbbe7d23286b3cb3, type: 2}
   - {fileID: 2100000, guid: 51f616761587874499d47c91070b5326, type: 2}

@@ -14,7 +14,7 @@ namespace Animals.Eagle
         {
             TerrainGenerator.Biome.Mountain,
             TerrainGenerator.Biome.Forest,
-            TerrainGenerator.Biome.Desert
+            TerrainGenerator.Biome.Lake
         };
         
         public float distanceWalk;
