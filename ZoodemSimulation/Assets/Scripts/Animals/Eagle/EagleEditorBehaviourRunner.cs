@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Animals.Eagle;
 using BehaviourAPI.Core;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEngine;

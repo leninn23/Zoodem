@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Animals;
+using Animals.Eagle;
 using TreeEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -224,17 +226,17 @@ public class TerrainGenerator : MonoBehaviour
         return new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z)) - _minCorner;
     }
     
-    public bool SpawnNest(Vector3 pos, Nido nido, Eagle owner)
+    public bool SpawnNest(Vector3 pos, Nido den, ABasicAnimal owner)
     {
         var mapPos = RealPosToMapPos(pos);
         Debug.Log("Map pos: " + mapPos);
         if (_terrainDictionary.TryGetValue(mapPos, out var tu))
         {
-            if(tu.nest) return false;
+            if(tu.den) return false;
 
-            var tuNest = Instantiate(nido, pos, Quaternion.identity);
-            tu.nest = tuNest;
-            owner.myNest = tuNest;
+            var tuDen = Instantiate(den, pos, Quaternion.identity);
+            tu.den = tuDen;
+            owner.den = tuDen;
             // TODO: SET OWNER OF NEST
             return true;
         }
@@ -267,20 +269,21 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     
-    public Nido GetClosestNest(Vector3 origin, float maxSearchDistance)
+    public Nido GetClosestDen(Vector3 origin, float maxSearchDistance)
     {
-        var nidos = _terrainDictionary.Values.Where(tu => tu.nest && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance).ToList();
-        nidos.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
+        var dens = _terrainDictionary.Values.Where(tu => tu.den && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance).ToList();
+        dens.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
                                                            Vector3.Distance(terrainUnit.realPosition, origin)));
-        return nidos.Count == 0 ? null : nidos.First().nest;
+        return dens.Count == 0 ? null : dens.First().den;
     }
-    // public Nido GetClosestNest(Vector3 origin, float maxSearchDistance, IAnimal animal)
-    // {
-    //     var nidos = _terrainDictionary.Values.Where(tu => tu.nest && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance && typeof(tu.nest.owner) == typeof(animal)).ToList();
-    //     nidos.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
-    //                                                        Vector3.Distance(terrainUnit.realPosition, origin)));
-    //     return nidos.First().nest;
-    // }
+    
+    public Nido GetClosestDen(Vector3 origin, float maxSearchDistance, AnimalType animal)
+    {
+        var dens = _terrainDictionary.Values.Where(tu => tu.den && Vector3.Distance(origin, tu.realPosition) <= maxSearchDistance && tu.den.owner.animalType == animal).ToList();
+        dens.Sort((unit, terrainUnit) => Mathf.RoundToInt(Vector3.Distance(unit.realPosition, origin) -
+                                                           Vector3.Distance(terrainUnit.realPosition, origin)));
+        return dens.First().den;
+    }
     
     #endregion
 }

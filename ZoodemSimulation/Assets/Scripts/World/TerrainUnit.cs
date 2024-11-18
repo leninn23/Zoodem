@@ -9,7 +9,7 @@ public class TerrainUnit : MonoBehaviour
     public Vector2Int mapPosition;
     public Vector3Int realPosition;
     public Biome biome;
-    public Nido nest;
+    public Nido den;
     
     // public 
     [SerializeField] private Material[] biomeMaterials;
