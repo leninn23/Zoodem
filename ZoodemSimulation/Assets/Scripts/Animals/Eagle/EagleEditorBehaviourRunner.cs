@@ -88,6 +88,30 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         //eagle.OnNestReached();
     }
 
+    public void TravelMate()
+    {
+        Debug.Log("Acercándose a posible pareja Ha llegado al nido");
+        //eagle.TravelMate();
+    }
+
+    public void Court()
+    {
+        Debug.Log("Acercándose a posible pareja Ha llegado al nido");
+        //eagle.Court();
+    }
+
+    public void StartProtecting()
+    {
+        Debug.Log("Empezando a proteger");
+        //eagle.StartProtecting();
+    }
+
+    public void Protect()
+    {
+        Debug.Log("Protegiendo");
+        //eagle.Protect();
+    }
+
 
     #endregion
 }
