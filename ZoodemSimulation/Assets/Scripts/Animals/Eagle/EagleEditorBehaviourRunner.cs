@@ -88,12 +88,6 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         //eagle.OnNestReached();
     }
 
-    public void TravelMate()
-    {
-        Debug.Log("Acercándose a posible pareja Ha llegado al nido");
-        //eagle.TravelMate();
-    }
-
     public void Court()
     {
         Debug.Log("Acercándose a posible pareja Ha llegado al nido");
@@ -111,7 +105,51 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         Debug.Log("Protegiendo");
         //eagle.Protect();
     }
+    #endregion
 
+    #region HuntBT
+    ///PERCEPTIONS
+    public bool IsFoodNear()
+    {
+        Debug.Log("Detectando si hay comida");
+        return eagle.partner;
+    }
 
+    public bool PreyNear()
+    {
+        Debug.Log("Detectando si presa cerca");
+        return eagle.den.offspringCount > 0;
+    }
+
+    public bool isPreyAlone()
+    {
+        Debug.Log("Detectando si presa sola");
+        return eagle.isFemale;
+    }
+    ///
+
+    public void Eat()
+    {
+        Debug.Log("Comiendo");
+        //eagle.Eat();
+    }
+
+    public void FollowPrey()
+    {
+        Debug.Log("Siguiendo a presa");
+        //eagle.FollowPrey();
+    }
+
+    public void StartAttack()
+    {
+        Debug.Log("Preparando ataque");
+        //eagle.StartAttack();
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Atacando");
+        //eagle.Attack();
+    }
     #endregion
 }
