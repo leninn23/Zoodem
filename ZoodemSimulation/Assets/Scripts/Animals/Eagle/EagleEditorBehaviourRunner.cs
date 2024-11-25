@@ -22,12 +22,16 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         Debug.Log("Detectando nido");
         return eagle.NearNest();
     }
+
     ///
+
+    public void StartTravelBiome()
+    {
+        eagle.StartWalkToBiome();
+    }
     
     public Status TravelBiome() {
-        
-        Debug.Log("Viajando a bioma");
-        return eagle.TravelBiome();;
+        return eagle.WalkObjective();
     }
 
     public void StartWalk()
@@ -39,7 +43,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public Status Walk() {
 
         Debug.Log("Deambulando");
-        return eagle.Walk();
+        return eagle.WalkDir();
     }
 
     public void CreateNest() {
@@ -88,25 +92,8 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         //eagle.OnNestReached();
     }
 
-    public void Court()
-    {
-        Debug.Log("Acercándose a posible pareja Ha llegado al nido");
-        //eagle.Court();
-    }
 
-    public void StartProtecting()
-    {
-        Debug.Log("Empezando a proteger");
-        //eagle.StartProtecting();
-    }
-
-    public void Protect()
-    {
-        Debug.Log("Protegiendo");
-        //eagle.Protect();
-    }
     #endregion
-
     #region HuntBT
     ///PERCEPTIONS
     public bool IsFoodNear()
@@ -121,7 +108,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.den.offspringCount > 0;
     }
 
-    public bool isPreyAlone()
+    public bool IsPreyAlone()
     {
         Debug.Log("Detectando si presa sola");
         return eagle.isFemale;

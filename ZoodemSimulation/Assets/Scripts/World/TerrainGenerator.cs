@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    [SerializeField] private Vector2Int mapSize;
+    [SerializeField] public Vector2Int mapSize;
     
         [Space]
     [SerializeField] private float minHumidity;
@@ -223,18 +223,36 @@ public class TerrainGenerator : MonoBehaviour
 
     public Vector2Int RealPosToMapPos(Vector3 pos)
     {
-        return new Vector2Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.z)) - _minCorner;
+        return new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)) - _minCorner;
     }
     
+    /// <summary>
+    /// Transforms 2d map tile coordinates into world 3d coordinates
+    /// </summary>
+    /// <param name="pos">The x and y position of the tile</param>
+    /// <returns>The world position of the center of the tile</returns>
+    public Vector3 MapPosToRealPos(Vector2Int pos)
+    {
+        return new Vector3(pos.x + _minCorner.x, 0, pos.y + _minCorner.y);
+    }
+    
+    /// <summary>
+    /// Tries to create a <see cref="Nido"/> in position <paramref name="pos"/>, and assigns the <paramref name="owner"/> as owner of the nest.
+    /// <see cref="ABasicAnimal"/> <paramref name="owner"/> den variable gets assigned to this new den.
+    /// </summary>
+    /// <param name="pos">Position to spawn the <see cref="Nido"/></param>
+    /// <param name="den">Type of <see cref="Nido"/> to spawn</param>
+    /// <param name="owner">Animal that spawns the den</param>
+    /// <returns></returns>
     public bool SpawnNest(Vector3 pos, Nido den, ABasicAnimal owner)
     {
         var mapPos = RealPosToMapPos(pos);
-        Debug.Log("Map pos: " + mapPos);
+        // Debug.Log("Map pos: " + mapPos);
         if (_terrainDictionary.TryGetValue(mapPos, out var tu))
         {
             if(tu.den) return false;
 
-            var tuDen = Instantiate(den, pos, Quaternion.identity);
+            var tuDen = Instantiate(den, tu.realPosition, Quaternion.identity);
             tu.den = tuDen;
             owner.den = tuDen;
             // TODO: SET OWNER OF NEST
@@ -249,6 +267,7 @@ public class TerrainGenerator : MonoBehaviour
         var posInt = RealPosToMapPos(pos);
         if (_terrainDictionary.TryGetValue(posInt, out var tu))
         {
+            Debug.Log($"Terrain at {pos} with mapPos {posInt} is {tu.biome}");
             return tu;
         }
 
