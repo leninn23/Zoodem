@@ -267,7 +267,6 @@ public class TerrainGenerator : MonoBehaviour
         var posInt = RealPosToMapPos(pos);
         if (_terrainDictionary.TryGetValue(posInt, out var tu))
         {
-            Debug.Log($"Terrain at {pos} with mapPos {posInt} is {tu.biome}");
             return tu;
         }
 

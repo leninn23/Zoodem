@@ -37,13 +37,13 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public void StartWalk()
     {
         Debug.Log("Start Walk");
-        eagle.StartWalk();;
+        eagle.StartWalkRandom();;
     }
     
     public Status Walk() {
 
         Debug.Log("Deambulando");
-        return eagle.WalkDir();
+        return eagle.WalkObjective();
     }
 
     public void CreateNest() {
@@ -64,7 +64,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool HasBaby()
     {
         Debug.Log("Detectando si tiene crias");
-        return eagle.den.offspringCount > 0;
+        return eagle.HasChildren();
     }
 
     public bool IsFemale()
@@ -76,20 +76,21 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool ExistsMate() 
     {
         Debug.Log("Detectando si hay pareja");
-        return false;
+        return eagle.HasPartner();
     }
     ///
 
     public void StartWalkToNest()
     {
         Debug.Log("Viajando a nido");
-        //eagle.StartWalkToNest();
+        eagle.StartWalkToNest();
     }
 
     public void OnNestReached()
     {
         Debug.Log("Ha llegado al nido");
         //eagle.OnNestReached();
+        //Ahora a criar, no?
     }
 
 
@@ -99,19 +100,22 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool IsFoodNear()
     {
         Debug.Log("Detectando si hay comida");
-        return eagle.partner;
+        //Sin implementar el sistema de comida
+        return false;
     }
 
     public bool PreyNear()
     {
         Debug.Log("Detectando si presa cerca");
-        return eagle.den.offspringCount > 0;
+        //Buscar presa cerca
+        return false;
     }
 
     public bool IsPreyAlone()
     {
         Debug.Log("Detectando si presa sola");
-        return eagle.isFemale;
+        //Look for animals of same type as prey in a distance x around prey
+        return false;
     }
     ///
 

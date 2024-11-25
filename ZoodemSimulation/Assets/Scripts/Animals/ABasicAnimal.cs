@@ -26,17 +26,23 @@ namespace Animals
         public bool isFemale;
         public ABasicAnimal partner;
         public Nido den;
+        public Nido nidoPrefab;
+        public const float MinDistanceNest = 5f;
         [Space(8)]
         public float gestationTime; //in years
         public Vector2Int offspringNRange;
         private int _offspring;
 
+        //TODO: Look for a way to court a certain animal, and communicate with it to avoid other partners to court with them
+        //maybe an enum would work (single, engaged, courting, beingCourted)
+        
         [FormerlySerializedAs("distanceWalk")] [Space(15)]
         public float wanderDistance;
         protected float currentDistanceWalk = 0;
         protected Vector3 walkObjective;
         protected Vector3 currentWalkDir;
         private float _walkDistance;
+        
         [Space(15)]
         public List<TerrainGenerator.Biome> biomePreferences = new List<TerrainGenerator.Biome>
         {
@@ -44,59 +50,37 @@ namespace Animals
             TerrainGenerator.Biome.Forest,
             TerrainGenerator.Biome.Lake
         };
-        public bool IsInBiome()
+        private void Awake()
         {
-            return biomePreferences.Any(biome => terrainGenerator.IsBiomeOfPreference(transform.position, biome));
+            health = maxHealth;
+            energy = maxEnergy; 
         }
-        public Status WalkDir()
-        {
-            currentDistanceWalk += Time.deltaTime;
-            // currentDistanceWalk =
-            //     Mathf.Clamp(currentDistanceWalk, 0, Vector3.Distance(transform.position, walkObjective));
-            var translation = currentWalkDir * moveSpeed * Time.deltaTime;
-            var dist = Vector3.Distance(walkObjective, transform.position);
-            if (translation.magnitude >= dist)
-            {
-                translation = translation.normalized * dist;
-                currentDistanceWalk = wanderDistance + 1;
-            }
-            transform.Translate(translation);
-            return currentDistanceWalk > wanderDistance ? Status.Success : Status.Running;
-        }
+        #region Movement
+
+        // public Status WalkDir()
+        // {
+        //     currentDistanceWalk += Time.deltaTime;
+        //     // currentDistanceWalk =
+        //     //     Mathf.Clamp(currentDistanceWalk, 0, Vector3.Distance(transform.position, walkObjective));
+        //     var translation = currentWalkDir * moveSpeed * Time.deltaTime;
+        //     var dist = Vector3.Distance(walkObjective, transform.position);
+        //     if (translation.magnitude >= dist)
+        //     {
+        //         translation = translation.normalized * dist;
+        //         currentDistanceWalk = wanderDistance + 1;
+        //     }
+        //     transform.Translate(translation);
+        //     return currentDistanceWalk > wanderDistance ? Status.Success : Status.Running;
+        // }
         public Status WalkObjective()
         {
             var trans = transform;
             var dist = Vector3.Distance(trans.position, walkObjective);
-            // if (dist <= 0.5f)
-            // {
-            //     trans.position = walkObjective;
-            //     return Status.Success;
-            // }
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
-            // Debug.Log($"Dist: {dist}, maxDist: {maxDist}, walkDir: {currentWalkDir}");
             trans.Translate(currentWalkDir * maxDist);
             return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
         }
-        public void StartTravelBiome()
-        {
-            walkObjective = Vector3.zero;
-            var closestDistance = float.MaxValue;
-
-            foreach (var biome in biomePreferences)
-            {
-                var biomePosition = terrainGenerator.LocateBiome(biome, transform.position);
-                if (biomePosition != Vector3.zero)
-                {
-                    float distance = Vector3.Distance(transform.position, biomePosition);
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        walkObjective = biomePosition;
-                    }
-                }
-            }
-        }
-
+        
         public void StartWalkToBiome()
         {
             walkObjective = Vector3.zero;
@@ -119,18 +103,18 @@ namespace Animals
             }
             
             var fixedDir = walkObjective - position;
-            Debug.Log("Walking to " + walkObjective);
             fixedDir.y = 0;
             currentWalkDir = fixedDir.normalized;
         }
         
-        public void StartWalk()
+        public void StartWalkRandom()
         {
             currentDistanceWalk = 0;
             var position = transform.position;
             var dist = 0f;
             do
             {
+                //Normalize the Random.insideUnitCircle if you want the animal to walk exactly wanderDistance units
                 var dir = Random.insideUnitCircle * wanderDistance;
                 var newPos = terrainGenerator.RealPosToMapPos(position + new Vector3(dir.x, 0, dir.y));
                 newPos.x = Mathf.Clamp(newPos.x, 0, terrainGenerator.mapSize.x-1);
@@ -143,23 +127,59 @@ namespace Animals
             var fixedDir = walkObjective - position;
             fixedDir.y = 0;
             currentWalkDir = fixedDir.normalized;
-            Debug.Log($"Going from {position} to {walkObjective}");
             // currentWalkDir = new Vector3(dir.x, 0, dir.y);
         }
-        
-        
-        private void Awake()
+
+        public void StartWalkToNest()
         {
-            health = maxHealth;
-            energy = maxEnergy; 
+            walkObjective = den.transform.position;
+            currentWalkDir = walkObjective - transform.position;
+        }
+        #endregion
+        
+        public bool IsInBiome()
+        {
+            return biomePreferences.Any(biome => terrainGenerator.IsBiomeOfPreference(transform.position, biome));
+        }
+        
+        #region Relationships
+
+        public bool HasChildren()
+        {
+            if (den)
+            {
+                return den.offspringCount > 0;
+            }
+
+            return false;
         }
 
+        public bool HasPartner()
+        {
+            return partner;
+        }
+        
         public void GenerateOffspring(Nido nido)
         {
             _offspring = Random.Range(offspringNRange.x, offspringNRange.y);
             nido.offspringCount = _offspring;
             nido.timeLeftForSpawn = gestationTime;
             den = nido;
+        }        
+        public void CreateNest() 
+        {
+            terrainGenerator.SpawnNest(transform.position, nidoPrefab, this);
         }
+        public bool NearNest() 
+        {
+            return terrainGenerator.GetClosestDen(transform.position, MinDistanceNest);
+        }
+
+        public bool TieneNido()
+        {
+            return den;
+        }
+        #endregion
+
     }
 }
