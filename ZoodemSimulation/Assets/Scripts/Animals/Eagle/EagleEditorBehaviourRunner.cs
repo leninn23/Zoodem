@@ -86,10 +86,10 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         eagle.StartWalkToNest();
     }
 
-    public void OnNestReached()
+    public void FeedOffspring()
     {
         Debug.Log("Ha llegado al nido");
-        //eagle.OnNestReached();
+        eagle.FeedOffspring();
         //Ahora a criar, no?
     }
 

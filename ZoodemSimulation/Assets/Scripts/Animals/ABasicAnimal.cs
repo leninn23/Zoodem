@@ -12,25 +12,35 @@ namespace Animals
     {
         public TerrainGenerator terrainGenerator;
         public AnimalType animalType;
-        [Space(15)]
-        public float health;
+        [Space(7)][Header("Basic settings")]
         public float maxHealth;
-        public float attackDamage;
-        [Space(15)]
-        public float moveSpeed;
-        
-        public float energy;
         public float maxEnergy;
+        public float maxFood;
+        public float attackDamage;
+        public float moveSpeed;
 
-        [Space(15)]
+        [Space(7)] [Header("Advanced settings")]
+        public float walkEnergyDrain;
+        public float huntEnergyDrain;
+        public float foodDrain;
+        [Header("Current state")] public float food;
+        public float health;
+        public float energy;
+        // [Space(15)]
+        
+
+        [Space(7)][Header("Relationship attributes")]
         public bool isFemale;
         public ABasicAnimal partner;
+        public RelationshipStatus relationshipState = RelationshipStatus.Single;
         public Nido den;
         public Nido nidoPrefab;
-        public const float MinDistanceNest = 5f;
-        [Space(8)]
+        private Collider[] _aBasicAnimals;
+        [Space(7)][Header("Relationship settings")]
+        public float minDistanceNest = 5f;
         public float gestationTime; //in years
         public Vector2Int offspringNRange;
+        [Tooltip("How much food to give each child in the den")] public float foodPerChild;
         private int _offspring;
 
         //TODO: Look for a way to court a certain animal, and communicate with it to avoid other partners to court with them
@@ -43,15 +53,26 @@ namespace Animals
         protected Vector3 currentWalkDir;
         private float _walkDistance;
         
-        [Space(15)]
+        [Space(7)]
         public List<TerrainGenerator.Biome> biomePreferences = new List<TerrainGenerator.Biome>
         {
             TerrainGenerator.Biome.Mountain,
             TerrainGenerator.Biome.Forest,
             TerrainGenerator.Biome.Lake
         };
+        
+        public enum RelationshipStatus
+        {
+            Single,
+            Enganged,
+            Courting,
+            BeingCourted,
+        }
         private void Awake()
         {
+            _aBasicAnimals = new Collider[10];
+            
+            food = maxFood;
             health = maxHealth;
             energy = maxEnergy; 
         }
@@ -78,6 +99,7 @@ namespace Animals
             var dist = Vector3.Distance(trans.position, walkObjective);
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
+            energy -= walkEnergyDrain * Time.deltaTime;
             return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
         }
         
@@ -142,7 +164,7 @@ namespace Animals
             return biomePreferences.Any(biome => terrainGenerator.IsBiomeOfPreference(transform.position, biome));
         }
         
-        #region Relationships
+        #region Relationship perceptions
 
         public bool HasChildren()
         {
@@ -156,29 +178,85 @@ namespace Animals
 
         public bool HasPartner()
         {
-            return partner;
+            return relationshipState == RelationshipStatus.Enganged;
         }
         
-        public void GenerateOffspring(Nido nido)
-        {
-            _offspring = Random.Range(offspringNRange.x, offspringNRange.y);
-            nido.offspringCount = _offspring;
-            nido.timeLeftForSpawn = gestationTime;
-            den = nido;
-        }        
-        public void CreateNest() 
-        {
-            terrainGenerator.SpawnNest(transform.position, nidoPrefab, this);
-        }
+
         public bool NearNest() 
         {
-            return terrainGenerator.GetClosestDen(transform.position, MinDistanceNest);
+            return terrainGenerator.GetClosestDen(transform.position, minDistanceNest);
         }
 
         public bool TieneNido()
         {
             return den;
         }
+        #endregion
+
+        #region Relationship functions
+        public void CreateNest() 
+        {
+            terrainGenerator.SpawnNest(transform.position, nidoPrefab, this);
+        } 
+        public void GenerateOffspring(Nido nido)
+        {
+            _offspring = Random.Range(offspringNRange.x, offspringNRange.y);
+            nido.offspringCount = _offspring;
+            nido.timeLeftForSpawn = gestationTime;
+            den = nido;
+        }
+
+        public void FeedOffspring()
+        {
+            den.food += _offspring * foodPerChild;
+        }
+
+        private bool TryFindPartner(float radius, out ABasicAnimal potentialPartner)
+        {
+            if (Physics.OverlapSphereNonAlloc(transform.position, radius, _aBasicAnimals,
+                    LayerMask.GetMask("Animal")) == 0)
+            {
+                potentialPartner = null;
+                return false;
+            }
+            
+            var near = _aBasicAnimals.Select(collider1 => collider1.GetComponent<ABasicAnimal>()).Where(animal =>
+            {
+                if (animal)
+                {
+                    return animal.animalType == animalType && animal.relationshipState == RelationshipStatus.Single;
+                }
+
+                return false;
+            }).ToList();
+            if (near.Count == 0)
+            {
+                potentialPartner = null;
+                return false;
+            }
+
+            potentialPartner = near[Random.Range(0, near.Count)];
+            return true;
+        }
+
+        public bool FindPartner()
+        {
+            if (TryFindPartner(10f, out var potentialPartner))
+            {
+                partner = potentialPartner;
+                partner.Court(this);
+                relationshipState = RelationshipStatus.Courting;
+            }
+
+            return false;
+        }
+
+        private void Court(ABasicAnimal animal)
+        {
+            partner = animal;
+            relationshipState = RelationshipStatus.BeingCourted;
+        }
+        
         #endregion
 
     }
