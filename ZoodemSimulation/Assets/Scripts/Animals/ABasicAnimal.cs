@@ -23,9 +23,11 @@ namespace Animals
         public float walkEnergyDrain;
         public float huntEnergyDrain;
         public float foodDrain;
-        [Header("Current state")] public float food;
+        [Header("Current state")]
+        public float food;
         public float health;
         public float energy;
+        public bool isSleeping;
         // [Space(15)]
         
 
@@ -36,6 +38,7 @@ namespace Animals
         public Nido den;
         public Nido nidoPrefab;
         private Collider[] _aBasicAnimals;
+        private float _courtTime;
         [Space(7)][Header("Relationship settings")]
         public float minDistanceNest = 5f;
         public float gestationTime; //in years
@@ -241,6 +244,8 @@ namespace Animals
 
         public bool FindPartner()
         {
+            if (relationshipState != RelationshipStatus.Single) return true;
+            
             if (TryFindPartner(10f, out var potentialPartner))
             {
                 partner = potentialPartner;
@@ -255,9 +260,50 @@ namespace Animals
         {
             partner = animal;
             relationshipState = RelationshipStatus.BeingCourted;
+            _courtTime = 2f;
+        }
+
+        public Status Courting()
+        {
+            if (relationshipState == RelationshipStatus.BeingCourted) return Status.Running;
+            
+            _courtTime -= Time.deltaTime;
+            if (_courtTime <= 0)
+            {
+                partner.relationshipState = RelationshipStatus.Enganged;
+                relationshipState = RelationshipStatus.Enganged;
+                return Status.Success;
+            }
+
+            return Status.Running;
         }
         
         #endregion
 
+        #region variable perceptions
+
+        public float Energy()
+        {
+            return energy / maxEnergy;
+        }
+        public float Health()
+        {
+            return health / maxHealth;
+        }
+        public float Hunger()
+        {
+            return 1 - (food / maxFood);
+        }
+
+        public float HasNest()
+        {
+            return den ? 1 : 0;
+        }
+
+        public float IsAwake()
+        {
+            return isSleeping ? 0 : 1;
+        }
+        #endregion
     }
 }

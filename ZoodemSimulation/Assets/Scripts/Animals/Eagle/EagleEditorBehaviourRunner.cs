@@ -58,7 +58,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool HasMate()
     {
         Debug.Log("Detectando si hay pareja");
-        return eagle.partner;
+        return eagle.HasPartner();
     }
 
     public bool HasBaby()
@@ -76,7 +76,12 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool ExistsMate() 
     {
         Debug.Log("Detectando si hay pareja");
-        return eagle.HasPartner();
+        return eagle.FindPartner();
+    }
+
+    public Status Courting()
+    {
+        return eagle.Courting();
     }
     ///
 
