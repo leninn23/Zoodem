@@ -29,10 +29,11 @@ namespace Animals
         public float energy;
         public bool isSleeping;
         // [Space(15)]
-        
 
-        [Space(7)][Header("Relationship attributes")]
-        public bool isFemale;
+
+        [Space(7)] [Header("Relationship attributes")]
+        public GenderAnimal gender = GenderAnimal.unassigned;
+        //public bool isFemale;
         public ABasicAnimal partner;
         public RelationshipStatus relationshipState = RelationshipStatus.Single;
         public Nido den;
@@ -70,6 +71,13 @@ namespace Animals
             Enganged,
             Courting,
             BeingCourted,
+        }
+
+        public enum GenderAnimal
+        {
+            male,
+            female,
+            unassigned
         }
         private void Awake()
         {
@@ -194,6 +202,11 @@ namespace Animals
         {
             return den;
         }
+
+        public bool IsFemale()
+        {
+            return gender == GenderAnimal.female;
+        }
         #endregion
 
         #region Relationship functions
@@ -256,7 +269,7 @@ namespace Animals
             return false;
         }
 
-        private void Court(ABasicAnimal animal)
+        public void Court(ABasicAnimal animal)
         {
             partner = animal;
             relationshipState = RelationshipStatus.BeingCourted;
@@ -276,6 +289,15 @@ namespace Animals
             }
 
             return Status.Running;
+        }
+        public Status Incubate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AssignGender()
+        {
+            gender = Random.Range(0, 1) == 0 ? GenderAnimal.female : GenderAnimal.male;
         }
         
         #endregion

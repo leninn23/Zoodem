@@ -70,7 +70,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool IsFemale()
     {
         Debug.Log("Detectando si es hembra");
-        return eagle.isFemale;
+        return eagle.IsFemale();
     }
 
     public bool ExistsMate() 
