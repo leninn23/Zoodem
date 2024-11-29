@@ -17,5 +17,12 @@ public class Bear : ABasicAnimal
         gender = GenderAnimal.unassigned;
     }
 
-   
+
+    public bool NearFood()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    
+    
 }

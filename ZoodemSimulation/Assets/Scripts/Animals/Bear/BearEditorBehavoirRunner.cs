@@ -114,4 +114,37 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     
 
     #endregion
+
+    #region HuntBT
+
+    public bool NearPrey()
+    {
+        return bear.PreyNear();
+    }
+
+    public Status Attack()
+    {
+        return bear.Attack();
+    }
+
+    #endregion
+
+    #region RecolectBT
+
+    public bool NearFood()
+    {
+        return bear.NearFood();
+    }
+
+    public bool LowHealth()
+    {
+        return bear.LowHealth();
+    }
+
+    public void Honeycomb()
+    {
+        bear.Honeycomb();
+    }
+
+    #endregion
 }

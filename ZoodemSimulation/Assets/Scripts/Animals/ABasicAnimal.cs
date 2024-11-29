@@ -327,5 +327,31 @@ namespace Animals
             return isSleeping ? 0 : 1;
         }
         #endregion
+
+        #region Hunt perceptions
+
+        public bool PreyNear()
+        {
+            return false;
+        }
+        public bool LowHealth()
+        {
+            return health < maxHealth * 0.2;
+        }
+        public void Honeycomb()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region Hunt functions
+
+        public Status Attack()
+        {
+            return Status.Running;
+        }
+
+        #endregion
     }
 }
