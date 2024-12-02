@@ -244,21 +244,25 @@ public class TerrainGenerator : MonoBehaviour
     /// <param name="den">Type of <see cref="Nido"/> to spawn</param>
     /// <param name="owner">Animal that spawns the den</param>
     /// <returns></returns>
-    public bool SpawnNest(Vector3 pos, Nido den, ABasicAnimal owner)
+    public bool SpawnNest(Vector3 pos, Nido den, ABasicAnimal owner, out Nido nest)
     {
         var mapPos = RealPosToMapPos(pos);
         // Debug.Log("Map pos: " + mapPos);
         if (_terrainDictionary.TryGetValue(mapPos, out var tu))
         {
-            if(tu.den) return false;
+            if(tu.den) {
+                nest = null;
+                return false; }
 
             var tuDen = Instantiate(den, tu.realPosition, Quaternion.identity);
             tu.den = tuDen;
             owner.den = tuDen;
             // TODO: SET OWNER OF NEST
+            nest = tuDen;
+            Debug.Log("He devuelto true");
             return true;
         }
-
+        nest = null;
         return false;
     }
     #region  Perceptions

@@ -42,7 +42,7 @@ namespace World
             else Instance = this;
         
             _light = FindObjectOfType<Light>();
-            Time.timeScale = 10f;
+            //Time.timeScale = 10f;
             UpdateTemperature();
         }
 

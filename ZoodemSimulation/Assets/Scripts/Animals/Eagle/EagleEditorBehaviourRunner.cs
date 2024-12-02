@@ -31,6 +31,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     }
     
     public Status TravelBiome() {
+        Debug.Log("Viajando...");
         return eagle.WalkObjective();
     }
 
@@ -79,6 +80,16 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.FindPartner();
     }
 
+    public void StartCourt()
+    {
+        eagle.FindPartner();
+    }
+
+    public void Incubate()
+    {
+        eagle.GenerateOffspring();
+    }
+
     public Status Courting()
     {
         return eagle.Courting();
@@ -89,6 +100,11 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     {
         Debug.Log("Viajando a nido");
         eagle.StartWalkToNest();
+    }
+
+    public void AssignGender()
+    {
+        eagle.AssignGender();
     }
 
     public void FeedOffspring()
@@ -116,7 +132,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.PreyNear();
     }
 
-    public bool IsPreyAlone()
+    public bool isPreyAlone()
     {
         Debug.Log("Detectando si presa sola");
         //Look for animals of same type as prey in a distance x around prey
@@ -141,10 +157,17 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.WalkPrey();
     }
     
+
+
     public void StartAttack()
     {
         Debug.Log("Preparando ataque");
         // eagle.StartAttack();
+    }
+
+    public void Protect()
+    {
+        Debug.Log("Protect (not implemented)");
     }
 
     public Status Attack()

@@ -38,6 +38,7 @@ namespace Animals
         public GenderAnimal gender = GenderAnimal.unassigned;
         //public bool isFemale;
         public ABasicAnimal partner;
+        public bool isDom;
         public RelationshipStatus relationshipState = RelationshipStatus.Single;
         public Nido den;
         public Nido nidoPrefab;
@@ -117,6 +118,7 @@ namespace Animals
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy -= walkEnergyDrain * Time.deltaTime;
+            Debug.Log("At a distance of " + dist + " --- " + maxDist);
             return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
         }
         public Status WalkPrey()
@@ -128,7 +130,7 @@ namespace Animals
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy -= walkEnergyDrain * Time.deltaTime;
-            return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
+            return Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
         }
 
         public void StartWalkPrey()
@@ -193,7 +195,7 @@ namespace Animals
         
         public bool IsInBiome()
         {
-            return biomePreferences.Any(biome => terrainGenerator.IsBiomeOfPreference(transform.position, biome));
+            return biomePreferences.Where(biome => terrainGenerator.IsBiomeOfPreference(transform.position, biome)).ToArray().Length > 0;
         }
         
         #region Relationship perceptions
@@ -216,6 +218,7 @@ namespace Animals
 
         public bool NearNest() 
         {
+            Debug.Log("Near mnesst?");
             return terrainGenerator.GetClosestDen(transform.position, minDistanceNest);
         }
 
@@ -233,21 +236,27 @@ namespace Animals
         #region Relationship functions
         public void CreateNest() 
         {
-            terrainGenerator.SpawnNest(transform.position, nidoPrefab, this);
+            if(terrainGenerator.SpawnNest(transform.position, nidoPrefab, this, out var nest)){
+                Debug.Log(nest);
+                den = nest;
+            }
         } 
-        public void GenerateOffspring(Nido nido)
+        public void GenerateOffspring()
         {
             _offspring = Random.Range(offspringNRange.x, offspringNRange.y);
-            nido.offspringCount = _offspring;
-            nido.timeLeftForSpawn = gestationTime;
-            den = nido;
+            den.offspringCount = _offspring;
+            den.timeLeftForSpawn = gestationTime;
         }
 
         public void FeedOffspring()
         {
             den.food += _offspring * foodPerChild;
         }
-
+        public void Rest()
+        {
+            energy += 10f;
+            health += 10f;
+        }
         private bool TryFindPartner(float radius, out ABasicAnimal potentialPartner)
         {
             if (Physics.OverlapSphereNonAlloc(transform.position, radius, _aBasicAnimals,
@@ -283,6 +292,7 @@ namespace Animals
             if (TryFindPartner(10f, out var potentialPartner))
             {
                 partner = potentialPartner;
+                isDom = true;
                 partner.Court(this);
                 relationshipState = RelationshipStatus.Courting;
             }
@@ -293,6 +303,7 @@ namespace Animals
         public void Court(ABasicAnimal animal)
         {
             partner = animal;
+            isDom = false;
             relationshipState = RelationshipStatus.BeingCourted;
             _courtTime = 2f;
         }
@@ -318,7 +329,9 @@ namespace Animals
 
         public void AssignGender()
         {
-            gender = Random.Range(0, 1) == 0 ? GenderAnimal.female : GenderAnimal.male;
+            var isFemale = Random.Range(0, 1) == 0;
+            gender = isFemale ? GenderAnimal.female : GenderAnimal.male;
+            partner.gender = isFemale ? GenderAnimal.male : GenderAnimal.female;
         }
         
         #endregion
@@ -340,7 +353,7 @@ namespace Animals
 
         public float HasNest()
         {
-            return den ? 1 : 0;
+            return (den == null) ? 1 : 0;
         }
 
         public float IsAwake()
