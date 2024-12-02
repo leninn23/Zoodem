@@ -4,12 +4,14 @@ using System.Linq;
 using BehaviourAPI.Core;
 using UnityEngine;
 using UnityEngine.Serialization;
+using World;
 using Random = UnityEngine.Random;
 
 namespace Animals
 {
     public class ABasicAnimal : MonoBehaviour
     {
+        public Corpse corpse;
         public TerrainGenerator terrainGenerator;
         public AnimalType animalType;
         [Space(7)][Header("Basic settings")]
@@ -23,6 +25,7 @@ namespace Animals
         public float walkEnergyDrain;
         public float huntEnergyDrain;
         public float foodDrain;
+        public List<IFood.FoodTypes> foodPreferences;
         [Header("Current state")]
         public float food;
         public float health;
@@ -56,6 +59,7 @@ namespace Animals
         protected Vector3 walkObjective;
         protected Vector3 currentWalkDir;
         private float _walkDistance;
+        private Transform _prey;
         
         [Space(7)]
         public List<TerrainGenerator.Biome> biomePreferences = new List<TerrainGenerator.Biome>
@@ -85,7 +89,9 @@ namespace Animals
             
             food = maxFood;
             health = maxHealth;
-            energy = maxEnergy; 
+            energy = maxEnergy;
+
+            // terrainGenerator = FindObjectOfType<TerrainGenerator>();
         }
         #region Movement
 
@@ -113,7 +119,22 @@ namespace Animals
             energy -= walkEnergyDrain * Time.deltaTime;
             return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
         }
-        
+        public Status WalkPrey()
+        {
+            var trans = transform;
+            var dist = Vector3.Distance(trans.position, _prey.position);
+            currentWalkDir = _prey.position - trans.position;
+            currentWalkDir.y = 0;
+            var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
+            trans.Translate(currentWalkDir * maxDist);
+            energy -= walkEnergyDrain * Time.deltaTime;
+            return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
+        }
+
+        public void StartWalkPrey()
+        {
+            
+        }
         public void StartWalkToBiome()
         {
             walkObjective = Vector3.zero;
@@ -332,7 +353,37 @@ namespace Animals
 
         public bool PreyNear()
         {
-            return false;
+            var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
+            foreach (var c in foodNear)
+            {
+                if (c.TryGetComponent<IFood>(out var component))
+                {
+                    if (component.FoodState == IFood.FoodStates.Alive)
+                    {
+                        walkObjective = c.transform.position;
+                        currentWalkDir = walkObjective - transform.position;
+                            currentWalkDir.y = 0;
+                    }
+                }
+            }
+            return foodNear.Length != 0;
+        }
+        public bool FoodNear()
+        {
+            var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
+            foreach (var c in foodNear)
+            {
+                if (c.TryGetComponent<IFood>(out var component))
+                {
+                    if (component.FoodState != IFood.FoodStates.Alive)
+                    {
+                        walkObjective = c.transform.position;
+                        currentWalkDir = walkObjective - transform.position;
+                        currentWalkDir.y = 0;
+                    }
+                }
+            }
+            return foodNear.Length != 0;
         }
         public bool LowHealth()
         {
@@ -349,9 +400,43 @@ namespace Animals
 
         public Status Attack()
         {
-            return Status.Running;
+            if (_prey.TryGetComponent<ABasicAnimal>(out var animal))
+            {
+                animal.GetAttacked(attackDamage);
+                return Status.Success;
+            }
+            return Status.Failure;
         }
 
+        private void GetAttacked(float damage)
+        {
+            health -= damage;
+            if (health == 0)
+            {
+                var a = Instantiate(corpse, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+        }
+
+        public void Eat()
+        {
+            if(_prey)
+            {
+                Destroy(_prey.gameObject);
+                food += 20f;
+            }
+        }
         #endregion
+
+        public void WakeUp()
+        {
+            Debug.Log("I woke up!");
+            isSleeping = false;
+        }
+        public void Sleep()
+        {
+            Debug.Log("I'm off to sleep!");
+            isSleeping = true;
+        }
     }
 }

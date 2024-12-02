@@ -113,39 +113,45 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     {
         Debug.Log("Detectando si presa cerca");
         //Buscar presa cerca
-        return false;
+        return eagle.PreyNear();
     }
 
     public bool IsPreyAlone()
     {
         Debug.Log("Detectando si presa sola");
         //Look for animals of same type as prey in a distance x around prey
-        return false;
+        return true;
     }
     ///
 
     public void Eat()
     {
         Debug.Log("Comiendo");
-        //eagle.Eat();
+        eagle.Eat();
     }
 
-    public void FollowPrey()
+    public void StartWalkPrey()
     {
         Debug.Log("Siguiendo a presa");
-        //eagle.FollowPrey();
+        eagle.StartWalkPrey();
     }
 
+    public Status WalkToPrey()
+    {
+        return eagle.WalkPrey();
+    }
+    
     public void StartAttack()
     {
         Debug.Log("Preparando ataque");
-        //eagle.StartAttack();
+        // eagle.StartAttack();
     }
 
-    public void Attack()
+    public Status Attack()
     {
         Debug.Log("Atacando");
-        //eagle.Attack();
+        eagle.Attack();
+        return Status.Success;
     }
     #endregion
 }
