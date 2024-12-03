@@ -1,9 +1,14 @@
+using System;
 using System.Collections.Generic;
+using BehaviourAPI.Core.Actions;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Action = System.Action;
 using Random = UnityEngine.Random;
 
 namespace World
 {
+    [DefaultExecutionOrder(-200)]
     public class TimeManager : MonoBehaviour
     {
         public int DayOfTheYear { private set; get; }
@@ -17,16 +22,32 @@ namespace World
         public const float LenghtOfDay = 30f; 
         public const float StartOfDaylight = LenghtOfDay*6/24;
         public const float EndOfDaylight = LenghtOfDay*22/24;
+        
         public bool IsDay => TimeOfTheDay is >= StartOfDaylight and <= EndOfDaylight;
+        private const float MorningDuration = LenghtOfDay*2/24f;
+        public bool IsBetweenDayAndNigth => (TimeOfTheDay is >= StartOfDaylight - MorningDuration / 2f
+            and <= StartOfDaylight + MorningDuration / 2f or >= EndOfDaylight - MorningDuration / 2f
+            and <= EndOfDaylight + MorningDuration / 2f);
         private bool _temperatureUpdateFlag;
 
         private static readonly List<Vector2> k_SeasonTemperatures = new List<Vector2>() { new Vector2(-10f, 8f), new Vector2(8f, 20f),new Vector2(25f, 35f), new Vector2(8f, 20f) };
         private const float NightTemperatureOffset = 1.5f;
         private Light _light;
-        private string[] _seasonNames = new[] { "Winter", "Spring", "Summer", "Autumn" };
+        public string[] seasonNames = new[] { "Winter", "Spring", "Summer", "Autumn" };
         public static TimeManager Instance;
         public Season currentSeason;
     
+        //Public Events
+        public Action<int> onDayChange;
+        public Action<int> onYearChange;
+        public Action<Season> onSeasonChange;
+        public Action onTimeOfDayChange;
+
+
+        public float GetNormalisedTime()
+        {
+            return TimeOfTheDay / LenghtOfDay * 24;
+        }
         public enum Season
         {
             Winter = 0,
@@ -52,18 +73,18 @@ namespace World
             UpdateTime();
         }
 
-        private void OnGUI()
-        {
-            GUILayout.BeginArea(new Rect(10, 10, 1000, 500));
-            GUILayout.Label("Year: " + YearsPassed);
-            GUILayout.Label("Season: " + _seasonNames[DayOfTheYear / DaysPerSeason]);
-            GUILayout.Label("Day: " + DayOfTheYear);
-            var time = TimeOfTheDay / LenghtOfDay * 24F;
-            GUILayout.Label("Time: " + Mathf.FloorToInt(time) + ":" + Mathf.FloorToInt((time - Mathf.FloorToInt(time))*60));
-            GUILayout.Label(IsDay ? "DAY" : "NIGHT");
-            GUILayout.Label("Temperature: " + Temperature);
-            GUILayout.EndArea();
-        }
+        // private void OnGUI()
+        // {
+        //     GUILayout.BeginArea(new Rect(10, 10, 1000, 500));
+        //     GUILayout.Label("Year: " + YearsPassed);
+        //     GUILayout.Label("Season: " + seasonNames[DayOfTheYear / DaysPerSeason]);
+        //     GUILayout.Label("Day: " + DayOfTheYear);
+        //     var time = TimeOfTheDay / LenghtOfDay * 24F;
+        //     GUILayout.Label("Time: " + Mathf.FloorToInt(time) + ":" + Mathf.FloorToInt((time - Mathf.FloorToInt(time))*60));
+        //     GUILayout.Label(IsDay ? "DAY" : "NIGHT");
+        //     GUILayout.Label("Temperature: " + Temperature);
+        //     GUILayout.EndArea();
+        // }
 
         private void UpdateTemperature()
         {
@@ -92,15 +113,24 @@ namespace World
             while (TimeOfTheDay >= LenghtOfDay)
             {
                 TimeOfTheDay -= LenghtOfDay;
+                var prevSeason = (Season)(DayOfTheYear / DaysPerSeason);
                 DayOfTheYear++;
+                onDayChange?.Invoke(DayOfTheYear);
                 currentSeason = (Season)(DayOfTheYear / DaysPerSeason);
+                if (prevSeason != currentSeason)
+                {
+                    onSeasonChange?.Invoke(currentSeason);
+                }
                 // UpdateTemperature();
             }
             //There are 4 months
             if (DayOfTheYear > DaysPerSeason * 4)
             {
+                //In case in a high game speed it skips 2 days (??)
                 DayOfTheYear -= DaysPerSeason * 4;
                 YearsPassed++;
+                onDayChange?.Invoke(DayOfTheYear);
+                onYearChange.Invoke(YearsPassed);
             }
 
             if (IsDay)
@@ -109,8 +139,9 @@ namespace World
                 {
                     _temperatureUpdateFlag = true;
                     UpdateTemperature();
+                     _light.color = new Color(0.93f, 0.91f, 0.7f);
+                     onTimeOfDayChange?.Invoke();
                 }
-                _light.color = new Color(0.93f, 0.91f, 0.7f);
             }
             else
             {   
@@ -118,8 +149,9 @@ namespace World
                 {
                     _temperatureUpdateFlag = false;
                     UpdateTemperature();
+                    _light.color = new Color(0.64f, 0.69f, 0.93f);
+                    onTimeOfDayChange?.Invoke();
                 }
-                _light.color = new Color(0.64f, 0.69f, 0.93f);
             }
             //TODO: Manage stuff related to change between day and night, and clocks/calendars
         }

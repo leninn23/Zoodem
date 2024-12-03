@@ -27,9 +27,10 @@ public class TimeReader : MonoBehaviour
 
     public float Temperature()
     {
-        return _manager.Temperature;
+        return (_manager.Temperature + 10) / 45f;
     }
-    
+
+
     // public float Season()
     // {
     //     return seasonValues[(int)_manager.currentSeason];

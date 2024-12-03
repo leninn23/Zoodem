@@ -25,6 +25,9 @@ namespace Animals
         public float walkEnergyDrain;
         public float huntEnergyDrain;
         public float foodDrain;
+        public float sleepFoodDrain;
+        public float sleepEnergyGain;
+        public float sleepHealthGain;
         public List<IFood.FoodTypes> foodPreferences;
         [Header("Current state")]
         public float food;
@@ -118,7 +121,8 @@ namespace Animals
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy -= walkEnergyDrain * Time.deltaTime;
-            Debug.Log("At a distance of " + dist + " --- " + maxDist);
+            food -= foodDrain;
+            // Debug.Log("At a distance of " + dist + " --- " + maxDist);
             return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
         }
         public Status WalkPrey()
@@ -129,7 +133,8 @@ namespace Animals
             currentWalkDir.y = 0;
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
-            energy -= walkEnergyDrain * Time.deltaTime;
+            energy -= huntEnergyDrain * Time.deltaTime;
+            food -= foodDrain;
             return Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
         }
 
@@ -190,6 +195,8 @@ namespace Animals
         {
             walkObjective = den.transform.position;
             currentWalkDir = walkObjective - transform.position;
+            currentWalkDir.y = 0;
+            Debug.Log("Viajando a " + walkObjective);
         }
         #endregion
         
@@ -239,6 +246,7 @@ namespace Animals
             if(terrainGenerator.SpawnNest(transform.position, nidoPrefab, this, out var nest)){
                 Debug.Log(nest);
                 den = nest;
+                den.owner = this;
             }
         } 
         public void GenerateOffspring()
@@ -265,8 +273,20 @@ namespace Animals
                 potentialPartner = null;
                 return false;
             }
-            
-            var near = _aBasicAnimals.Select(collider1 => collider1.GetComponent<ABasicAnimal>()).Where(animal =>
+
+            // foreach (var aBasicAnimal in _aBasicAnimals)
+            // {
+            //     Debug.Log($"Animal: " +  aBasicAnimal.name);
+            // }
+            var near = _aBasicAnimals.Select(collider1 =>
+            {
+                if (collider1 && collider1.TryGetComponent<ABasicAnimal>(out var animal))
+                {
+                    return animal;
+                }
+
+                return null;
+            }).Where(animal =>
             {
                 if (animal)
                 {
@@ -446,10 +466,17 @@ namespace Animals
             Debug.Log("I woke up!");
             isSleeping = false;
         }
-        public void Sleep()
+        public void StartSleep()
         {
             Debug.Log("I'm off to sleep!");
             isSleeping = true;
+        }
+
+        public void Sleep()
+        {
+            energy += sleepEnergyGain;
+            health += sleepHealthGain;
+            food -= sleepFoodDrain;
         }
     }
 }
