@@ -34,6 +34,8 @@ namespace Animals
         public float health;
         public float energy;
         public bool isSleeping;
+
+        private float _timer;
         // [Space(15)]
 
 
@@ -46,7 +48,7 @@ namespace Animals
         public Nido den;
         public Nido nidoPrefab;
         private Collider[] _aBasicAnimals;
-        private float _courtTime;
+        public float courtTime;
         [Space(7)][Header("Relationship settings")]
         public float minDistanceNest = 5f;
         public float gestationTime; //in years
@@ -89,6 +91,7 @@ namespace Animals
         }
         private void Awake()
         {
+            terrainGenerator = FindObjectOfType<TerrainGenerator>();
             _aBasicAnimals = new Collider[10];
             
             food = maxFood;
@@ -114,6 +117,7 @@ namespace Animals
         //     transform.Translate(translation);
         //     return currentDistanceWalk > wanderDistance ? Status.Success : Status.Running;
         // }
+        private float _prevDistance;
         public Status WalkObjective()
         {
             var trans = transform;
@@ -122,25 +126,56 @@ namespace Animals
             trans.Translate(currentWalkDir * maxDist);
             energy -= walkEnergyDrain * Time.deltaTime;
             food -= foodDrain;
-            // Debug.Log("At a distance of " + dist + " --- " + maxDist);
-            return Mathf.Approximately(maxDist, dist) ? Status.Success : Status.Running;
+            if (_prevDistance < dist)
+            {
+                transform.position = walkObjective;
+                return Status.Success;
+            }
+            else
+            {
+                _prevDistance = dist;
+            }
+            Debug.Log("At a distance of " + dist + " --- " + maxDist + ", " + name);
+            return Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
         }
         public Status WalkPrey()
         {
+            if (!_prey) return Status.Failure;
+            
             var trans = transform;
-            var dist = Vector3.Distance(trans.position, _prey.position);
-            currentWalkDir = _prey.position - trans.position;
+            var preyPosition = _prey.position;
+            var position = trans.position;
+            var dist = Vector3.Distance(position, preyPosition);
+            currentWalkDir = preyPosition - position;
             currentWalkDir.y = 0;
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy -= huntEnergyDrain * Time.deltaTime;
             food -= foodDrain;
-            return Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
+            return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
         }
 
-        public void StartWalkPrey()
+        private void SetUpObjectiveAndDirection(Vector3 obj)
         {
-            
+            _prevDistance = float.MaxValue;
+            walkObjective = obj;
+            var position = transform.position;
+            walkObjective.y = position.y;
+            var fixedDir = walkObjective - position;
+            fixedDir.y = 0;
+            currentWalkDir = fixedDir.normalized;
+        }
+        public void StartWalkFood()
+        {
+            if (_prey)
+            {
+                SetUpObjectiveAndDirection(_prey.transform.position);
+            }
+            else
+            {
+                Debug.LogError("No food on sight m'sir");
+                SetUpObjectiveAndDirection(transform.position);
+            }
         }
         public void StartWalkToBiome()
         {
@@ -163,13 +198,12 @@ namespace Animals
                 }
             }
             
-            var fixedDir = walkObjective - position;
-            fixedDir.y = 0;
-            currentWalkDir = fixedDir.normalized;
+            SetUpObjectiveAndDirection(walkObjective);
         }
         
         public void StartWalkRandom()
         {
+            _prevDistance = float.MaxValue;
             currentDistanceWalk = 0;
             var position = transform.position;
             var dist = 0f;
@@ -185,18 +219,15 @@ namespace Animals
                 dist = Vector3.Distance(position, walkObjective);
             } while (dist <= 2f);
 
-            var fixedDir = walkObjective - position;
-            fixedDir.y = 0;
-            currentWalkDir = fixedDir.normalized;
+            SetUpObjectiveAndDirection(walkObjective);
             // currentWalkDir = new Vector3(dir.x, 0, dir.y);
         }
 
         public void StartWalkToNest()
         {
-            walkObjective = den.transform.position;
-            currentWalkDir = walkObjective - transform.position;
-            currentWalkDir.y = 0;
-            Debug.Log("Viajando a " + walkObjective);
+            _prevDistance = float.MaxValue;
+            SetUpObjectiveAndDirection(den.transform.position);
+            Debug.Log("Viajando a nido desde " + transform.position + " en " + walkObjective + " " + name);
         }
         #endregion
         
@@ -255,7 +286,22 @@ namespace Animals
             den.offspringCount = _offspring;
             den.timeLeftForSpawn = gestationTime;
         }
+        public void StartIncubate()
+        {
+            _timer = gestationTime;
+        }
+        public Status Incubate()
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                GenerateOffspring();
+                return Status.Success;
+            }
 
+            return Status.Running;
+        }
+        
         public void FeedOffspring()
         {
             den.food += _offspring * foodPerChild;
@@ -290,7 +336,7 @@ namespace Animals
             {
                 if (animal)
                 {
-                    return animal.animalType == animalType && animal.relationshipState == RelationshipStatus.Single;
+                    return animal.animalType == animalType && animal.relationshipState == RelationshipStatus.Single && animal != this;
                 }
 
                 return false;
@@ -325,15 +371,15 @@ namespace Animals
             partner = animal;
             isDom = false;
             relationshipState = RelationshipStatus.BeingCourted;
-            _courtTime = 2f;
+            _timer = courtTime;
         }
 
         public Status Courting()
         {
             if (relationshipState == RelationshipStatus.BeingCourted) return Status.Running;
             
-            _courtTime -= Time.deltaTime;
-            if (_courtTime <= 0)
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
             {
                 partner.relationshipState = RelationshipStatus.Enganged;
                 relationshipState = RelationshipStatus.Enganged;
@@ -341,10 +387,6 @@ namespace Animals
             }
 
             return Status.Running;
-        }
-        public Status Incubate()
-        {
-            throw new System.NotImplementedException();
         }
 
         public void AssignGender()
@@ -391,15 +433,17 @@ namespace Animals
             {
                 if (c.TryGetComponent<IFood>(out var component))
                 {
-                    if (component.FoodState == IFood.FoodStates.Alive)
+                    if (component.FoodState == IFood.FoodStates.Alive && foodPreferences.Contains(component.FoodType))
                     {
-                        walkObjective = c.transform.position;
-                        currentWalkDir = walkObjective - transform.position;
-                            currentWalkDir.y = 0;
+                        _prey = c.transform;
+                        return true;
+                        // walkObjective = c.transform.position;
+                        // currentWalkDir = walkObjective - transform.position;
+                        //     currentWalkDir.y = 0;
                     }
                 }
             }
-            return foodNear.Length != 0;
+            return false;
         }
         public bool FoodNear()
         {
@@ -408,15 +452,18 @@ namespace Animals
             {
                 if (c.TryGetComponent<IFood>(out var component))
                 {
-                    if (component.FoodState != IFood.FoodStates.Alive)
+                    if (component.FoodState != IFood.FoodStates.Alive && foodPreferences.Contains(component.FoodType))
                     {
                         walkObjective = c.transform.position;
                         currentWalkDir = walkObjective - transform.position;
                         currentWalkDir.y = 0;
+                        _prey = c.transform;
+                        return true;
                     }
                 }
             }
-            return foodNear.Length != 0;
+
+            return false;
         }
         public bool LowHealth()
         {
@@ -431,8 +478,18 @@ namespace Animals
 
         #region Hunt functions
 
+        public void StartAttack()
+        {
+            _timer = 1f;
+        }
+        
         public Status Attack()
         {
+            if (!_prey) return Status.Failure;
+            
+            _timer -= Time.deltaTime;
+            if (_timer > 0) return Status.Running;
+            
             if (_prey.TryGetComponent<ABasicAnimal>(out var animal))
             {
                 animal.GetAttacked(attackDamage);
@@ -441,12 +498,15 @@ namespace Animals
             return Status.Failure;
         }
 
+        public Action onDeath;
+        
         private void GetAttacked(float damage)
         {
             health -= damage;
-            if (health == 0)
+            if (health <= 0)
             {
                 var a = Instantiate(corpse, transform.position, transform.rotation);
+                onDeath?.Invoke();
                 Destroy(gameObject);
             }
         }
@@ -456,6 +516,7 @@ namespace Animals
             if(_prey)
             {
                 Destroy(_prey.gameObject);
+                _prey = null;
                 food += 20f;
             }
         }
@@ -463,12 +524,12 @@ namespace Animals
 
         public void WakeUp()
         {
-            Debug.Log("I woke up!");
+            Debug.Log("I woke up! " + name);
             isSleeping = false;
         }
         public void StartSleep()
         {
-            Debug.Log("I'm off to sleep!");
+            Debug.Log("I'm off to sleep! " + name);
             isSleeping = true;
         }
 

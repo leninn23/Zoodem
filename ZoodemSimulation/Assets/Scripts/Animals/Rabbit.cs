@@ -1,6 +1,8 @@
+using System;
 using BehaviourAPI.Core;
 using UnityEngine;
 using World;
+using Random = UnityEngine.Random;
 
 namespace Animals
 {
@@ -18,6 +20,8 @@ namespace Animals
             FoodState = IFood.FoodStates.Alive;
             FoodType = IFood.FoodTypes.Meat;
             _numberOfTurns = Random.Range(0, 4);
+
+            onDeath += SpawnRandomRabbit;
         }
 
         // Update is called once per frame
@@ -38,7 +42,16 @@ namespace Animals
                 StartWalkRandom();
             }
         }
+        
 
+        public void SpawnRandomRabbit()
+        {
+            var pos = new Vector2Int(Random.Range(0, terrainGenerator.mapSize.x),
+                Random.Range(0, terrainGenerator.mapSize.y));
+            var realPos = terrainGenerator.MapPosToRealPos(pos);
+            Instantiate(gameObject, realPos, Quaternion.identity, transform.parent);
+        }
+        
         public IFood.FoodTypes FoodType { get; private set; }
         public IFood.FoodStates FoodState { get; private set;}
     }

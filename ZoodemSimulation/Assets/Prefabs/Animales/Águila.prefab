@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6ef04c5a7bfcaf49bb2b84f1c17a58a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,13 +130,13 @@ MonoBehaviour:
   maxFood: 100
   attackDamage: 20
   moveSpeed: 10
-  walkEnergyDrain: 0
-  huntEnergyDrain: 0
-  foodDrain: 0
-  sleepFoodDrain: 0
-  sleepEnergyGain: 0
-  sleepHealthGain: 0
-  foodPreferences: 
+  walkEnergyDrain: 0.01
+  huntEnergyDrain: 0.015
+  foodDrain: 0.03
+  sleepFoodDrain: 0.003
+  sleepEnergyGain: 1
+  sleepHealthGain: 1
+  foodPreferences: 00000000
   food: 0
   health: 0
   energy: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   relationshipState: 0
   den: {fileID: 0}
   nidoPrefab: {fileID: 8278214411429633431, guid: eabb38182efee334cb4bac25196c713b, type: 3}
+  courtTime: 0
   minDistanceNest: 5
   gestationTime: 2
   offspringNRange: {x: 1, y: 3}
@@ -353,13 +354,13 @@ MonoBehaviour:
         - 2e1ecf1a-11f4-4177-88bf-f87576a02480
       - name: Lack of strenght
         id: c417495c-9ab8-4e44-82c7-1399d54f1abb
-        position: {x: 861, y: 469}
+        position: {x: 846, y: 477}
         node:
           rid: 5264634918441582623
         references: []
         parentIds:
-        - 6849e53f-c1d6-4c6a-9070-b85661675bba
         - eaacf56e-35cd-4155-a0c3-ab2af6dd4bb2
+        - efd316ae-67b7-4171-baad-3025d8185ef9
         childIds:
         - 66495b0f-8672-4f14-b603-8adde610c744
         - bc8117b5-f48a-403a-b8a4-0896a8d049ab
@@ -372,7 +373,7 @@ MonoBehaviour:
         parentIds:
         - 3d2f7b4d-8d5d-4d0a-8f38-d2ed17077cab
         childIds:
-        - c417495c-9ab8-4e44-82c7-1399d54f1abb
+        - efd316ae-67b7-4171-baad-3025d8185ef9
         - 0e015f55-2e5a-41cb-adae-3aabd45df306
       - name: Rest
         id: 1edc85fe-3675-4be0-80e7-92c48ee48d80
@@ -553,6 +554,16 @@ MonoBehaviour:
         - fb1c1044-80f0-4900-9e44-bca3b9030bc0
         childIds:
         - fa62133d-bebf-408a-a99d-f61c36950b9d
+      - name: 
+        id: efd316ae-67b7-4171-baad-3025d8185ef9
+        position: {x: 967, y: 582}
+        node:
+          rid: 3799616516779147265
+        references: []
+        parentIds:
+        - 6849e53f-c1d6-4c6a-9070-b85661675bba
+        childIds:
+        - c417495c-9ab8-4e44-82c7-1399d54f1abb
     - name: EagleNestBT
       id: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
       graph:
@@ -947,7 +958,7 @@ MonoBehaviour:
         references:
         - fieldName: Action
           value:
-            rid: 6665480339530448896
+            rid: 3799616516779147264
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
@@ -1109,10 +1120,10 @@ MonoBehaviour:
         parentIds:
         - c33cb87d-3ff1-49dd-b878-aef1937f5c90
         childIds:
-        - 91b032aa-b42f-47a8-8efb-5e9f8a481d26
+        - cdf3b68c-e02e-4c4e-a3dc-6a2a4c3f6516
       - name: Wait
         id: 0419e1ce-de32-49dc-b195-b5f14b41b9ad
-        position: {x: 462, y: 1416}
+        position: {x: 511, y: 1430}
         node:
           rid: 6259615934206443540
         references:
@@ -1124,9 +1135,9 @@ MonoBehaviour:
         parentIds:
         - c33cb87d-3ff1-49dd-b878-aef1937f5c90
         childIds: []
-      - name: Attack
+      - name: WalkToPrey
         id: 91b032aa-b42f-47a8-8efb-5e9f8a481d26
-        position: {x: 174.4, y: 1616.7999}
+        position: {x: 119, y: 1808}
         node:
           rid: 6259615934206443541
         references:
@@ -1136,7 +1147,7 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
-        - 1b089b8b-9879-4a3d-b5a4-474f4c13ffa1
+        - cdf3b68c-e02e-4c4e-a3dc-6a2a4c3f6516
         childIds: []
       - name: 
         id: 3b580e7e-c14f-4922-9fae-6887b858876f
@@ -1176,6 +1187,31 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds:
         - 3b580e7e-c14f-4922-9fae-6887b858876f
+        childIds: []
+      - name: 
+        id: cdf3b68c-e02e-4c4e-a3dc-6a2a4c3f6516
+        position: {x: 265.21738, y: 1620.8696}
+        node:
+          rid: 3799616516779147266
+        references: []
+        parentIds:
+        - 1b089b8b-9879-4a3d-b5a4-474f4c13ffa1
+        childIds:
+        - 91b032aa-b42f-47a8-8efb-5e9f8a481d26
+        - c6f46068-d215-41db-a6ac-e926c5b142fe
+      - name: Attack
+        id: c6f46068-d215-41db-a6ac-e926c5b142fe
+        position: {x: 463.47827, y: 1828.6958}
+        node:
+          rid: 3799616516779147267
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616516779147268
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - cdf3b68c-e02e-4c4e-a3dc-6a2a4c3f6516
         childIds: []
     - name: RandomWalk
       id: c8197d37-9a54-4d07-b7e8-e84b3351c427
@@ -1341,6 +1377,55 @@ MonoBehaviour:
         ExecuteOnLoop: 0
         InterruptOptions: 2
         subgraphId: a7120e69-d4a3-473d-bee3-5d66629b49be
+    - rid: 3799616516779147264
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Eagle
+          methodName: StartIncubate
+        update:
+          componentName: Eagle
+          methodName: Incubate
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616516779147265
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: -1
+        YIntercept: 1
+    - rid: 3799616516779147266
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 3799616516779147267
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616516779147268
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Eagle
+          methodName: StartAttack
+        update:
+          componentName: Eagle
+          methodName: Attack
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
     - rid: 5264634693250449442
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -1616,8 +1701,8 @@ MonoBehaviour:
       data:
         PullingEnabled: 1
         Weights:
-        - 0.6
-        - 0.4
+        - 0.3
+        - 0.7
     - rid: 5264634918441582625
       type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -2120,11 +2205,11 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: 
-          methodName: StartWalkPrey
+          componentName: Eagle
+          methodName: StartWalkFood
         update:
           componentName: 
-          methodName: WalkToPrey
+          methodName: Walk
         stop:
           componentName: 
           methodName: 
@@ -2193,25 +2278,19 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartAttack
+          methodName: 
         update:
-          componentName: 
-          methodName: Attack
+          componentName: Eagle
+          methodName: WalkPrey
         stop:
           componentName: 
-          methodName: 
+          methodName: Attack
         pause:
           componentName: 
           methodName: 
         unpause:
           componentName: 
           methodName: 
-    - rid: 6665480339530448896
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: 
-          methodName: Incubate
     - rid: 6665480339530448897
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:

@@ -13,13 +13,13 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     ///PERCEPTIONS
     public bool IsInBiome()
     {
-        Debug.Log("checking");
+        Debug.Log("checking " + name);
         return eagle.IsInBiome();
     }
 
     public bool NearNest()
     {
-        Debug.Log("Detectando nido");
+        Debug.Log("Detectando nido " + name);
         return eagle.NearNest();
     }
 
@@ -31,24 +31,23 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     }
     
     public Status TravelBiome() {
-        Debug.Log("Viajando...");
         return eagle.WalkObjective();
     }
 
     public void StartWalk()
     {
-        Debug.Log("Start Walk");
+        Debug.Log("Start Walk " + name);
         eagle.StartWalkRandom();;
     }
     
     public Status Walk() {
 
-        Debug.Log("Deambulando");
+        // Debug.Log("Deambulando " + name);
         return eagle.WalkObjective();
     }
 
     public void CreateNest() {
-        Debug.Log("Crear nido");
+        Debug.Log("Crear nido " + name);
         eagle.CreateNest();
     }
 
@@ -58,25 +57,25 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     ///PERCEPTIONS
     public bool HasMate()
     {
-        Debug.Log("Detectando si hay pareja");
+        Debug.Log("Detectando si hay pareja " + name);
         return eagle.HasPartner();
     }
 
     public bool HasBaby()
     {
-        Debug.Log("Detectando si tiene crias");
+        Debug.Log("Detectando si tiene crias " + name);
         return eagle.HasChildren();
     }
 
     public bool IsFemale()
     {
-        Debug.Log("Detectando si es hembra");
+        Debug.Log("Detectando si es hembra " + name);
         return eagle.IsFemale();
     }
 
     public bool ExistsMate() 
     {
-        Debug.Log("Detectando si hay pareja");
+        Debug.Log("Detectando si hay pareja " + name);
         return eagle.FindPartner();
     }
 
@@ -98,7 +97,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
 
     public void StartWalkToNest()
     {
-        Debug.Log("Viajando a nido");
+        Debug.Log("Viajando a nido " + name);
         eagle.StartWalkToNest();
     }
 
@@ -109,7 +108,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
 
     public void FeedOffspring()
     {
-        Debug.Log("Ha llegado al nido");
+        Debug.Log("Ha llegado al nido " + name);
         eagle.FeedOffspring();
         //Ahora a criar, no?
     }
@@ -121,8 +120,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public bool IsFoodNear()
     {
         Debug.Log("Detectando si hay comida");
-        //Sin implementar el sistema de comida
-        return false;
+        return eagle.FoodNear();
     }
 
     public bool PreyNear()
@@ -149,7 +147,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public void StartWalkPrey()
     {
         Debug.Log("Siguiendo a presa");
-        eagle.StartWalkPrey();
+        // eagle.StartWalkPrey();
     }
 
     public Status WalkToPrey()
