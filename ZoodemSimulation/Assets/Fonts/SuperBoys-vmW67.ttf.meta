@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ae6356039511f94e91cb333c5b308bc
+guid: 2e9239311fe36034287054f9875bc9af
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Chatsile
+  - Super Boys
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

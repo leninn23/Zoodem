@@ -67,6 +67,11 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.HasChildren();
     }
 
+    public void EnterCourtingStatus()
+    {
+        eagle.display.PushStatus(StatusDisplay.Statuses.Courting);
+    }
+    
     public bool IsFemale()
     {
         Debug.Log("Detectando si es hembra " + name);
@@ -142,8 +147,20 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     {
         Debug.Log("Comiendo");
         eagle.Eat();
+        eagle.display.RemoveStatus(StatusDisplay.Statuses.Hunting);
     }
 
+
+    public void ExitHuntingStatus()
+    {
+        eagle.display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+    }
+
+    public void EnterHuntingStatus()
+    {
+        
+        eagle.display.PushStatus(StatusDisplay.Statuses.Hunting);
+    }
     public void StartWalkPrey()
     {
         Debug.Log("Siguiendo a presa");
@@ -163,6 +180,8 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         // eagle.StartAttack();
     }
 
+    
+    
     public void Protect()
     {
         Debug.Log("Protect (not implemented)");
@@ -175,4 +194,10 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return Status.Success;
     }
     #endregion
+
+    public void ExitSleepStatus()
+    {
+        eagle.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
+    }
+    public void EmptyAction(){}
 }

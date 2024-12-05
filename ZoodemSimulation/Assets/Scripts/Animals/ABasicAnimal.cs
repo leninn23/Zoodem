@@ -11,6 +11,7 @@ namespace Animals
 {
     public class ABasicAnimal : MonoBehaviour
     {
+        public StatusDisplay display;
         public Corpse corpse;
         public TerrainGenerator terrainGenerator;
         public AnimalType animalType;
@@ -98,8 +99,18 @@ namespace Animals
             health = maxHealth;
             energy = maxEnergy;
 
+            display = GetComponentInChildren<StatusDisplay>();
             // terrainGenerator = FindObjectOfType<TerrainGenerator>();
         }
+
+        private void Update()
+        {
+            if (food <= 0.1f * food)
+            {
+                health -= 0.1f * Time.deltaTime;
+            }
+        }
+
         #region Movement
 
         // public Status WalkDir()
@@ -124,8 +135,8 @@ namespace Animals
             var dist = Vector3.Distance(trans.position, walkObjective);
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
-            energy -= walkEnergyDrain * Time.deltaTime;
-            food -= foodDrain;
+            energy = Mathf.Clamp(energy - walkEnergyDrain * Time.deltaTime, 0, maxEnergy);
+            food = Mathf.Clamp(food - foodDrain * Time.deltaTime, 0, maxFood);
             if (_prevDistance < dist)
             {
                 transform.position = walkObjective;
@@ -140,7 +151,11 @@ namespace Animals
         }
         public Status WalkPrey()
         {
-            if (!_prey) return Status.Failure;
+            if (!_prey)
+            {
+                // _display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+                return Status.Failure;
+            }
             
             var trans = transform;
             var preyPosition = _prey.position;
@@ -150,8 +165,8 @@ namespace Animals
             currentWalkDir.y = 0;
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
-            energy -= huntEnergyDrain * Time.deltaTime;
-            food -= foodDrain;
+            energy = Mathf.Clamp(energy - huntEnergyDrain * Time.deltaTime, 0, maxEnergy);
+            food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
             return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
         }
 
@@ -308,8 +323,20 @@ namespace Animals
         }
         public void Rest()
         {
-            energy += 10f;
-            health += 10f;
+            energy = Mathf.Clamp(energy+ 10, 0, maxEnergy);
+            health = Mathf.Clamp(health + 10, 0, maxHealth);
+        }
+
+        public float IsBeingCourted()
+        {
+            if (relationshipState == RelationshipStatus.BeingCourted)
+            {
+                return 10f;
+            }
+            else
+            {
+                return 0f;
+            }
         }
         private bool TryFindPartner(float radius, out ABasicAnimal potentialPartner)
         {
@@ -372,6 +399,8 @@ namespace Animals
             isDom = false;
             relationshipState = RelationshipStatus.BeingCourted;
             _timer = courtTime;
+            display.PushStatus(StatusDisplay.Statuses.Courting);
+            partner.display.PushStatus(StatusDisplay.Statuses.Courting);
         }
 
         public Status Courting()
@@ -381,6 +410,8 @@ namespace Animals
             _timer -= Time.deltaTime;
             if (_timer <= 0)
             {
+                display.RemoveStatus(StatusDisplay.Statuses.Courting);
+                partner.display.RemoveStatus(StatusDisplay.Statuses.Courting);
                 partner.relationshipState = RelationshipStatus.Enganged;
                 relationshipState = RelationshipStatus.Enganged;
                 return Status.Success;
@@ -436,6 +467,7 @@ namespace Animals
                     if (component.FoodState == IFood.FoodStates.Alive && foodPreferences.Contains(component.FoodType))
                     {
                         _prey = c.transform;
+                        // display.PushStatus(StatusDisplay.Statuses.Hunting);
                         return true;
                         // walkObjective = c.transform.position;
                         // currentWalkDir = walkObjective - transform.position;
@@ -480,12 +512,17 @@ namespace Animals
 
         public void StartAttack()
         {
-            _timer = 1f;
+            
+            display.PushStatus(StatusDisplay.Statuses.Hunting);
+            _timer = 0f;
         }
         
         public Status Attack()
         {
-            if (!_prey) return Status.Failure;
+            if (!_prey)
+            {
+                return Status.Failure;
+            }
             
             _timer -= Time.deltaTime;
             if (_timer > 0) return Status.Running;
@@ -493,7 +530,8 @@ namespace Animals
             if (_prey.TryGetComponent<ABasicAnimal>(out var animal))
             {
                 animal.GetAttacked(attackDamage);
-                return Status.Success;
+                _timer = 1f;
+                return Status.Running;
             }
             return Status.Failure;
         }
@@ -525,19 +563,22 @@ namespace Animals
         public void WakeUp()
         {
             Debug.Log("I woke up! " + name);
+            display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
             isSleeping = false;
         }
         public void StartSleep()
         {
             Debug.Log("I'm off to sleep! " + name);
+            display.PushStatus(StatusDisplay.Statuses.Sleeping);
             isSleeping = true;
         }
 
         public void Sleep()
         {
-            energy += sleepEnergyGain;
-            health += sleepHealthGain;
-            food -= sleepFoodDrain;
+            
+            energy = Mathf.Clamp(energy + sleepEnergyGain, 0, maxEnergy);
+            health = Mathf.Clamp(health + sleepHealthGain, 0, maxHealth);
+            food = Mathf.Clamp(food - sleepFoodDrain, 0, maxFood);
         }
     }
 }
