@@ -5,6 +5,7 @@ using World;
 
 public class Corpse : MonoBehaviour, IFood
 {
+    public float foodValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,16 @@ public class Corpse : MonoBehaviour, IFood
     void Update()
     {
         
+    }
+
+    public float GetFoodValue()
+    {
+        return foodValue;
+    }
+
+    public void GetEaten()
+    {
+        Destroy(gameObject);
     }
 
     public IFood.FoodTypes FoodType { get; private set; }

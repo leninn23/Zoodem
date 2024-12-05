@@ -9,17 +9,20 @@ public class CameraFocus : MonoBehaviour
 {
     private static CameraFocus _focusedObject;
     private bool _focused;
-    private Vector3 _fixedCameraPos;
-    private Quaternion _fixedCameraRot;
+    private static Vector3 _fixedCameraPos;
+    private static Quaternion _fixedCameraRot;
     private Transform _myCamera;
-    private Transform _mainCamera;
+    private static Transform _mainCamera;
     private const float Speed = 1f;
 
     private void Start()
     {
-        if (Camera.main != null) _mainCamera = Camera.main.transform;
-        _fixedCameraRot = _mainCamera.rotation;
-        _fixedCameraPos = _mainCamera.position;
+        if(_mainCamera == null)
+        {
+            if (Camera.main != null) _mainCamera = Camera.main.transform;
+            _fixedCameraRot = _mainCamera.rotation;
+            _fixedCameraPos = _mainCamera.position;
+        }
         _myCamera = transform.Find("PersonalCameraPosition");
 
     }
@@ -40,6 +43,8 @@ public class CameraFocus : MonoBehaviour
                 _focusedObject.Unfocus();
             }
             _focusedObject = this;
+            _mainCamera.SetPositionAndRotation(_myCamera.position, _myCamera.rotation);
+            _mainCamera.SetParent(transform);
         }else
         {
             _focusedObject = null;
@@ -58,6 +63,7 @@ public class CameraFocus : MonoBehaviour
 
     private void ResetCamera()
     {
+        _mainCamera.SetParent(null);
         _mainCamera.SetPositionAndRotation(_fixedCameraPos, _fixedCameraRot);
         // StopAllCoroutines();
         // StartCoroutine(MoveCamera(_fixedCameraPos, _fixedCameraRot));
@@ -65,10 +71,10 @@ public class CameraFocus : MonoBehaviour
 
     private void Update()
     {
-        if (_focused)
-        {
-            _mainCamera.SetPositionAndRotation(_myCamera.position, _myCamera.rotation);
-        }
+        // if (_focused)
+        // {
+        //     _mainCamera.SetPositionAndRotation(_myCamera.position, _myCamera.rotation);
+        // }
     }
 
     private IEnumerator MoveCamera(Vector3 objective, Quaternion objectiveRot)

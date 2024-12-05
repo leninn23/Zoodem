@@ -21,6 +21,9 @@ namespace World
             Rotten,
         }
 
+        public float GetFoodValue();
+        public void GetEaten();
+
         public FoodTypes FoodType { get; }
         public FoodStates FoodState { get; }
         

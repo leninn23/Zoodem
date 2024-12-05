@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6ef04c5a7bfcaf49bb2b84f1c17a58a, type: 2}
+  - {fileID: 2100000, guid: 3f66899151be8034caa3a0cd0c42ba85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,12 +134,13 @@ MonoBehaviour:
   maxFood: 100
   attackDamage: 20
   moveSpeed: 10
-  walkEnergyDrain: 0.01
-  huntEnergyDrain: 0.015
+  walkEnergyDrain: 0.3
+  huntEnergyDrain: 0.6
   foodDrain: 0.5
   sleepFoodDrain: 0.03
   sleepEnergyGain: 1
   sleepHealthGain: 1
+  foodValue: 70
   foodPreferences: 00000000
   food: 0
   health: 0
@@ -151,7 +152,7 @@ MonoBehaviour:
   relationshipState: 0
   den: {fileID: 0}
   nidoPrefab: {fileID: 8278214411429633431, guid: eabb38182efee334cb4bac25196c713b, type: 3}
-  courtTime: 5
+  courtTime: 20
   minDistanceNest: 5
   gestationTime: 2
   offspringNRange: {x: 1, y: 3}
@@ -196,7 +197,7 @@ MonoBehaviour:
             PublicKeyToken=b77a5c561934e089
         parentIds:
         - 932d8c5b-a49f-444f-89e8-a6c6ebd9da84
-        - bc8117b5-f48a-403a-b8a4-0896a8d049ab
+        - 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
         childIds: []
       - name: Health
         id: dbdf8c37-7ab6-4d85-9faa-3ff93ec05d93
@@ -295,22 +296,11 @@ MonoBehaviour:
         - 1edc85fe-3675-4be0-80e7-92c48ee48d80
         childIds:
         - 1de666b3-0997-4142-9858-3b97d5801850
-      - name: Exhaustion
-        id: bc8117b5-f48a-403a-b8a4-0896a8d049ab
-        position: {x: 486, y: 682}
-        node:
-          rid: 5264634918441582617
-        references: []
-        parentIds:
-        - fd829167-6820-4f50-8db0-08c9c07393dc
-        - c417495c-9ab8-4e44-82c7-1399d54f1abb
-        childIds:
-        - 1de666b3-0997-4142-9858-3b97d5801850
       - name: Need to eat
         id: 0e015f55-2e5a-41cb-adae-3aabd45df306
         position: {x: 494, y: 846}
         node:
-          rid: 5264634918441582618
+          rid: 3799616545139982345
         references: []
         parentIds:
         - 6849e53f-c1d6-4c6a-9070-b85661675bba
@@ -320,7 +310,7 @@ MonoBehaviour:
         id: 91052aca-4787-4e91-a26c-046bf3a039da
         position: {x: 494, y: 1015}
         node:
-          rid: 5264634918441582619
+          rid: 3799616545139982346
         references: []
         parentIds:
         - fd829167-6820-4f50-8db0-08c9c07393dc
@@ -330,7 +320,7 @@ MonoBehaviour:
         id: 49944f6b-c11e-4e76-be3f-676f7ae17309
         position: {x: 494, y: 1184}
         node:
-          rid: 5264634918441582620
+          rid: 3799616545139982347
         references: []
         parentIds:
         - 1edc85fe-3675-4be0-80e7-92c48ee48d80
@@ -340,7 +330,7 @@ MonoBehaviour:
         id: 13eff97e-e149-42b5-a976-fc47569ee37a
         position: {x: 502, y: 1353}
         node:
-          rid: 5264634918441582621
+          rid: 3799616545139982348
         references: []
         parentIds:
         - 8bec17bc-e29e-4fd4-9429-518ae4a9c536
@@ -350,7 +340,7 @@ MonoBehaviour:
         id: ca378bad-3063-4b1a-bcb6-a1c52e9f958a
         position: {x: 502, y: 1522}
         node:
-          rid: 5264634918441582622
+          rid: 3799616545139982349
         references: []
         parentIds:
         - 87d22ca2-2168-4ba1-b4da-7f316636f7d8
@@ -358,21 +348,21 @@ MonoBehaviour:
         - 2e1ecf1a-11f4-4177-88bf-f87576a02480
       - name: Lack of strenght
         id: c417495c-9ab8-4e44-82c7-1399d54f1abb
-        position: {x: 846, y: 477}
+        position: {x: 843, y: 477}
         node:
-          rid: 5264634918441582623
+          rid: 3799616545139982350
         references: []
         parentIds:
         - eaacf56e-35cd-4155-a0c3-ab2af6dd4bb2
         - efd316ae-67b7-4171-baad-3025d8185ef9
         childIds:
         - 66495b0f-8672-4f14-b603-8adde610c744
-        - bc8117b5-f48a-403a-b8a4-0896a8d049ab
+        - 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
       - name: lack of vital force
         id: 6849e53f-c1d6-4c6a-9070-b85661675bba
         position: {x: 1219, y: 646}
         node:
-          rid: 5264634918441582624
+          rid: 3799616545139982351
         references: []
         parentIds:
         - 3d2f7b4d-8d5d-4d0a-8f38-d2ed17077cab
@@ -383,7 +373,7 @@ MonoBehaviour:
         id: 1edc85fe-3675-4be0-80e7-92c48ee48d80
         position: {x: 1221, y: 810}
         node:
-          rid: 5264634918441582625
+          rid: 3799616545139982352
         references: []
         parentIds:
         - fb1c1044-80f0-4900-9e44-bca3b9030bc0
@@ -394,18 +384,18 @@ MonoBehaviour:
         id: fd829167-6820-4f50-8db0-08c9c07393dc
         position: {x: 1213, y: 963}
         node:
-          rid: 5264634918441582626
+          rid: 3799616545139982353
         references: []
         parentIds:
         - 0b72bf6b-8aee-47c6-9233-918c90fb9e5a
         childIds:
-        - bc8117b5-f48a-403a-b8a4-0896a8d049ab
+        - 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
         - 91052aca-4787-4e91-a26c-046bf3a039da
       - name: NothingImportantToDo
         id: a1eb4dc6-1652-4a09-890a-197718e1c756
         position: {x: 1229, y: 1169}
         node:
-          rid: 5264634918441582627
+          rid: 3799616545139982354
         references: []
         parentIds:
         - e6671f09-fc35-44a6-820c-c3d6add1b95c
@@ -414,11 +404,11 @@ MonoBehaviour:
         id: f40e59d0-0054-417f-9bb4-72ff009e62fa
         position: {x: 1569, y: 322}
         node:
-          rid: 5264634918441582628
+          rid: 3799616545139982355
         references:
         - fieldName: Action
           value:
-            rid: 3799616473472434180
+            rid: 3799616545139982356
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -426,13 +416,13 @@ MonoBehaviour:
         - 66495b0f-8672-4f14-b603-8adde610c744
       - name: Rest
         id: eaacf56e-35cd-4155-a0c3-ab2af6dd4bb2
-        position: {x: 1578, y: 468}
+        position: {x: 1593, y: 487}
         node:
-          rid: 5264634918441582629
+          rid: 3799616545139982357
         references:
         - fieldName: Action
           value:
-            rid: -2
+            rid: 3799616545139982385
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -442,11 +432,11 @@ MonoBehaviour:
         id: 0b72bf6b-8aee-47c6-9233-918c90fb9e5a
         position: {x: 1569, y: 946}
         node:
-          rid: 5264634918441582630
+          rid: 3799616545139982359
         references:
         - fieldName: Action
           value:
-            rid: 3799616502097772683
+            rid: 3799616545139982360
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -456,11 +446,11 @@ MonoBehaviour:
         id: 3d2f7b4d-8d5d-4d0a-8f38-d2ed17077cab
         position: {x: 1569, y: 624}
         node:
-          rid: 5264634918441582631
+          rid: 3799616545139982361
         references:
         - fieldName: Action
           value:
-            rid: 5264634918441582639
+            rid: 3799616545139982362
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -470,11 +460,11 @@ MonoBehaviour:
         id: 8473e1da-8afd-4891-894e-b3362ef83ee4
         position: {x: 1577, y: 793}
         node:
-          rid: 5264634918441582632
+          rid: 3799616545139982363
         references:
         - fieldName: Action
           value:
-            rid: 3799616473472434177
+            rid: 3799616545139982364
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -484,11 +474,11 @@ MonoBehaviour:
         id: e6671f09-fc35-44a6-820c-c3d6add1b95c
         position: {x: 1561, y: 1161}
         node:
-          rid: 5264634918441582633
+          rid: 3799616545139982365
         references:
         - fieldName: Action
           value:
-            rid: 3799616502097772550
+            rid: 3799616545139982366
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -498,11 +488,11 @@ MonoBehaviour:
         id: 8bec17bc-e29e-4fd4-9429-518ae4a9c536
         position: {x: 1553, y: 1361}
         node:
-          rid: 5264634918441582634
+          rid: 3799616545139982367
         references:
         - fieldName: Action
           value:
-            rid: 5264634918441582637
+            rid: 3799616545139982368
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -512,11 +502,11 @@ MonoBehaviour:
         id: 87d22ca2-2168-4ba1-b4da-7f316636f7d8
         position: {x: 1553, y: 1530}
         node:
-          rid: 5264634918441582636
+          rid: 3799616545139982369
         references:
         - fieldName: Action
           value:
-            rid: 5264634918441582638
+            rid: 3799616545139982370
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -526,7 +516,7 @@ MonoBehaviour:
         id: fb1c1044-80f0-4900-9e44-bca3b9030bc0
         position: {x: 1491.2, y: 173.59999}
         node:
-          rid: 5264634918441582988
+          rid: 3799616545139982371
         references: []
         parentIds:
         - 8473e1da-8afd-4891-894e-b3362ef83ee4
@@ -537,11 +527,11 @@ MonoBehaviour:
         id: fa62133d-bebf-408a-a99d-f61c36950b9d
         position: {x: 788, y: 160}
         node:
-          rid: 5264634918441582989
+          rid: 3799616545139982372
         references:
         - fieldName: Variable
           value:
-            rid: 5264634918441582990
+            rid: 3799616545139982373
           fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
@@ -552,7 +542,7 @@ MonoBehaviour:
         id: e63a0811-c3db-4a11-a98f-f26b547b8120
         position: {x: 1191.2, y: 165.59999}
         node:
-          rid: 6665480339530448898
+          rid: 3799616545139982374
         references: []
         parentIds:
         - fb1c1044-80f0-4900-9e44-bca3b9030bc0
@@ -560,23 +550,23 @@ MonoBehaviour:
         - fa62133d-bebf-408a-a99d-f61c36950b9d
       - name: 
         id: efd316ae-67b7-4171-baad-3025d8185ef9
-        position: {x: 967, y: 582}
+        position: {x: 927, y: 598}
         node:
-          rid: 3799616516779147265
+          rid: 3799616545139982375
         references: []
         parentIds:
         - 6849e53f-c1d6-4c6a-9070-b85661675bba
         childIds:
         - c417495c-9ab8-4e44-82c7-1399d54f1abb
-      - name: nothing
+      - name: BEing courted
         id: 868901b3-bc41-4798-936a-ab5b0a993924
         position: {x: 598, y: 1786}
         node:
-          rid: 3799616540466741255
+          rid: 3799616545139982376
         references:
         - fieldName: Action
           value:
-            rid: 3799616540466741843
+            rid: 3799616545139982377
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -586,17 +576,28 @@ MonoBehaviour:
         id: bfb73805-18be-4306-800c-9d1a43b42c10
         position: {x: 251, y: 1802}
         node:
-          rid: 3799616540466741256
+          rid: 3799616545139982378
         references:
         - fieldName: Variable
           value:
-            rid: 3799616540466741257
+            rid: 3799616545139982379
           fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         parentIds:
         - 868901b3-bc41-4798-936a-ab5b0a993924
         childIds: []
+      - name: 
+        id: 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
+        position: {x: 455, y: 665}
+        node:
+          rid: 3799616545139982380
+        references: []
+        parentIds:
+        - fd829167-6820-4f50-8db0-08c9c07393dc
+        - c417495c-9ab8-4e44-82c7-1399d54f1abb
+        childIds:
+        - 1de666b3-0997-4142-9858-3b97d5801850
     - name: EagleNestBT
       id: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
       graph:
@@ -1334,17 +1335,18 @@ MonoBehaviour:
       nodes:
       - name: 
         id: 85efbb5f-f3c5-422d-8f2b-dd90500c7b0a
-        position: {x: 634, y: 1740}
+        position: {x: 0, y: 0}
         node:
           rid: 3799616540466741837
         references: []
         parentIds: []
         childIds:
         - 7ec7fdc1-08de-47dd-8b04-319727a354e1
+        - bd86e3a9-9e24-4adf-a494-02d6342f6828
         - 35781d11-b594-488b-8a0b-e6e7de4c6d9a
       - name: 
         id: 7ec7fdc1-08de-47dd-8b04-319727a354e1
-        position: {x: 505, y: 1942}
+        position: {x: -300, y: 200}
         node:
           rid: 3799616540466741838
         references:
@@ -1358,7 +1360,7 @@ MonoBehaviour:
         childIds: []
       - name: 
         id: 35781d11-b594-488b-8a0b-e6e7de4c6d9a
-        position: {x: 817, y: 1958}
+        position: {x: 300, y: 200}
         node:
           rid: 3799616540466741841
         references: []
@@ -1368,7 +1370,7 @@ MonoBehaviour:
         - 87849ed2-51ee-4be3-a5c0-dedc1d07e920
       - name: 
         id: 87849ed2-51ee-4be3-a5c0-dedc1d07e920
-        position: {x: 958, y: 2133}
+        position: {x: 300, y: 400}
         node:
           rid: 3799616540466741992
         references:
@@ -1380,43 +1382,59 @@ MonoBehaviour:
         parentIds:
         - 35781d11-b594-488b-8a0b-e6e7de4c6d9a
         childIds: []
+      - name: 
+        id: bd86e3a9-9e24-4adf-a494-02d6342f6828
+        position: {x: 0, y: 200}
+        node:
+          rid: 3799616545139982336
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616545139982337
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 85efbb5f-f3c5-422d-8f2b-dd90500c7b0a
+        childIds: []
+    - name: Rest
+      id: 1ead2244-4188-4af4-a9b5-6fd252402b1f
+      graph:
+        rid: 3799616545139982381
+      nodes:
+      - name: 
+        id: 1588b1d7-1905-4d42-8408-501b3750542d
+        position: {x: 1426.5807, y: 223.56862}
+        node:
+          rid: 3799616545139982382
+        references: []
+        parentIds: []
+        childIds:
+        - 61a93286-0a4c-45dd-82b3-45474df2ecc7
+      - name: 
+        id: 61a93286-0a4c-45dd-82b3-45474df2ecc7
+        position: {x: 1420, y: 407}
+        node:
+          rid: 3799616545139982383
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616545139982384
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 1588b1d7-1905-4d42-8408-501b3750542d
+        childIds: []
     pushPerceptions: []
   eagle: {fileID: 8747803331283776312}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 3799616473472434176
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
           componentName: 
           methodName: Eat
-    - rid: 3799616473472434177
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: Eagle
-          methodName: WakeUp
-    - rid: 3799616473472434180
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: Eagle
-          methodName: StartWalkRandom
-        update:
-          componentName: Eagle
-          methodName: WalkObjective
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
     - rid: 3799616502097772545
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -1445,12 +1463,6 @@ MonoBehaviour:
         unpause:
           componentName: 
           methodName: 
-    - rid: 3799616502097772550
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: c8197d37-9a54-4d07-b7e8-e84b3351c427
     - rid: 3799616502097772679
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -1479,12 +1491,6 @@ MonoBehaviour:
         unpause:
           componentName: 
           methodName: 
-    - rid: 3799616502097772683
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: a7120e69-d4a3-473d-bee3-5d66629b49be
     - rid: 3799616516779147264
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -1503,12 +1509,6 @@ MonoBehaviour:
         unpause:
           componentName: 
           methodName: 
-    - rid: 3799616516779147265
-      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Slope: -1
-        YIntercept: 1
     - rid: 3799616516779147266
       type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
@@ -1547,22 +1547,6 @@ MonoBehaviour:
       type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
         IsRandomized: 0
-    - rid: 3799616540466741255
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 0
-        FinishSystemOnComplete: 0
-    - rid: 3799616540466741256
-      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        min: 0
-        max: 10
-    - rid: 3799616540466741257
-      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        componentName: Eagle
-        methodName: IsBeingCourted
     - rid: 3799616540466741835
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -1583,12 +1567,6 @@ MonoBehaviour:
       type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
         Iterations: -1
-    - rid: 3799616540466741843
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: 47b1f789-6bc8-4b65-b291-09c4ca7b1b99
     - rid: 3799616540466741992
       type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -1598,6 +1576,377 @@ MonoBehaviour:
         method:
           componentName: 
           methodName: EmptyAction
+    - rid: 3799616545139982336
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616545139982337
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Eagle
+          methodName: AssignPartnersDen
+    - rid: 3799616545139982345
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: 13.64
+        Midpoint: 0.5
+    - rid: 3799616545139982346
+      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        PullingEnabled: 1
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0.009441817
+            outSlope: 0.009441817
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.2496853
+            value: 1.0023575
+            inSlope: -0.024657005
+            outSlope: -0.024657005
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.119195044
+          - serializedVersion: 3
+            time: 0.35031542
+            value: 0.008962929
+            inSlope: -0.004103701
+            outSlope: -0.004103701
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.8161186
+            value: 0.0060005207
+            inSlope: 0.019277312
+            outSlope: 0.019277312
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2083811
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.9174295
+            value: 0.9965408
+            inSlope: 0.022202102
+            outSlope: 0.022202102
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.7917871
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.041894082
+            outSlope: 0.041894082
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 3799616545139982347
+      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        PullingEnabled: 1
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -0.009457095
+            outSlope: -0.009457095
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.2496853
+            value: -0.0023612976
+            inSlope: -0.024657005
+            outSlope: -0.024657005
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.119195044
+          - serializedVersion: 3
+            time: 0.35031542
+            value: 1.0018828
+            inSlope: -0.004103701
+            outSlope: -0.004103701
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.8161186
+            value: 1.0004463
+            inSlope: 0.019277312
+            outSlope: 0.019277312
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2083811
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.9174295
+            value: -0.0027782917
+            inSlope: 0.022202102
+            outSlope: 0.022202102
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.7917871
+          - serializedVersion: 3
+            time: 1
+            value: -0.0012130737
+            inSlope: 0.018956142
+            outSlope: 0.018956142
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 3799616545139982348
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: 1
+        YIntercept: 0
+    - rid: 3799616545139982349
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: 44.74
+        Midpoint: 0.5
+    - rid: 3799616545139982350
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.6
+        - 0.6
+    - rid: 3799616545139982351
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.3
+        - 0.7
+    - rid: 3799616545139982352
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.2
+        - 0.8
+    - rid: 3799616545139982353
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.3
+        - 0.7
+    - rid: 3799616545139982354
+      type: {class: ConstantFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        value: 0.35
+    - rid: 3799616545139982355
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982356
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Eagle
+          methodName: StartWalkRandom
+        update:
+          componentName: Eagle
+          methodName: WalkObjective
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616545139982357
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982359
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982360
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: a7120e69-d4a3-473d-bee3-5d66629b49be
+    - rid: 3799616545139982361
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982362
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: dd89a62a-36bf-4b4b-bb2a-1eeb6aefb38c
+    - rid: 3799616545139982363
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982364
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Eagle
+          methodName: WakeUp
+    - rid: 3799616545139982365
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982366
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: c8197d37-9a54-4d07-b7e8-e84b3351c427
+    - rid: 3799616545139982367
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982368
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
+    - rid: 3799616545139982369
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982370
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: f6605e51-4723-4f89-b569-3c123b15c728
+    - rid: 3799616545139982371
+      type: {class: MinFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+    - rid: 3799616545139982372
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 3799616545139982373
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Eagle
+        methodName: IsAwake
+    - rid: 3799616545139982374
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: -1
+        YIntercept: 1
+    - rid: 3799616545139982375
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: -1
+        YIntercept: 1
+    - rid: 3799616545139982376
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 0
+        FinishSystemOnComplete: 0
+    - rid: 3799616545139982377
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 0
+        subgraphId: 47b1f789-6bc8-4b65-b291-09c4ca7b1b99
+    - rid: 3799616545139982378
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 10
+    - rid: 3799616545139982379
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Eagle
+        methodName: IsBeingCourted
+    - rid: 3799616545139982380
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: -20.88
+        Midpoint: 0.5
+    - rid: 3799616545139982381
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616545139982382
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 3799616545139982383
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616545139982384
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: 
+        update:
+          componentName: 
+          methodName: Rest
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616545139982385
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 1ead2244-4188-4af4-a9b5-6fd252402b1f
     - rid: 5264634693250449442
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -1687,286 +2036,6 @@ MonoBehaviour:
         Exponent: 0.5
         DespX: 0
         DespY: 0
-    - rid: 5264634918441582617
-      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
-      data:
-        PullingEnabled: 1
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: -0.00047104526
-            value: 0.9995105
-            inSlope: -2.0526326
-            outSlope: -2.0526326
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.066770636
-          - serializedVersion: 3
-            time: 1.0013428
-            value: 0.000030517578
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5264634918441582618
-      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        GrownRate: 13.64
-        Midpoint: 0.5
-    - rid: 5264634918441582619
-      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
-      data:
-        PullingEnabled: 1
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0.009441817
-            outSlope: 0.009441817
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.2496853
-            value: 1.0023575
-            inSlope: -0.024657005
-            outSlope: -0.024657005
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.119195044
-          - serializedVersion: 3
-            time: 0.35031542
-            value: 0.008962929
-            inSlope: -0.004103701
-            outSlope: -0.004103701
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.8161186
-            value: 0.0060005207
-            inSlope: 0.019277312
-            outSlope: 0.019277312
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.2083811
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.9174295
-            value: 0.9965408
-            inSlope: 0.022202102
-            outSlope: 0.022202102
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.7917871
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0.041894082
-            outSlope: 0.041894082
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5264634918441582620
-      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
-      data:
-        PullingEnabled: 1
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: -0.009457095
-            outSlope: -0.009457095
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.2496853
-            value: -0.0023612976
-            inSlope: -0.024657005
-            outSlope: -0.024657005
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.119195044
-          - serializedVersion: 3
-            time: 0.35031542
-            value: 1.0018828
-            inSlope: -0.004103701
-            outSlope: -0.004103701
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.8161186
-            value: 1.0004463
-            inSlope: 0.019277312
-            outSlope: 0.019277312
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.2083811
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.9174295
-            value: -0.0027782917
-            inSlope: 0.022202102
-            outSlope: 0.022202102
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.7917871
-          - serializedVersion: 3
-            time: 1
-            value: -0.0012130737
-            inSlope: 0.018956142
-            outSlope: 0.018956142
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5264634918441582621
-      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Slope: 1
-        YIntercept: 0
-    - rid: 5264634918441582622
-      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        GrownRate: 44.74
-        Midpoint: 0.5
-    - rid: 5264634918441582623
-      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Weights:
-        - 0.6
-        - 0.4
-    - rid: 5264634918441582624
-      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Weights:
-        - 0.3
-        - 0.7
-    - rid: 5264634918441582625
-      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Weights:
-        - 0.2
-        - 0.8
-    - rid: 5264634918441582626
-      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Weights:
-        - 0.3
-        - 0.7
-    - rid: 5264634918441582627
-      type: {class: ConstantFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        value: 0.35
-    - rid: 5264634918441582628
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582629
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582630
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582631
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582632
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582633
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582634
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582636
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        FinishSystemOnComplete: 0
-    - rid: 5264634918441582637
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
-    - rid: 5264634918441582638
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: f6605e51-4723-4f89-b569-3c123b15c728
-    - rid: 5264634918441582639
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: dd89a62a-36bf-4b4b-bb2a-1eeb6aefb38c
-    - rid: 5264634918441582988
-      type: {class: MinFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-    - rid: 5264634918441582989
-      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        min: 0
-        max: 1
-    - rid: 5264634918441582990
-      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        componentName: Eagle
-        methodName: IsAwake
     - rid: 6259615775858360320
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -2469,12 +2538,6 @@ MonoBehaviour:
         method:
           componentName: 
           methodName: Protect
-    - rid: 6665480339530448898
-      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        Slope: -1
-        YIntercept: 1
     - rid: 6665480339530448901
       type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
@@ -2715,7 +2778,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5309291114755877294}
-  - component: {fileID: 4946045488823778639}
   - component: {fileID: 1042117777361544417}
   m_Layer: 6
   m_Name: PersonalCameraPosition
@@ -2739,57 +2801,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4524937366858331167}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!20 &4946045488823778639
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728438107045750566}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!81 &1042117777361544417
 AudioListener:
   m_ObjectHideFlags: 0

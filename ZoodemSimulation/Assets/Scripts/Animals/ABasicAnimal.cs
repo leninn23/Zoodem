@@ -29,6 +29,7 @@ namespace Animals
         public float sleepFoodDrain;
         public float sleepEnergyGain;
         public float sleepHealthGain;
+        public float foodValue;
         public List<IFood.FoodTypes> foodPreferences;
         [Header("Current state")]
         public float food;
@@ -105,12 +106,25 @@ namespace Animals
 
         private void Update()
         {
-            if (food <= 0.1f * food)
+            if (food <= 0.15f * maxFood)
             {
-                health -= 0.1f * Time.deltaTime;
+                health -= 0.5f * Time.deltaTime;
+                if (health <= 0)
+                {
+                    
+                }
             }
         }
 
+        private void Die()
+        {
+            var a = Instantiate(corpse, transform.position, transform.rotation);
+            a.foodValue = foodValue;
+            a.name = name;
+            onDeath?.Invoke();
+            Destroy(gameObject);
+        }
+        
         #region Movement
 
         // public Status WalkDir()
@@ -293,6 +307,7 @@ namespace Animals
                 Debug.Log(nest);
                 den = nest;
                 den.owner = this;
+                den.name = name + " den";
             }
         } 
         public void GenerateOffspring()
@@ -321,14 +336,16 @@ namespace Animals
         {
             den.food += _offspring * foodPerChild;
         }
-        public void Rest()
+        public Status Rest()
         {
-            energy = Mathf.Clamp(energy+ 10, 0, maxEnergy);
-            health = Mathf.Clamp(health + 10, 0, maxHealth);
+            energy = Mathf.Clamp(energy + sleepEnergyGain* Time.deltaTime, 0, maxEnergy);
+            // health = Mathf.Clamp(health + sleepEnergyGain* Time.deltaTime, 0, maxHealth);
+            return Status.Running;
         }
 
         public float IsBeingCourted()
         {
+            Debug.Log("Being courted");
             if (relationshipState == RelationshipStatus.BeingCourted)
             {
                 return 10f;
@@ -425,6 +442,16 @@ namespace Animals
             var isFemale = Random.Range(0, 1) == 0;
             gender = isFemale ? GenderAnimal.female : GenderAnimal.male;
             partner.gender = isFemale ? GenderAnimal.male : GenderAnimal.female;
+        }
+
+        //Se muda con la parienta
+        public void AssignPartnersDen()
+        {
+            if (!isDom && partner && partner.den)
+            {
+                Destroy(den);
+                den = partner.den;
+            }
         }
         
         #endregion
@@ -543,9 +570,7 @@ namespace Animals
             health -= damage;
             if (health <= 0)
             {
-                var a = Instantiate(corpse, transform.position, transform.rotation);
-                onDeath?.Invoke();
-                Destroy(gameObject);
+                Die();
             }
         }
 
@@ -553,9 +578,10 @@ namespace Animals
         {
             if(_prey)
             {
-                Destroy(_prey.gameObject);
+                var f = _prey.GetComponent<IFood>();
+                food += f.GetFoodValue();
+                f.GetEaten();
                 _prey = null;
-                food += 20f;
             }
         }
         #endregion

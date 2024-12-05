@@ -12,10 +12,19 @@ namespace Animals
 
         private float _timeStamp;
         private float _timeToWait;
+        private static bool _createdRabbits;
         
         // Start is called before the first frame update
         private void Start()
         {
+            if (!_createdRabbits)
+            {
+                _createdRabbits = true;
+                for (int i = 0; i < 20; i++)
+                {
+                    SpawnRandomRabbit();
+                }
+            }
             StartWalkRandom();
             FoodState = IFood.FoodStates.Alive;
             FoodType = IFood.FoodTypes.Meat;
@@ -42,14 +51,24 @@ namespace Animals
                 StartWalkRandom();
             }
         }
-        
+
+        public float GetFoodValue()
+        {
+            return 10f;
+        }
+
+        public void GetEaten()
+        {
+            //I they dont get eaten alive :(
+        }
 
         public void SpawnRandomRabbit()
         {
             var pos = new Vector2Int(Random.Range(0, terrainGenerator.mapSize.x),
                 Random.Range(0, terrainGenerator.mapSize.y));
             var realPos = terrainGenerator.MapPosToRealPos(pos);
-            Instantiate(gameObject, realPos, Quaternion.identity, transform.parent);
+            var newRabbit = Instantiate(gameObject, realPos, Quaternion.identity, transform.parent);
+            newRabbit.name = "Rabbit";
         }
         
         public IFood.FoodTypes FoodType { get; private set; }

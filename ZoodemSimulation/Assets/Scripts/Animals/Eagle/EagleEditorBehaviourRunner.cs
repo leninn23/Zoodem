@@ -128,6 +128,15 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.FoodNear();
     }
 
+    public Status Rest()
+    {
+        return eagle.Rest();
+    }
+
+    public void EnterBeingCourtedState()
+    {
+        eagle.display.PushStatus(StatusDisplay.Statuses.Courting);
+    }
     public bool PreyNear()
     {
         Debug.Log("Detectando si presa cerca");
