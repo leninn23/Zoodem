@@ -1,0 +1,532 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3263964894498413124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5194410964923949931}
+  - component: {fileID: 3449831872824279565}
+  - component: {fileID: 604979183364411328}
+  - component: {fileID: 370103494903543529}
+  - component: {fileID: 153196234383986875}
+  - component: {fileID: 1240629465472281751}
+  m_Layer: 6
+  m_Name: AbejaObrera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5194410964923949931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 76.97, y: 0.53, z: 43.578}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3449831872824279565
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &604979183364411328
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &370103494903543529
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &153196234383986875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de262b88e1d23543bc0f07bdaeafd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
+  _eventHandler:
+    debugStatusChanges: 0
+    identifier: 
+  data:
+    graphs:
+    - name: WorkerBeebehaviourgraph
+      id: e13d6cb2-ecef-46ce-83d2-2db74e09bf51
+      graph:
+        rid: 5137887122736545792
+      nodes:
+      - name: 
+        id: d7c59546-bae3-4998-bfd0-6509f239b3e4
+        position: {x: 150, y: 0}
+        node:
+          rid: 5137887122736545793
+        references: []
+        parentIds: []
+        childIds:
+        - 1fc5f679-2fbc-4a8f-a2d4-9057ffe2a8c4
+      - name: 
+        id: 1fc5f679-2fbc-4a8f-a2d4-9057ffe2a8c4
+        position: {x: 150, y: 200}
+        node:
+          rid: 5137887122736545794
+        references: []
+        parentIds:
+        - d7c59546-bae3-4998-bfd0-6509f239b3e4
+        childIds:
+        - 50269e35-9f77-4642-be5c-e9a184a3587f
+        - f352e09d-270a-461e-b48b-6ef38de4668b
+      - name: HasNectar
+        id: 50269e35-9f77-4642-be5c-e9a184a3587f
+        position: {x: -150, y: 400}
+        node:
+          rid: 5137887122736545795
+        references:
+        - fieldName: Perception
+          value:
+            rid: 5137887122736545806
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 1fc5f679-2fbc-4a8f-a2d4-9057ffe2a8c4
+        childIds:
+        - 92751e40-daa3-4798-b900-731b3b0d0bc2
+      - name: 
+        id: 92751e40-daa3-4798-b900-731b3b0d0bc2
+        position: {x: -150, y: 600}
+        node:
+          rid: 5137887122736545796
+        references: []
+        parentIds:
+        - 50269e35-9f77-4642-be5c-e9a184a3587f
+        childIds:
+        - b6ba6738-505a-4ebd-bcd5-110f95ac2351
+        - dfc53a45-8ec4-46e5-8bb5-56258c356a2f
+      - name: WalkToHive
+        id: b6ba6738-505a-4ebd-bcd5-110f95ac2351
+        position: {x: -300, y: 800}
+        node:
+          rid: 5137887122736545797
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545807
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 92751e40-daa3-4798-b900-731b3b0d0bc2
+        childIds: []
+      - name: PutNectar
+        id: dfc53a45-8ec4-46e5-8bb5-56258c356a2f
+        position: {x: 0, y: 800}
+        node:
+          rid: 5137887122736545798
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545808
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 92751e40-daa3-4798-b900-731b3b0d0bc2
+        childIds: []
+      - name: 
+        id: f352e09d-270a-461e-b48b-6ef38de4668b
+        position: {x: 450, y: 400}
+        node:
+          rid: 5137887122736545799
+        references: []
+        parentIds:
+        - 1fc5f679-2fbc-4a8f-a2d4-9057ffe2a8c4
+        childIds:
+        - 4e75b53b-926a-4f1c-be3f-85f90659fe63
+        - 03ec2d1a-a40c-4160-85d2-1bd17cd10cb3
+      - name: IsInBiome
+        id: 4e75b53b-926a-4f1c-be3f-85f90659fe63
+        position: {x: 300, y: 600}
+        node:
+          rid: 5137887122736545800
+        references:
+        - fieldName: Perception
+          value:
+            rid: 5137887122736545811
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - f352e09d-270a-461e-b48b-6ef38de4668b
+        childIds:
+        - d1a0ec7f-be36-43f6-a3da-03262825f861
+      - name: TravelBiome
+        id: 03ec2d1a-a40c-4160-85d2-1bd17cd10cb3
+        position: {x: 600, y: 600}
+        node:
+          rid: 5137887122736545801
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545810
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - f352e09d-270a-461e-b48b-6ef38de4668b
+        childIds: []
+      - name: 
+        id: d1a0ec7f-be36-43f6-a3da-03262825f861
+        position: {x: 300, y: 800}
+        node:
+          rid: 5137887122736545802
+        references: []
+        parentIds:
+        - 4e75b53b-926a-4f1c-be3f-85f90659fe63
+        childIds:
+        - 16b56435-9c64-4a64-bbee-08465c969cb7
+        - 99097055-0a6c-4e5a-b417-d6e638c03cf8
+      - name: NearFlower
+        id: 16b56435-9c64-4a64-bbee-08465c969cb7
+        position: {x: 166.4, y: 1016.00006}
+        node:
+          rid: 5137887122736545803
+        references:
+        - fieldName: Perception
+          value:
+            rid: 5137887122736545809
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d1a0ec7f-be36-43f6-a3da-03262825f861
+        childIds:
+        - 0e0686cc-5f10-4387-a895-14817296923c
+      - name: Walk
+        id: 99097055-0a6c-4e5a-b417-d6e638c03cf8
+        position: {x: 450, y: 1000}
+        node:
+          rid: 5137887122736545804
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545812
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d1a0ec7f-be36-43f6-a3da-03262825f861
+        childIds: []
+      - name: Collect
+        id: 0e0686cc-5f10-4387-a895-14817296923c
+        position: {x: 150, y: 1200}
+        node:
+          rid: 5137887122736545805
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545813
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16b56435-9c64-4a64-bbee-08465c969cb7
+        childIds: []
+    pushPerceptions: []
+  bee: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 5137887122736545792
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545793
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 5137887122736545794
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 5137887122736545795
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545796
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 5137887122736545797
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545798
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545799
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 5137887122736545800
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545801
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545802
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 5137887122736545803
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545804
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545805
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 5137887122736545806
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: 
+          methodName: HasNectar
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545807
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkToHive
+        update:
+          componentName: 
+          methodName: WalkHive
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545808
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: 
+          methodName: PutNectar
+    - rid: 5137887122736545809
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: 
+          methodName: NearFlower
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545810
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartTravelBiome
+        update:
+          componentName: 
+          methodName: TravelBiome
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545811
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: 
+          methodName: IsInBiome
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545812
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalk
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 5137887122736545813
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartCollect
+        update:
+          componentName: 
+          methodName: Collecting
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+--- !u!114 &1240629465472281751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8c067577c226945bd3bd9b6ae23e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: {fileID: 0}
+  corpse: {fileID: 0}
+  terrainGenerator: {fileID: 0}
+  animalType: 0
+  maxHealth: 0
+  maxEnergy: 0
+  maxFood: 0
+  attackDamage: 0
+  moveSpeed: 0
+  walkEnergyDrain: 0
+  huntEnergyDrain: 0
+  foodDrain: 0
+  sleepFoodDrain: 0
+  sleepEnergyGain: 0
+  sleepHealthGain: 0
+  foodPreferences: 
+  food: 0
+  health: 0
+  energy: 0
+  isSleeping: 0
+  gender: 2
+  partner: {fileID: 0}
+  isDom: 0
+  relationshipState: 0
+  den: {fileID: 0}
+  nidoPrefab: {fileID: 0}
+  courtTime: 0
+  minDistanceNest: 5
+  gestationTime: 0
+  offspringNRange: {x: 0, y: 0}
+  foodPerChild: 0
+  wanderDistance: 0
+  biomePreferences: 030000000200000004000000
