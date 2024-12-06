@@ -23,6 +23,7 @@ namespace Animals
         public float moveSpeed;
 
         [Space(7)] [Header("Advanced settings")]
+        public float maxDenRange;
         public float walkEnergyDrain;
         public float huntEnergyDrain;
         public float foodDrain;
@@ -183,7 +184,26 @@ namespace Animals
             food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
             return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
         }
-
+        public Status WalkPartner()
+        {
+            if (!partner)
+            {
+                // _display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+                return Status.Failure;
+            }
+            
+            var trans = transform;
+            var partnerPosition = partner.transform.position;
+            var position = trans.position;
+            var dist = Vector3.Distance(position, partnerPosition);
+            currentWalkDir = partnerPosition - position;
+            currentWalkDir.y = 0;
+            var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
+            trans.Translate(currentWalkDir * maxDist);
+            energy = Mathf.Clamp(energy - walkEnergyDrain * Time.deltaTime, 0, maxEnergy);
+            food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
+            return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
+        }
         private void SetUpObjectiveAndDirection(Vector3 obj)
         {
             _prevDistance = float.MaxValue;
@@ -246,12 +266,49 @@ namespace Animals
                 walkObjective = terrainGenerator.MapPosToRealPos(newPos);
                 walkObjective.y = position.y;
                 dist = Vector3.Distance(position, walkObjective);
+                //we dont want it to walk too little, it helps specially when against walls
             } while (dist <= 2f);
 
             SetUpObjectiveAndDirection(walkObjective);
             // currentWalkDir = new Vector3(dir.x, 0, dir.y);
         }
 
+        public void StartWalkRandomNest()
+        {
+            var position = transform.position;
+            if (Vector3.Distance(position, den.transform.position) < maxDenRange)
+            {
+                StartWalkRandom();
+                Debug.Log("RandomWalk " + name);
+                return;
+            }
+
+            var baseDir = (den.transform.position - position);
+            baseDir.y = 0;
+            const float maxAngle = 0 * (2f * Mathf.PI) / 360f;
+            var dist = 0f;
+            var i = 0;
+            do
+            {
+                i++;
+                var randAngle = 0;//Random.Range(-maxAngle, maxAngle);
+                var dir = baseDir;
+                
+                // dir.x = dir.x * Mathf.Cos(randAngle) - dir.z * Mathf.Sin(randAngle);
+                // dir.z = dir.z * Mathf.Cos(randAngle) + dir.x * Mathf.Sin(randAngle);
+                dir = dir.normalized * wanderDistance;
+                var newPos = terrainGenerator.RealPosToMapPos(position + dir);
+                Debug.Log(name + "---" + dir + "----" +Vector3.Distance(position, den.transform.position) + " ---- " + newPos);
+                newPos.x = Mathf.Clamp(newPos.x, 0, terrainGenerator.mapSize.x-1);
+                newPos.y = Mathf.Clamp(newPos.y, 0, terrainGenerator.mapSize.y-1);
+                walkObjective = terrainGenerator.MapPosToRealPos(newPos);
+                walkObjective.y = position.y;
+                dist = Vector3.Distance(position, walkObjective);
+            } while (dist <= 2.0f && i < 5);
+            Debug.Log($"{name} is walking from {position}, to {walkObjective}");
+            SetUpObjectiveAndDirection(walkObjective);
+        }
+        
         public void StartWalkToNest()
         {
             _prevDistance = float.MaxValue;
@@ -346,14 +403,11 @@ namespace Animals
         public float IsBeingCourted()
         {
             Debug.Log("Being courted");
-            if (relationshipState == RelationshipStatus.BeingCourted)
-            {
-                return 10f;
-            }
-            else
-            {
-                return 0f;
-            }
+            return relationshipState == RelationshipStatus.BeingCourted ? 10f : 0f;
+        }
+        public bool IsBeingCourtedBool()
+        {
+            return relationshipState == RelationshipStatus.BeingCourted;
         }
         private bool TryFindPartner(float radius, out ABasicAnimal potentialPartner)
         {
@@ -395,6 +449,11 @@ namespace Animals
             return true;
         }
 
+        public void StartCourt()
+        {
+            _timer = courtTime;
+        }
+        
         public bool FindPartner()
         {
             if (relationshipState != RelationshipStatus.Single) return true;
@@ -410,6 +469,12 @@ namespace Animals
             return false;
         }
 
+        private void EndCourt()
+        {
+            AssignPartnersDen();
+        }
+        
+        //I am being courted!
         public void Court(ABasicAnimal animal)
         {
             partner = animal;
@@ -422,7 +487,9 @@ namespace Animals
 
         public Status Courting()
         {
-            if (relationshipState == RelationshipStatus.BeingCourted) return Status.Running;
+            // if (partner) return Status.Success;
+            if (relationshipState == RelationshipStatus.Enganged) return Status.Success;
+            if (relationshipState == RelationshipStatus.BeingCourted) return Status.Success;
             
             _timer -= Time.deltaTime;
             if (_timer <= 0)
@@ -431,6 +498,7 @@ namespace Animals
                 partner.display.RemoveStatus(StatusDisplay.Statuses.Courting);
                 partner.relationshipState = RelationshipStatus.Enganged;
                 relationshipState = RelationshipStatus.Enganged;
+                partner.EndCourt();
                 return Status.Success;
             }
 
@@ -475,7 +543,10 @@ namespace Animals
         {
             return (den == null) ? 1 : 0;
         }
-
+        public bool HasDenBool()
+        {
+            return den;
+        }
         public float IsAwake()
         {
             return isSleeping ? 0 : 1;
@@ -486,7 +557,7 @@ namespace Animals
 
         public bool PreyNear()
         {
-            var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
+            var foodNear = Physics.OverlapSphere(transform.position, 5.75f, LayerMask.GetMask("Animal"));
             foreach (var c in foodNear)
             {
                 if (c.TryGetComponent<IFood>(out var component))
@@ -504,6 +575,28 @@ namespace Animals
             }
             return false;
         }
+
+        public bool AnimalNear()
+        {
+            var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
+            foreach (var c in foodNear)
+            {
+                if (c.TryGetComponent<IFood>(out var component))
+                {
+                    if (component.FoodState == IFood.FoodStates.Alive && c.GetComponent<ABasicAnimal>().animalType != animalType)
+                    {
+                        _prey = c.transform;
+                        // display.PushStatus(StatusDisplay.Statuses.Hunting);
+                        return true;
+                        // walkObjective = c.transform.position;
+                        // currentWalkDir = walkObjective - transform.position;
+                        //     currentWalkDir.y = 0;
+                    }
+                }
+            }
+            return false;
+        }
+        
         public bool FoodNear()
         {
             var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
@@ -599,12 +692,12 @@ namespace Animals
             isSleeping = true;
         }
 
-        public void Sleep()
+        public Status Sleep()
         {
-            
-            energy = Mathf.Clamp(energy + sleepEnergyGain, 0, maxEnergy);
-            health = Mathf.Clamp(health + sleepHealthGain, 0, maxHealth);
-            food = Mathf.Clamp(food - sleepFoodDrain, 0, maxFood);
+            energy = Mathf.Clamp(energy + sleepEnergyGain*Time.deltaTime, 0, maxEnergy);
+            health = Mathf.Clamp(health + sleepHealthGain*Time.deltaTime, 0, maxHealth);
+            food = Mathf.Clamp(food - sleepFoodDrain*Time.deltaTime, 0, maxFood);
+            return Status.Running;
         }
     }
 }

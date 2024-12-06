@@ -86,7 +86,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
 
     public void StartCourt()
     {
-        eagle.FindPartner();
+        eagle.StartCourt();
     }
 
     public void Incubate()
@@ -106,6 +106,11 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         eagle.StartWalkToNest();
     }
 
+    public bool IsBeingCourted()
+    {
+        return eagle.IsBeingCourtedBool();
+    }
+    
     public void AssignGender()
     {
         eagle.AssignGender();
