@@ -23,6 +23,14 @@ public class Bear : ABasicAnimal
         throw new System.NotImplementedException();
     }
 
-    
-    
-}
+
+    public void StartCollect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Status Collect()
+    {
+        throw new System.NotImplementedException();
+    }
+}   

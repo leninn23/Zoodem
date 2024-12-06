@@ -146,5 +146,15 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
         bear.Honeycomb();
     }
 
+    public void StartCollect()
+    {
+        bear.StartCollect();
+    }
+
+    public Status Collect()
+    {
+        return bear.Collect();
+    }
+
     #endregion
 }
