@@ -46,9 +46,34 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     }
     
 
-    public void StartWalk()
+    public void StartWalkFleeing()
     {
-        bee.StartWalkRandom();
+        bee.StartWalkRandom(StatusDisplay.Statuses.Fleeing);
+    }
+    public void StartWalkProtect()
+    {
+        bee.StartWalkRandom(StatusDisplay.Statuses.Protecting);
+    }
+
+    public void StartWalkRandom()
+    {
+        bee.StartWalkRandom(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkHunting()
+    {
+        bee.StartWalkRandom(StatusDisplay.Statuses.Hunting);
+    }
+
+    public void StartWalkRandomNest()
+    {
+        bee.StartWalkRandomNest(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkRandomNestProtect()
+    {
+        bee.StartWalkRandomNest(StatusDisplay.Statuses.Protecting);
+    }    public void StartWalkRandomNestHunt()
+    {
+        bee.StartWalkRandomNest(StatusDisplay.Statuses.Hunting);
     }
 
     public Status Walk()

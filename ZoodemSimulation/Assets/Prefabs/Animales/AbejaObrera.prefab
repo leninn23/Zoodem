@@ -353,7 +353,7 @@ MonoBehaviour:
         childIds: []
       - name: Run away
         id: 07a58786-da85-48e3-add6-b3facf4de4b7
-        position: {x: 896, y: -153}
+        position: {x: 912, y: -139}
         node:
           rid: 2752642924918865936
         references:
@@ -395,7 +395,7 @@ MonoBehaviour:
         - 52402b06-6b8e-4143-9039-b3446b120ae5
       - name: Eat
         id: acf59ba3-f6b4-4719-90c1-9a2b17efaec8
-        position: {x: 1796, y: 301}
+        position: {x: 1814, y: 317}
         node:
           rid: 2752642924918865939
         references:
@@ -627,7 +627,7 @@ MonoBehaviour:
         parentIds:
         - d1a0ec7f-be36-43f6-a3da-03262825f861
         childIds: []
-      - name: Collect
+      - name: Eat
         id: 0e0686cc-5f10-4387-a895-14817296923c
         position: {x: 541, y: 1368}
         node:
@@ -763,7 +763,7 @@ MonoBehaviour:
         childIds: []
       - name: 
         id: 5201b82d-2b9b-414e-9896-405958bb92d5
-        position: {x: -150, y: 600}
+        position: {x: -134, y: 617}
         node:
           rid: 2752642924918865964
         references:
@@ -1138,8 +1138,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Bee
-          methodName: StartWalkRandom
+          componentName: 
+          methodName: StartWalkFleeing
         update:
           componentName: Bee
           methodName: WalkObjective
@@ -1280,7 +1280,7 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Bee
+          componentName: 
           methodName: StartWalkRandomNest
         update:
           componentName: 
@@ -1299,7 +1299,7 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartWalk
+          methodName: StartWalkRandom
         update:
           componentName: 
           methodName: Walk
@@ -1460,7 +1460,7 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartWalk
+          methodName: StartWalkRandom
         update:
           componentName: 
           methodName: Walk
@@ -1504,6 +1504,7 @@ MonoBehaviour:
   sleepHealthGain: 1
   foodValue: 90
   foodPreferences: 05000000
+  hungryThreshold: 0
   food: 0
   health: 0
   energy: 0

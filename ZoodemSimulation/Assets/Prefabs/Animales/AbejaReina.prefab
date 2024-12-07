@@ -140,6 +140,7 @@ MonoBehaviour:
   sleepHealthGain: 0
   foodValue: 0
   foodPreferences: 
+  hungryThreshold: 0
   food: 0
   health: 0
   energy: 0
@@ -178,89 +179,6 @@ MonoBehaviour:
     identifier: 
   data:
     graphs:
-    - name: QueenBeeReproductionBT
-      id: c42e0caf-a158-4d1e-844b-7e127db073d2
-      graph:
-        rid: 5137887122736545828
-      nodes:
-      - name: 
-        id: be63c486-939c-4454-8b2d-023fdbcff087
-        position: {x: 0, y: 0}
-        node:
-          rid: 5137887122736545834
-        references: []
-        parentIds: []
-        childIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-      - name: Mate
-        id: 60afe4be-1c71-49ee-8740-ad9f22a19c37
-        position: {x: 635, y: 440}
-        node:
-          rid: 5137887122736545829
-        references:
-        - fieldName: Action
-          value:
-            rid: 5137887122736545837
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
-      - name: 
-        id: 16c964d2-1699-4bde-8767-d26ab58c78af
-        position: {x: 0, y: 200}
-        node:
-          rid: 5137887122736545830
-        references: []
-        parentIds:
-        - be63c486-939c-4454-8b2d-023fdbcff087
-        childIds:
-        - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
-        - a3744ee0-9259-483f-9609-ead7d66702b3
-        - 85df7b40-28fd-4d92-8417-d271d087cb60
-        - 60afe4be-1c71-49ee-8740-ad9f22a19c37
-      - name: NearWorkerBee
-        id: 7d876ac1-027d-474f-aed3-8e30e8b3ba46
-        position: {x: -300, y: 400}
-        node:
-          rid: 5137887122736545831
-        references:
-        - fieldName: Perception
-          value:
-            rid: 5137887122736545835
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
-      - name: SpaceHive
-        id: a3744ee0-9259-483f-9609-ead7d66702b3
-        position: {x: 0, y: 400}
-        node:
-          rid: 5137887122736545832
-        references:
-        - fieldName: Perception
-          value:
-            rid: 5137887122736545836
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
-      - name: WalkPartner
-        id: 85df7b40-28fd-4d92-8417-d271d087cb60
-        position: {x: 342, y: 432}
-        node:
-          rid: 2752642923302748160
-        references:
-        - fieldName: Action
-          value:
-            rid: 2752642923302748161
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
     - name: utilitySystem
       id: a8e4f7c4-e333-4b07-9829-4160bca21ef4
       graph:
@@ -560,7 +478,7 @@ MonoBehaviour:
         - 6da111b1-c613-465b-9700-b85c0875ff0d
       - name: WakeUp
         id: 68182f71-b875-4554-86a5-daad53d9cdac
-        position: {x: 900, y: 665.55554}
+        position: {x: 916, y: 699}
         node:
           rid: 2752642924918866000
         references:
@@ -596,6 +514,89 @@ MonoBehaviour:
         parentIds: []
         childIds:
         - 6bfbdbf2-f566-4cf1-9ea0-4531987ff78b
+    - name: QueenBeeReproductionBT
+      id: c42e0caf-a158-4d1e-844b-7e127db073d2
+      graph:
+        rid: 5137887122736545828
+      nodes:
+      - name: 
+        id: be63c486-939c-4454-8b2d-023fdbcff087
+        position: {x: 0, y: 0}
+        node:
+          rid: 5137887122736545834
+        references: []
+        parentIds: []
+        childIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+      - name: Mate
+        id: 60afe4be-1c71-49ee-8740-ad9f22a19c37
+        position: {x: 635, y: 440}
+        node:
+          rid: 5137887122736545829
+        references:
+        - fieldName: Action
+          value:
+            rid: 5137887122736545837
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
+      - name: 
+        id: 16c964d2-1699-4bde-8767-d26ab58c78af
+        position: {x: 0, y: 200}
+        node:
+          rid: 5137887122736545830
+        references: []
+        parentIds:
+        - be63c486-939c-4454-8b2d-023fdbcff087
+        childIds:
+        - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
+        - a3744ee0-9259-483f-9609-ead7d66702b3
+        - 85df7b40-28fd-4d92-8417-d271d087cb60
+        - 60afe4be-1c71-49ee-8740-ad9f22a19c37
+      - name: NearWorkerBee
+        id: 7d876ac1-027d-474f-aed3-8e30e8b3ba46
+        position: {x: -300, y: 400}
+        node:
+          rid: 5137887122736545831
+        references:
+        - fieldName: Perception
+          value:
+            rid: 5137887122736545835
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
+      - name: SpaceHive
+        id: a3744ee0-9259-483f-9609-ead7d66702b3
+        position: {x: 0, y: 400}
+        node:
+          rid: 5137887122736545832
+        references:
+        - fieldName: Perception
+          value:
+            rid: 5137887122736545836
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
+      - name: WalkPartner
+        id: 85df7b40-28fd-4d92-8417-d271d087cb60
+        position: {x: 342, y: 432}
+        node:
+          rid: 2752642923302748160
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642923302748161
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
     - name: Rest
       id: 2e733e59-7527-4eea-8c6f-610b19abb437
       graph:
@@ -956,7 +957,7 @@ MonoBehaviour:
           methodName: StartWalkToNest
         update:
           componentName: Bee
-          methodName: WalkObjetive
+          methodName: WalkObjective
         stop:
           componentName: 
           methodName: 
@@ -1030,7 +1031,7 @@ MonoBehaviour:
           methodName: StartWalkToNest
         update:
           componentName: Bee
-          methodName: WalkObjetive
+          methodName: WalkObjective
         stop:
           componentName: 
           methodName: 
