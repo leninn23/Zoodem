@@ -24,11 +24,19 @@ public class Bear : ABasicAnimal
     }
 
 
-    public bool NearFood()
+    public bool NearFoodCollecting()
     {
-        throw new System.NotImplementedException();
+        foodPreferences.Clear();
+        foodPreferences.Add(IFood.FoodTypes.Berry);
+        foodPreferences.Add(IFood.FoodTypes.Beehive);
+        return FoodNear();
     }
-
+    public bool NearFoodHunting()
+    {
+        foodPreferences.Clear();
+        foodPreferences.Add(IFood.FoodTypes.Meat);
+        return FoodNear();
+    }
 
     public void StartCollect()
     {

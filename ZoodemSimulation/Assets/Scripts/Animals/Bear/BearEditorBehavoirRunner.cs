@@ -164,19 +164,22 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
 
     #region RecolectBT
 
-    public bool NearFood()
+    public bool NearFoodCollecting()
     {
-        return bear.NearFood();
+        return bear.NearFoodCollecting();
     }
-
+    public bool NearFoodHunting()
+    {
+        return bear.NearFoodHunting();
+    }
     public bool LowHealth()
     {
         return bear.LowHealth();
     }
 
-    public void Honeycomb()
+    public bool Honeycomb()
     {
-        bear.Honeycomb();
+        return bear.Honeycomb();
     }
 
     public void StartCollect()

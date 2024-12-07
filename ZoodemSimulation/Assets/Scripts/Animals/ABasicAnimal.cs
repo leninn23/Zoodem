@@ -263,8 +263,10 @@ namespace Animals
             currentDistanceWalk = 0;
             var position = transform.position;
             var dist = 0f;
+            var index = 0;
             do
             {
+                index++;
                 //Normalize the Random.insideUnitCircle if you want the animal to walk exactly wanderDistance units
                 var dir = Random.insideUnitCircle * wanderDistance;
                 var newPos = terrainGenerator.RealPosToMapPos(position + new Vector3(dir.x, 0, dir.y));
@@ -274,7 +276,7 @@ namespace Animals
                 walkObjective.y = position.y;
                 dist = Vector3.Distance(position, walkObjective);
                 //we dont want it to walk too little, it helps specially when against walls
-            } while (dist <= 2f);
+            } while (dist <= 2f && index < 10);
 
             SetUpObjectiveAndDirection(walkObjective);
             // currentWalkDir = new Vector3(dir.x, 0, dir.y);
@@ -628,9 +630,14 @@ namespace Animals
         {
             return health < maxHealth * 0.2;
         }
-        public void Honeycomb()
+        public bool Honeycomb()
         {
-            throw new System.NotImplementedException();
+            if (_prey)
+            {
+                return _prey.GetComponent<IFood>().FoodType == IFood.FoodTypes.Beehive;
+            }
+
+            return false;
         }
 
         #endregion
