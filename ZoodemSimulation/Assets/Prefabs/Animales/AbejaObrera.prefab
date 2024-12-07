@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 370103494903543529}
   - component: {fileID: 153196234383986875}
   - component: {fileID: 1240629465472281751}
+  - component: {fileID: 8906532931805985789}
+  - component: {fileID: 7080759512350410178}
   m_Layer: 6
   m_Name: AbejaObrera
   m_TagString: Untagged
@@ -167,7 +169,7 @@ MonoBehaviour:
         childIds: []
       - name: Hunger
         id: e27a4957-6f3e-4d2e-a9a4-ebc4f09e4bd7
-        position: {x: 0, y: 400}
+        position: {x: 16, y: 387}
         node:
           rid: 2752642923302748171
         references:
@@ -317,8 +319,8 @@ MonoBehaviour:
         parentIds:
         - 52402b06-6b8e-4143-9039-b3446b120ae5
         childIds:
-        - 1778c2d1-a815-4d6d-8527-97e1def29dd8
         - d9f10221-456e-4d0a-857c-9cb598677b70
+        - 1778c2d1-a815-4d6d-8527-97e1def29dd8
       - name: Sleepynest
         id: 337e5894-1e30-4367-9926-2a63eabb40ff
         position: {x: 896, y: 247}
@@ -328,8 +330,8 @@ MonoBehaviour:
         parentIds:
         - 4e3a21bf-2687-4059-8ca4-bc73d23dff41
         childIds:
-        - 79c8dbab-3810-4b9f-aa7e-172cc794a7d5
         - bcc914eb-5742-4567-a4cd-097dd233edf6
+        - 79c8dbab-3810-4b9f-aa7e-172cc794a7d5
       - name: 
         id: 1e212bb5-fdf8-44b5-a14d-57f5938c1d22
         position: {x: 1196, y: -6}
@@ -747,7 +749,7 @@ MonoBehaviour:
         - ea16e94d-f1fd-4ba8-94d7-6ddfc1093a7b
       - name: 
         id: ea16e94d-f1fd-4ba8-94d7-6ddfc1093a7b
-        position: {x: 164, y: 416}
+        position: {x: 181, y: 422}
         node:
           rid: 2752642924918865963
         references:
@@ -823,7 +825,7 @@ MonoBehaviour:
       data:
         method:
           componentName: 
-          methodName: Collect
+          methodName: Eat
     - rid: 2752642923302748166
       type: {class: UtilitySystem, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -859,8 +861,8 @@ MonoBehaviour:
     - rid: 2752642923302748172
       type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
-        componentName: Bee
-        methodName: Hunger
+        componentName: 
+        methodName: food
     - rid: 2752642923302748173
       type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -1044,8 +1046,8 @@ MonoBehaviour:
       type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
         PullingEnabled: 1
-        Slope: 1
-        YIntercept: 0
+        Slope: -1
+        YIntercept: 1
     - rid: 2752642924918865929
       type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -1140,7 +1142,7 @@ MonoBehaviour:
           methodName: StartWalkRandom
         update:
           componentName: Bee
-          methodName: WalkObjetive
+          methodName: WalkObjective
         stop:
           componentName: 
           methodName: 
@@ -1512,16 +1514,39 @@ MonoBehaviour:
   isDom: 0
   relationshipState: 0
   den: {fileID: 0}
-  nidoPrefab: {fileID: 0}
+  nidoPrefab: {fileID: 532198393069034125, guid: 892f69dc49f2ab14188e0d89aef1b2bc, type: 3}
   courtTime: 0
   minDistanceNest: 5
-  gestationTime: 0
+  gestationTime: 1
   offspringNRange: {x: 0, y: 0}
   foodPerChild: 0
-  wanderDistance: 0
+  wanderDistance: 6
   biomePreferences: 030000000200000004000000
   rangeNearWorkerBee: 0
-  colmena: {fileID: 0}
+--- !u!114 &8906532931805985789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f96cb786c96b44a850c65c4416a3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7080759512350410178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624a8bc2c44bd7c45bb94174d4e028ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9005846985424091699
 PrefabInstance:
   m_ObjectHideFlags: 0

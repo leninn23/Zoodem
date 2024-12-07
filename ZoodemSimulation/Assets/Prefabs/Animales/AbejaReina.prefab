@@ -159,7 +159,6 @@ MonoBehaviour:
   wanderDistance: 0
   biomePreferences: 030000000200000004000000
   rangeNearWorkerBee: 0
-  colmena: {fileID: 0}
 --- !u!114 &-7921379673294308249
 MonoBehaviour:
   m_ObjectHideFlags: 0

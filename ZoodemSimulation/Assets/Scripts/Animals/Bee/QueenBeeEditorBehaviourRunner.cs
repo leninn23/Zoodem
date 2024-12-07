@@ -9,6 +9,9 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 {
     public Bee bee;
 
+   
+    
+
     public bool NearWorkerBee()
     {
         return bee.NearWorkerBee();
@@ -21,7 +24,7 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 
     public void StartCourt()
     {
-        bee.colmena.freeSpace--;
+        bee.den.freeSpace--;
         bee.Court(bee);
     }
 

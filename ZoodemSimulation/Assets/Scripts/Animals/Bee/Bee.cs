@@ -8,7 +8,6 @@ public class Bee : ABasicAnimal
 {
     private float _nectar;
     public float rangeNearWorkerBee;
-    public Nido colmena;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +27,7 @@ public class Bee : ABasicAnimal
 
     public void PutNectar()
     {
-        colmena.food += _nectar;
+        den.food += _nectar;
         _nectar = 0;
     }
 
@@ -67,6 +66,13 @@ public class Bee : ABasicAnimal
 
     public bool SpaceHive()
     {
-        return colmena.freeSpace > 0;
+        return den.freeSpace > 0;
     }
+
+    public void Eatt()
+    {
+        Eat();
+        _nectar += 2;
+    }
+    
 }

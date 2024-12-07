@@ -13,6 +13,7 @@ public class Flower : MonoBehaviour, IFood
     // Start is called before the first frame update
     void Start()
     {
+        _collider = GetComponent<BoxCollider>();
         FoodType = IFood.FoodTypes.Flower;
         FoodState = IFood.FoodStates.Fresh;
     }

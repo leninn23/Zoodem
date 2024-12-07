@@ -11,7 +11,10 @@ using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
 {
     public Bee bee;
-    
+    public float food()
+    {
+        return bee.food;
+    }
     public bool HasNectar()
     {
         return bee.HasNectar();
@@ -37,7 +40,7 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
         bee.PutNectar();
     }
 
-    public void StartCollect()
+    public void Collect()
     {
         bee.StartCollect();
     }
@@ -74,6 +77,11 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     public void ExitSleepStatus()
     {
         bee.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
+    }
+
+    public void Eat()
+    {
+        bee.Eatt();
     }
 }
 
