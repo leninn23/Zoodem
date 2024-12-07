@@ -25,35 +25,45 @@ public class StatusDisplay : MonoBehaviour
     private ABasicAnimal _animal;
     private List<List<Statuses>> _conflictingStatuses;
 
+    private List<Statuses> _movementStatuses;
     public enum Statuses
     {
         Fleeing,
         Hungry,
         Courting,
         Hunting,
-        Hurt,
         GoingHome,
         Sleeping,
-        Wander
+        Wander,
+        WalkingToBiome,
+        WalkingFood,
+        WalkingPrey,
+        WalkingPartner,
+        Rest,
+        FeedingBaby,
+        Protecting
     }
     
-    void Start()
+    void Awake()
     {
         _animal = transform.parent.GetComponent<ABasicAnimal>();
-        healthBar.SetMax(_animal.maxHealth);
-        energyBar.SetMax(_animal.maxEnergy);
-        energyBar.SetColors(new Color(0.75f, 0.7f, 0f), new Color(0.87f, 0.82f, 0.79f));
-        foodBar.SetMax(_animal.maxFood);
-        foodBar.SetColors(new Color(0.41f, 0.2f, 0.03f), new Color(0.87f, 0.82f, 0.79f));
+        if(energyBar)
+        {
+            healthBar.SetMax(_animal.maxHealth);
+            energyBar.SetMax(_animal.maxEnergy);
+            energyBar.SetColors(new Color(0.75f, 0.7f, 0f), new Color(0.87f, 0.82f, 0.79f));
+            foodBar.SetMax(_animal.maxFood);
+            foodBar.SetColors(new Color(0.41f, 0.2f, 0.03f), new Color(0.87f, 0.82f, 0.79f));
+        }
 
         _currentStatues = new Dictionary<Statuses, ScriptableStatusIcon>();
 
-        var conflictingMovement = new List<Statuses>()
+        _movementStatuses = new List<Statuses>()
         {
-            Statuses.Sleeping, Statuses.GoingHome, Statuses.Hunting, Statuses.Fleeing
+            Statuses.Sleeping, Statuses.GoingHome, Statuses.Hunting, Statuses.Fleeing, Statuses.Wander, Statuses.WalkingFood, Statuses.WalkingPartner, Statuses.WalkingPrey, Statuses.Rest, Statuses.WalkingToBiome
         };
         _conflictingStatuses = new List<List<Statuses>>();
-        _conflictingStatuses.Add(conflictingMovement);
+        _conflictingStatuses.Add(_movementStatuses);
     }
 
     private void SetMainBars()
@@ -103,6 +113,14 @@ public class StatusDisplay : MonoBehaviour
         }
     }
 
+    public void RemoveMovementStatuses()
+    {
+        foreach (var movementStatus in _movementStatuses)
+        {
+            RemoveStatus(movementStatus);
+        }
+    }
+    
     public void RemoveStatus(Statuses status)
     {
         if (_currentStatues.Remove(status))

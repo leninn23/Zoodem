@@ -91,14 +91,30 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value: {fileID: 11400000, guid: c9507a19b62f099468bcdbd3cb891eb4, type: 2}
+    - Key: 13
+      Value: {fileID: 11400000, guid: 96942a43f721e9147abac9c816501b40, type: 2}
+    - Key: 12
+      Value: {fileID: 11400000, guid: 728437da8ac8a9f4090378bd0b4d4001, type: 2}
+    - Key: 7
+      Value: {fileID: 11400000, guid: a9594bb2a243b9141b8a1752ea9acd1c, type: 2}
+    - Key: 8
+      Value: {fileID: 11400000, guid: cf4c0146308287f4e9f0980642b1f841, type: 2}
+    - Key: 9
+      Value: {fileID: 11400000, guid: ed0092150eb987341bda0de4e5e4f8c6, type: 2}
+    - Key: 10
+      Value: {fileID: 11400000, guid: b1cc77e2ad0d7744aaeb4ea4624c2e27, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: e32d5da6ae0d44342ad49fd779ce7e85, type: 2}
+    - Key: 1
+      Value: {fileID: 11400000, guid: e2031a93d37134749bae8231d438fefa, type: 2}
     - Key: 2
       Value: {fileID: 11400000, guid: e61931beb56641e41b23f07fe9111cb3, type: 2}
     - Key: 3
-      Value: {fileID: 11400000, guid: 305cd47702487ba4786641082d7271ce, type: 2}
+      Value: {fileID: 11400000, guid: f02e224b3a8679e418b87e9e5092e230, type: 2}
     - Key: 5
-      Value: {fileID: 11400000, guid: e32d5da6ae0d44342ad49fd779ce7e85, type: 2}
-    - Key: 6
       Value: {fileID: 11400000, guid: be22e7d35613d134f94dff5db4be9e60, type: 2}
+    - Key: 6
+      Value: {fileID: 11400000, guid: 469ad03a16ae99443a3eb00397c3e242, type: 2}
   statusesParent: {fileID: 611610756111252132}
 --- !u!1 &8894418722904111070
 GameObject:

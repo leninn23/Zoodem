@@ -33,12 +33,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     public Status TravelBiome() {
         return eagle.WalkObjective();
     }
-
-    public void StartWalk()
-    {
-        Debug.Log("Start Walk " + name);
-        eagle.StartWalkRandom();;
-    }
+    
     
     public Status Walk() {
 
@@ -185,9 +180,37 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     {
         return eagle.WalkPrey();
     }
-    
 
 
+        public void StartWalkFleeing()
+        {
+            eagle.StartWalkRandom(StatusDisplay.Statuses.Fleeing);
+        }
+    public void StartWalkProtect()
+    {
+        eagle.StartWalkRandom(StatusDisplay.Statuses.Protecting);
+    }
+
+    public void StartWalkRandom()
+    {
+        eagle.StartWalkRandom(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkHunting()
+    {
+        eagle.StartWalkRandom(StatusDisplay.Statuses.Hunting);
+    }
+
+    public void StartWalkRandomNest()
+    {
+        eagle.StartWalkRandomNest(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkRandomNestProtect()
+    {
+        eagle.StartWalkRandomNest(StatusDisplay.Statuses.Protecting);
+    }    public void StartWalkRandomNestHunt()
+    {
+        eagle.StartWalkRandomNest(StatusDisplay.Statuses.Hunting);
+    }
     public void StartAttack()
     {
         Debug.Log("Preparando ataque");

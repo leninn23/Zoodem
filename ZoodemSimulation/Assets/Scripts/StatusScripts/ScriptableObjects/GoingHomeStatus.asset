@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b49ad0fb8340f4bd740d196d82050f, type: 3}
   m_Name: GoingHomeStatus
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: edf7e9d158dcbdd49acb58a99c025ce1, type: 3}
+  icon: {fileID: 21300000, guid: 9435604bb37decc4b835266234ff0107, type: 3}
   description: Going home

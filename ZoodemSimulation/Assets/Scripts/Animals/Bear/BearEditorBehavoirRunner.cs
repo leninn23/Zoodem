@@ -53,12 +53,37 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
         return bear.WalkObjective();
     }
 
-    public void StartWalk()
+    public void StartWalkProtect()
     {
-        Debug.Log("Start Walk");
-        bear.StartWalkRandom();;
+        bear.StartWalkRandom(StatusDisplay.Statuses.Protecting);
     }
+
     
+
+    public void StartWalkRandom()
+    {
+        bear.StartWalkRandom(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkHunting()
+    {
+        bear.StartWalkRandom(StatusDisplay.Statuses.Hunting);
+    }
+    public void StartWalkRandomFleeing()
+    {
+        bear.StartWalkRandom(StatusDisplay.Statuses.Fleeing);
+    }
+
+    public void StartWalkRandomNest()
+    {
+        bear.StartWalkRandomNest(StatusDisplay.Statuses.Wander);
+    }
+    public void StartWalkRandomNestProtect()
+    {
+        bear.StartWalkRandomNest(StatusDisplay.Statuses.Protecting);
+    }    public void StartWalkRandomNestHunt()
+    {
+        bear.StartWalkRandomNest(StatusDisplay.Statuses.Hunting);
+    }
     public Status Walk() {
 
         Debug.Log("Deambulando");

@@ -33,6 +33,7 @@ namespace Animals
         public float sleepHealthGain;
         public float foodValue;
         public List<IFood.FoodTypes> foodPreferences;
+        public float hungryThreshold;
         [Header("Current state")]
         public float food;
         public float health;
@@ -110,13 +111,14 @@ namespace Animals
         private void Update()
         {
 
-            if (food <= 0.15f * maxFood)
+            if (food <= hungryThreshold * maxFood)
             {
                 health -= 0.5f * Time.deltaTime;
                 if (health <= 0)
                 {
                     
                 }
+                display.PushStatus(StatusDisplay.Statuses.Hungry);
             }
             age += Time.deltaTime;
             if (age >= maxLongevity || health <= 0)
@@ -163,6 +165,7 @@ namespace Animals
             if (_prevDistance < dist)
             {
                 transform.position = walkObjective;
+                display.RemoveMovementStatuses();
                 return Status.Success;
             }
             else
@@ -170,13 +173,25 @@ namespace Animals
                 _prevDistance = dist;
             }
             Debug.Log("At a distance of " + dist + " --- " + maxDist + ", " + name);
-            return Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
+            var result =  Mathf.Abs(maxDist - dist) <= 0.005f ? Status.Success : Status.Running;
+            if (result == Status.Success)
+            {
+                display.RemoveMovementStatuses();
+            }
+
+            return result;
+        }
+
+        public void StartWalkPrey()
+        {
+            display.PushStatus(StatusDisplay.Statuses.WalkingPrey);
         }
         public Status WalkPrey()
         {
+            // display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
             if (!_prey)
             {
-                // _display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPrey);
                 return Status.Failure;
             }
             
@@ -190,13 +205,25 @@ namespace Animals
             trans.Translate(currentWalkDir * maxDist);
             energy = Mathf.Clamp(energy - huntEnergyDrain * Time.deltaTime, 0, maxEnergy);
             food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
-            return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
+            var result = Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
+            if (result is Status.Success)
+            {
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPrey);
+            }
+
+            return result;
+        }
+
+        public void StartWalkPartner()
+        {
+            display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
         }
         public Status WalkPartner()
         {
+            // display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
             if (!partner)
             {
-                // _display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPartner);
                 return Status.Failure;
             }
             
@@ -210,7 +237,13 @@ namespace Animals
             trans.Translate(currentWalkDir * maxDist);
             energy = Mathf.Clamp(energy - walkEnergyDrain * Time.deltaTime, 0, maxEnergy);
             food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
-            return Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
+            var result = Mathf.Abs(maxDist - dist) <= 1f ? Status.Success : Status.Running;
+            if (result is Status.Success)
+            {
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPartner);
+            }
+
+            return result;
         }
         private void SetUpObjectiveAndDirection(Vector3 obj)
         {
@@ -224,8 +257,10 @@ namespace Animals
         }
         public void StartWalkFood()
         {
+            // display.PushStatus();
             if (_prey)
             {
+                display.PushStatus(StatusDisplay.Statuses.WalkingFood);
                 SetUpObjectiveAndDirection(_prey.transform.position);
             }
             else
@@ -255,10 +290,11 @@ namespace Animals
                 }
             }
             
+            display.PushStatus(StatusDisplay.Statuses.WalkingToBiome);
             SetUpObjectiveAndDirection(walkObjective);
         }
         
-        public void StartWalkRandom()
+        public void StartWalkRandom(StatusDisplay.Statuses status)
         {
             _prevDistance = float.MaxValue;
             currentDistanceWalk = 0;
@@ -278,20 +314,21 @@ namespace Animals
                 dist = Vector3.Distance(position, walkObjective);
                 //we dont want it to walk too little, it helps specially when against walls
             } while (dist <= 2f && index < 10);
-
+            display.PushStatus(status);
             SetUpObjectiveAndDirection(walkObjective);
             // currentWalkDir = new Vector3(dir.x, 0, dir.y);
         }
 
-        public void StartWalkRandomNest()
+        public void StartWalkRandomNest(StatusDisplay.Statuses status)
         {
             var position = transform.position;
             if (Vector3.Distance(position, den.transform.position) < maxDenRange)
             {
-                StartWalkRandom();
+                StartWalkRandom(status);
                 Debug.Log("RandomWalk " + name);
                 return;
             }
+            display.PushStatus(status);
 
             var baseDir = (den.transform.position - position);
             baseDir.y = 0;
@@ -323,6 +360,7 @@ namespace Animals
         {
             _prevDistance = float.MaxValue;
             SetUpObjectiveAndDirection(den.transform.position);
+            display.PushStatus(StatusDisplay.Statuses.GoingHome);
             Debug.Log("Viajando a nido desde " + transform.position + " en " + walkObjective + " " + name);
         }
         #endregion
@@ -402,6 +440,7 @@ namespace Animals
         public void FeedOffspring()
         {
             den.food += _offspring * foodPerChild;
+            food -= _offspring * foodPerChild;
         }
         public Status Rest()
         {
@@ -690,6 +729,10 @@ namespace Animals
                 var f = _prey.GetComponent<IFood>();
                 food += f.GetFoodValue();
                 f.GetEaten();
+                if (food > maxFood * hungryThreshold)
+                {
+                    display.RemoveStatus(StatusDisplay.Statuses.Hungry);
+                }
                 _prey = null;
             }
         }

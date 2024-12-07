@@ -1,6 +1,7 @@
 
 using UnityEngine;
 
+    [DefaultExecutionOrder(-1)]
 public class StatusBar : MonoBehaviour
 {
     private Transform _barTransform;

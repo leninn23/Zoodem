@@ -144,6 +144,7 @@ MonoBehaviour:
   sleepHealthGain: 1
   foodValue: 70
   foodPreferences: 00000000
+  hungryThreshold: 0
   food: 0
   health: 0
   energy: 0
@@ -419,7 +420,7 @@ MonoBehaviour:
         - 66495b0f-8672-4f14-b603-8adde610c744
       - name: Rest
         id: eaacf56e-35cd-4155-a0c3-ab2af6dd4bb2
-        position: {x: 1593, y: 487}
+        position: {x: 1593, y: 498}
         node:
           rid: 3799616545139982357
         references:
@@ -1613,7 +1614,7 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartWalk
+          methodName: StartWalkRandom
         update:
           componentName: 
           methodName: Walk
@@ -1936,7 +1937,7 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Eagle
+          componentName: 
           methodName: StartWalkRandom
         update:
           componentName: Eagle
@@ -2114,8 +2115,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Eagle
-          methodName: StartWalkRandomNest
+          componentName: 
+          methodName: StartWalkRandomNestProtect
         update:
           componentName: 
           methodName: Walk
@@ -2139,8 +2140,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Eagle
-          methodName: StartWalkRandomNest
+          componentName: 
+          methodName: StartWalkRandomNestHunt
         update:
           componentName: 
           methodName: Walk
@@ -2157,8 +2158,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: 
-          methodName: EnterHuntingStatus
+          componentName: Eagle
+          methodName: StartWalkPrey
         update:
           componentName: Eagle
           methodName: WalkPrey
@@ -2185,7 +2186,7 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: Eagle
+          componentName: 
           methodName: StartWalkRandomNest
         update:
           componentName: 
@@ -2228,8 +2229,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: 
-          methodName: EnterHuntingStatus
+          componentName: Eagle
+          methodName: StartWalkPrey
         update:
           componentName: Eagle
           methodName: WalkPrey
@@ -2551,7 +2552,7 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartWalk
+          methodName: StartWalkRandom
         update:
           componentName: 
           methodName: Walk
@@ -2674,8 +2675,8 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: 
-          methodName: 
+          componentName: Eagle
+          methodName: StartWalkPartner
         update:
           componentName: Eagle
           methodName: WalkPartner
@@ -2871,7 +2872,7 @@ MonoBehaviour:
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:
-          componentName: 
+          componentName: Eagle
           methodName: StartWalkPrey
         update:
           componentName: 
@@ -2982,7 +2983,7 @@ MonoBehaviour:
       data:
         start:
           componentName: 
-          methodName: StartWalk
+          methodName: StartWalkRandom
         update:
           componentName: 
           methodName: Walk

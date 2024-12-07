@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b49ad0fb8340f4bd740d196d82050f, type: 3}
   m_Name: FleeingStatus
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e3c1a4eeb35033a4cab41e5cd671f483, type: 3}
+  icon: {fileID: 21300000, guid: 21ac538c1632b32489fd4db54618e07c, type: 3}
   description: Fleeing

@@ -25,7 +25,7 @@ namespace Animals
                     SpawnRandomRabbit();
                 }
             }
-            StartWalkRandom();
+            StartWalkRandom(StatusDisplay.Statuses.Wander);
             FoodState = IFood.FoodStates.Alive;
             FoodType = IFood.FoodTypes.Meat;
             _numberOfTurns = Random.Range(0, 4);
@@ -48,7 +48,7 @@ namespace Animals
                     _timeToWait = Random.Range(1f, 3f);
                     return;
                 }
-                StartWalkRandom();
+                StartWalkRandom(StatusDisplay.Statuses.Wander);
             }
         }
 

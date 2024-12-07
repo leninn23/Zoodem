@@ -27,6 +27,7 @@ public class StatusSymbol : MonoBehaviour
     public void SetStatus(ScriptableStatusIcon statusIcon)
     {
         _statusInfo = statusIcon;
+        // Debug.LogWarning($"This object {statusIcon.icon}");
         _renderer.sprite = _statusInfo.icon;
         _textMeshPro.SetText(statusIcon.description);
     }
