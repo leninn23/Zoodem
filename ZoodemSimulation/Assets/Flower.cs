@@ -13,7 +13,8 @@ public class Flower : MonoBehaviour, IFood
     // Start is called before the first frame update
     void Start()
     {
-        
+        FoodType = IFood.FoodTypes.Flower;
+        FoodState = IFood.FoodStates.Fresh;
     }
 
     // Update is called once per frame
@@ -37,6 +38,6 @@ public class Flower : MonoBehaviour, IFood
         }
     }
 
-    public IFood.FoodTypes FoodType { get; }
-    public IFood.FoodStates FoodState { get; }
+    public IFood.FoodTypes FoodType { get; set; }
+    public IFood.FoodStates FoodState { get; set; }
 }

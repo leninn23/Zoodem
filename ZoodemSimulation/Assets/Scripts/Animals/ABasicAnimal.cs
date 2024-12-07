@@ -109,11 +109,7 @@ namespace Animals
 
         private void Update()
         {
-            age += Time.deltaTime;
-            if (age >= maxLongevity)
-            {
-                Die();
-            }
+
             if (food <= 0.15f * maxFood)
             {
                 health -= 0.5f * Time.deltaTime;
@@ -121,6 +117,11 @@ namespace Animals
                 {
                     
                 }
+            }
+            age += Time.deltaTime;
+            if (age >= maxLongevity || health <= 0)
+            {
+                Die();
             }
         }
 
@@ -566,7 +567,7 @@ namespace Animals
 
         public bool PreyNear()
         {
-            var foodNear = Physics.OverlapSphere(transform.position, 5.75f, LayerMask.GetMask("Animal"));
+            var foodNear = Physics.OverlapSphere(transform.position, 5.0f, LayerMask.GetMask("Animal"));
             foreach (var c in foodNear)
             {
                 if (c.TryGetComponent<IFood>(out var component))
@@ -608,7 +609,8 @@ namespace Animals
         
         public bool FoodNear()
         {
-            var foodNear = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Animal"));
+            var foodNear = Physics.OverlapSphere(transform.position, 5.75f, LayerMask.GetMask("Animal", "Food"));
+            // Debug.Log($"{name} has {foodNear.Length} food items near");
             foreach (var c in foodNear)
             {
                 if (c.TryGetComponent<IFood>(out var component))

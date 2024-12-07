@@ -250,7 +250,7 @@ MonoBehaviour:
   sleepEnergyGain: 1
   sleepHealthGain: 1
   foodValue: 90
-  foodPreferences: 
+  foodPreferences: 00000000
   food: 0
   health: 0
   energy: 0
@@ -267,9 +267,9 @@ MonoBehaviour:
   gestationTime: 1
   offspringNRange: {x: 0, y: 0}
   foodPerChild: 0
-  wanderDistance: 1
+  wanderDistance: 6
   biomePreferences: 030000000200000004000000
-  huntingSeasons: 
+  huntingSeasons: 0000000003000000
 --- !u!114 &150371055552429854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,9 +1144,9 @@ MonoBehaviour:
         parentIds:
         - fa8c680c-dc7b-4694-a698-d1e97fd58de9
         childIds:
+        - 3845c183-170d-4c76-9611-5478d6c141af
         - 6aec01d2-637c-458b-9437-d63648972c12
         - 85b5867b-76d9-4311-97a2-a96ece6ed401
-        - 3845c183-170d-4c76-9611-5478d6c141af
       - name: NearPrey
         id: 6aec01d2-637c-458b-9437-d63648972c12
         position: {x: -133.6, y: 416}
@@ -1161,10 +1161,10 @@ MonoBehaviour:
         parentIds:
         - c0db190d-1f0a-4532-8e5e-8db9d13edf03
         childIds:
-        - 2fbad0e3-0adc-4bd8-89e2-8941319c82b5
+        - 3af57eed-652b-4f49-b9d6-d27bccc569c9
       - name: Attack
         id: 2fbad0e3-0adc-4bd8-89e2-8941319c82b5
-        position: {x: -118, y: 618}
+        position: {x: 369, y: 805}
         node:
           rid: 5137887140953194552
         references:
@@ -1174,7 +1174,7 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
-        - 6aec01d2-637c-458b-9437-d63648972c12
+        - 3af57eed-652b-4f49-b9d6-d27bccc569c9
         childIds: []
       - name: Walk
         id: 85b5867b-76d9-4311-97a2-a96ece6ed401
@@ -1244,6 +1244,31 @@ MonoBehaviour:
         childIds:
         - 196af25b-9741-46f5-bcb9-eb6a83e7e8dd
         - 75353a00-00de-4a5e-be09-7a9bf66dc9d2
+      - name: 
+        id: 8db6b5d9-d0d0-47d6-b6de-1ca8a915b6d6
+        position: {x: 46, y: 786}
+        node:
+          rid: 3799616589940391936
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616589940391937
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3af57eed-652b-4f49-b9d6-d27bccc569c9
+        childIds: []
+      - name: 
+        id: 3af57eed-652b-4f49-b9d6-d27bccc569c9
+        position: {x: 69, y: 646}
+        node:
+          rid: 3799616589940391938
+        references: []
+        parentIds:
+        - 6aec01d2-637c-458b-9437-d63648972c12
+        childIds:
+        - 8db6b5d9-d0d0-47d6-b6de-1ca8a915b6d6
+        - 2fbad0e3-0adc-4bd8-89e2-8941319c82b5
     - name: BearCollectBT
       id: 50680c38-8776-4949-91cd-057d59dac151
       graph:
@@ -2336,6 +2361,31 @@ MonoBehaviour:
         method:
           componentName: 
           methodName: EmptyAction
+    - rid: 3799616589940391936
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616589940391937
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: 
+        update:
+          componentName: Bear
+          methodName: WalkPrey
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616589940391938
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
     - rid: 5137887140953194496
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
