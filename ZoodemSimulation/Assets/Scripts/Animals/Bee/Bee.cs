@@ -7,7 +7,7 @@ using UnityEngine;
 public class Bee : ABasicAnimal
 {
     private float _nectar;
-
+    public float rangeNearWorkerBee;
     public Nido colmena;
     // Start is called before the first frame update
     void Start()
@@ -44,21 +44,29 @@ public class Bee : ABasicAnimal
 
     public bool NearFlower()
     {
-        throw new System.NotImplementedException();
+        return FoodNear();
     }
-
-    public void StartWalkHive()
-    {
-        throw new System.NotImplementedException();
-    }
-
+    
     public bool NearWorkerBee()
     {
-        throw new System.NotImplementedException();
+        var workerBee = Physics.OverlapSphere(transform.position, rangeNearWorkerBee, LayerMask.GetMask("Animal"));
+        foreach (var w in workerBee)
+        {
+            if (w.TryGetComponent(out ABasicAnimal animal))
+            {
+                if (animal.animalType == AnimalType.Bee)//poner obrera
+                {
+                    partner = animal;
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public bool SpaceHive()
     {
-        throw new System.NotImplementedException();
+        return colmena.freeSpace > 0;
     }
 }

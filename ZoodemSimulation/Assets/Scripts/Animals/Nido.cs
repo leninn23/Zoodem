@@ -10,6 +10,7 @@ public class Nido : MonoBehaviour
     public float timeLeftForSpawn;
     public float food;
     public float foodDrain = 0.01f;
+    public int freeSpace;
 
     public ABasicAnimal owner;
     // public IAnimal owner;

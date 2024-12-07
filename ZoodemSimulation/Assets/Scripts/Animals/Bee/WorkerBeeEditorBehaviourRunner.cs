@@ -27,16 +27,11 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
         return bee.NearFlower();
     }
 
-    public void StartWalkToHive()
+    public void StartWalkToNest()
     {
-        bee.StartWalkHive();
+        bee.StartWalkToNest();
     }
-
-    public Status WalkHive()
-    {
-        return bee.WalkObjective();
-    }
-
+    
     public void PutNectar()
     {
         bee.PutNectar();
@@ -46,11 +41,7 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     {
         bee.StartCollect();
     }
-
-    public Status Collecting()
-    {
-        return bee.Collecting();
-    }
+    
 
     public void StartWalk()
     {
@@ -70,6 +61,19 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     public Status TravelBiome()
     {
         return bee.WalkObjective();
+    }
+
+    public void StartWalkFood()
+    {
+        bee.StartWalkFood();
+    }
+    public Status Rest()
+    {
+        return bee.Rest();
+    }
+    public void ExitSleepStatus()
+    {
+        bee.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
     }
 }
 

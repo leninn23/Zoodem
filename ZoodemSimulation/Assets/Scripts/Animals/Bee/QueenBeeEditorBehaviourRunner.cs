@@ -21,12 +21,26 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 
     public void StartCourt()
     {
+        bee.colmena.freeSpace--;
         bee.Court(bee);
     }
 
     public Status Courting()
     {
         return bee.Courting();
+    }
+    public Status Rest()
+    {
+        return bee.Rest();
+    }
+    public void ExitSleepStatus()
+    {
+        bee.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
+    }
+
+    public void Eat()
+    {
+        bee.Eat();
     }
     
 }

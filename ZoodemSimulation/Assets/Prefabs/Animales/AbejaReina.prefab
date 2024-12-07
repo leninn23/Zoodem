@@ -130,17 +130,21 @@ MonoBehaviour:
   maxFood: 0
   attackDamage: 0
   moveSpeed: 0
+  maxLongevity: 0
+  maxDenRange: 0
   walkEnergyDrain: 0
   huntEnergyDrain: 0
   foodDrain: 0
   sleepFoodDrain: 0
   sleepEnergyGain: 0
   sleepHealthGain: 0
+  foodValue: 0
   foodPreferences: 
   food: 0
   health: 0
   energy: 0
   isSleeping: 0
+  age: 0
   gender: 2
   partner: {fileID: 0}
   isDom: 0
@@ -154,6 +158,8 @@ MonoBehaviour:
   foodPerChild: 0
   wanderDistance: 0
   biomePreferences: 030000000200000004000000
+  rangeNearWorkerBee: 0
+  colmena: {fileID: 0}
 --- !u!114 &-7921379673294308249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +195,7 @@ MonoBehaviour:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
       - name: Mate
         id: 60afe4be-1c71-49ee-8740-ad9f22a19c37
-        position: {x: 316.8, y: 416}
+        position: {x: 635, y: 440}
         node:
           rid: 5137887122736545829
         references:
@@ -212,6 +218,7 @@ MonoBehaviour:
         childIds:
         - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
         - a3744ee0-9259-483f-9609-ead7d66702b3
+        - 85df7b40-28fd-4d92-8417-d271d087cb60
         - 60afe4be-1c71-49ee-8740-ad9f22a19c37
       - name: NearWorkerBee
         id: 7d876ac1-027d-474f-aed3-8e30e8b3ba46
@@ -241,11 +248,867 @@ MonoBehaviour:
         parentIds:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
         childIds: []
+      - name: WalkPartner
+        id: 85df7b40-28fd-4d92-8417-d271d087cb60
+        position: {x: 342, y: 432}
+        node:
+          rid: 2752642923302748160
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642923302748161
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
+    - name: utilitySystem
+      id: a8e4f7c4-e333-4b07-9829-4160bca21ef4
+      graph:
+        rid: 2752642924918865969
+      nodes:
+      - name: Health
+        id: 38953a20-c7cf-4f25-920e-0631f2dc395f
+        position: {x: 0, y: 0}
+        node:
+          rid: 2752642924918865970
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865971
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - e210d8e3-f575-4044-b7f6-2ec80f2487d4
+        childIds: []
+      - name: Energy
+        id: 4f0fa2b7-7f9c-4aac-877a-8ffaaf46fcb0
+        position: {x: 0, y: 200}
+        node:
+          rid: 2752642924918865972
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865973
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - 47b7eae2-04e6-42d9-920c-debf134f27e5
+        - 5c94ba8d-06a4-4f27-a89e-0346bd6b5fdd
+        childIds: []
+      - name: Hunger
+        id: 223eda62-0ac2-483e-a31c-3c984e3765c6
+        position: {x: 0, y: 400}
+        node:
+          rid: 2752642924918865974
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865975
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - d80563ec-9031-49a5-98fb-bef1b497917c
+        childIds: []
+      - name: Hour
+        id: 09c91784-53a2-45f0-a4eb-5cdf36b5ee96
+        position: {x: 0, y: 600}
+        node:
+          rid: 2752642924918865976
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865977
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - ca8e9b54-bea9-470e-999b-d57d07bc1055
+        - 8bd9a153-2ebe-4d82-8d96-a217796b3839
+        childIds: []
+      - name: Temperture
+        id: 79910ff5-449c-4c60-be1c-0f090e9c8079
+        position: {x: 0, y: 800}
+        node:
+          rid: 2752642924918865978
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865979
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - 3e3d539c-f406-4d37-80c6-8c5445b5f390
+        childIds: []
+      - name: IsAwake
+        id: 245eec9e-23e3-4232-a0d0-98bc9d709aeb
+        position: {x: 0, y: 1000}
+        node:
+          rid: 2752642924918865980
+        references:
+        - fieldName: Variable
+          value:
+            rid: 2752642924918865981
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - 3c48cca1-9f89-4db7-aa97-f0f7657b142d
+        childIds: []
+      - name: Life need
+        id: e210d8e3-f575-4044-b7f6-2ec80f2487d4
+        position: {x: 300, y: -244.44446}
+        node:
+          rid: 2752642924918865982
+        references: []
+        parentIds:
+        - 2be82198-26b7-4cc8-aef8-c5e24960ca5b
+        - a91ce704-9e6b-46ce-b6d4-3ca906c1f44a
+        childIds:
+        - 38953a20-c7cf-4f25-920e-0631f2dc395f
+      - name: Vigor
+        id: 47b7eae2-04e6-42d9-920c-debf134f27e5
+        position: {x: 300, y: -44.444458}
+        node:
+          rid: 2752642924918865983
+        references: []
+        parentIds:
+        - bfc5de1b-1a3f-4cc7-bd17-61e6584ca7bf
+        childIds:
+        - 4f0fa2b7-7f9c-4aac-877a-8ffaaf46fcb0
+      - name: 
+        id: 5c94ba8d-06a4-4f27-a89e-0346bd6b5fdd
+        position: {x: 300, y: 155.55554}
+        node:
+          rid: 2752642924918865984
+        references: []
+        parentIds:
+        - 2be82198-26b7-4cc8-aef8-c5e24960ca5b
+        - 6bfbdbf2-f566-4cf1-9ea0-4531987ff78b
+        childIds:
+        - 4f0fa2b7-7f9c-4aac-877a-8ffaaf46fcb0
+      - name: need to eat
+        id: d80563ec-9031-49a5-98fb-bef1b497917c
+        position: {x: 300, y: 355.55554}
+        node:
+          rid: 2752642924918865985
+        references: []
+        parentIds:
+        - 6da111b1-c613-465b-9700-b85c0875ff0d
+        childIds:
+        - 223eda62-0ac2-483e-a31c-3c984e3765c6
+      - name: Day time
+        id: 8bd9a153-2ebe-4d82-8d96-a217796b3839
+        position: {x: 300, y: 555.55554}
+        node:
+          rid: 2752642924918865986
+        references: []
+        parentIds:
+        - bfc5de1b-1a3f-4cc7-bd17-61e6584ca7bf
+        childIds:
+        - 09c91784-53a2-45f0-a4eb-5cdf36b5ee96
+      - name: Night time
+        id: ca8e9b54-bea9-470e-999b-d57d07bc1055
+        position: {x: 300, y: 755.55554}
+        node:
+          rid: 2752642924918865987
+        references: []
+        parentIds:
+        - 6bfbdbf2-f566-4cf1-9ea0-4531987ff78b
+        childIds:
+        - 09c91784-53a2-45f0-a4eb-5cdf36b5ee96
+      - name: Heat
+        id: 3e3d539c-f406-4d37-80c6-8c5445b5f390
+        position: {x: 300, y: 955.55554}
+        node:
+          rid: 2752642924918865988
+        references: []
+        parentIds: []
+        childIds:
+        - 79910ff5-449c-4c60-be1c-0f090e9c8079
+      - name: 
+        id: 3c48cca1-9f89-4db7-aa97-f0f7657b142d
+        position: {x: 300, y: 1155.5555}
+        node:
+          rid: 2752642924918865989
+        references: []
+        parentIds:
+        - 507abeec-caa4-43df-abfa-aa411558f90c
+        childIds:
+        - 245eec9e-23e3-4232-a0d0-98bc9d709aeb
+      - name: Lack of strenght
+        id: 2be82198-26b7-4cc8-aef8-c5e24960ca5b
+        position: {x: 600, y: 115.55554}
+        node:
+          rid: 2752642924918865990
+        references: []
+        parentIds:
+        - b7fb407b-de8f-400d-9fd5-e4a55b1f00c3
+        - 0915eb39-463f-4096-a1c2-5faed2c8f989
+        childIds:
+        - e210d8e3-f575-4044-b7f6-2ec80f2487d4
+        - 5c94ba8d-06a4-4f27-a89e-0346bd6b5fdd
+      - name: Lack of vital force
+        id: 6da111b1-c613-465b-9700-b85c0875ff0d
+        position: {x: 1200, y: 210.55554}
+        node:
+          rid: 2752642924918865991
+        references: []
+        parentIds:
+        - ca7be912-5072-4d35-8af3-282dd57a04a0
+        childIds:
+        - b7fb407b-de8f-400d-9fd5-e4a55b1f00c3
+        - d80563ec-9031-49a5-98fb-bef1b497917c
+      - name: Rest
+        id: bfc5de1b-1a3f-4cc7-bd17-61e6584ca7bf
+        position: {x: 600, y: 315.55554}
+        node:
+          rid: 2752642924918865992
+        references: []
+        parentIds: []
+        childIds:
+        - 47b7eae2-04e6-42d9-920c-debf134f27e5
+        - 8bd9a153-2ebe-4d82-8d96-a217796b3839
+      - name: Sleepynest
+        id: 6bfbdbf2-f566-4cf1-9ea0-4531987ff78b
+        position: {x: 600, y: 515.55554}
+        node:
+          rid: 2752642924918865993
+        references: []
+        parentIds:
+        - 028665fa-ea6c-443e-91d8-376c215617ed
+        childIds:
+        - 5c94ba8d-06a4-4f27-a89e-0346bd6b5fdd
+        - ca8e9b54-bea9-470e-999b-d57d07bc1055
+      - name: 
+        id: b7fb407b-de8f-400d-9fd5-e4a55b1f00c3
+        position: {x: 900, y: 65.55554}
+        node:
+          rid: 2752642924918865994
+        references: []
+        parentIds:
+        - 6da111b1-c613-465b-9700-b85c0875ff0d
+        childIds:
+        - 2be82198-26b7-4cc8-aef8-c5e24960ca5b
+      - name: 
+        id: 6804e222-03cf-449f-b8b8-2989613a2be4
+        position: {x: 0, y: 1200}
+        node:
+          rid: 2752642924918865995
+        references: []
+        parentIds:
+        - 249f72ae-1f04-426a-ad95-4108a2e59135
+        childIds: []
+      - name: Wander
+        id: 249f72ae-1f04-426a-ad95-4108a2e59135
+        position: {x: 300, y: 1355.5555}
+        node:
+          rid: 2752642924918865996
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - 6804e222-03cf-449f-b8b8-2989613a2be4
+      - name: Rest
+        id: 0915eb39-463f-4096-a1c2-5faed2c8f989
+        position: {x: 900, y: 265.55554}
+        node:
+          rid: 2752642924918865997
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866006
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - 2be82198-26b7-4cc8-aef8-c5e24960ca5b
+      - name: RunAway
+        id: a91ce704-9e6b-46ce-b6d4-3ca906c1f44a
+        position: {x: 600, y: -84.44446}
+        node:
+          rid: 2752642924918865998
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866003
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - e210d8e3-f575-4044-b7f6-2ec80f2487d4
+      - name: Eat
+        id: ca7be912-5072-4d35-8af3-282dd57a04a0
+        position: {x: 1500, y: 210.55554}
+        node:
+          rid: 2752642924918865999
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866027
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - 6da111b1-c613-465b-9700-b85c0875ff0d
+      - name: WakeUp
+        id: 68182f71-b875-4554-86a5-daad53d9cdac
+        position: {x: 900, y: 665.55554}
+        node:
+          rid: 2752642924918866000
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866026
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - 507abeec-caa4-43df-abfa-aa411558f90c
+      - name: 
+        id: 507abeec-caa4-43df-abfa-aa411558f90c
+        position: {x: 600, y: 715.55554}
+        node:
+          rid: 2752642924918866001
+        references: []
+        parentIds:
+        - 68182f71-b875-4554-86a5-daad53d9cdac
+        childIds:
+        - 3c48cca1-9f89-4db7-aa97-f0f7657b142d
+      - name: Sleep
+        id: 028665fa-ea6c-443e-91d8-376c215617ed
+        position: {x: 900, y: 465.55554}
+        node:
+          rid: 2752642924918866002
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866007
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - 6bfbdbf2-f566-4cf1-9ea0-4531987ff78b
+    - name: Rest
+      id: 2e733e59-7527-4eea-8c6f-610b19abb437
+      graph:
+        rid: 2752642924918866004
+      nodes:
+      - name: 
+        id: ac0115a3-aaab-40bf-9c76-04ddf006ab9e
+        position: {x: 993, y: 677}
+        node:
+          rid: 2752642924918866020
+        references: []
+        parentIds: []
+        childIds:
+        - 15684fb2-451a-4a69-92c0-fabe2e1d573e
+      - name: 
+        id: 15684fb2-451a-4a69-92c0-fabe2e1d573e
+        position: {x: 985.5501, y: 823.4001}
+        node:
+          rid: 2752642924918866021
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866022
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - ac0115a3-aaab-40bf-9c76-04ddf006ab9e
+        childIds: []
+    - name: Sleep
+      id: 7c3d8f8e-43cd-4889-8961-0886ac6ddae0
+      graph:
+        rid: 2752642924918866005
+      nodes:
+      - name: 
+        id: c5cf72af-6bc2-4e9c-b57a-8d0b091491fa
+        position: {x: 1007.4001, y: 710.7001}
+        node:
+          rid: 2752642924918866023
+        references: []
+        parentIds: []
+        childIds:
+        - 88b1bc7d-dd9d-43a1-957c-d8f0b13b18e2
+      - name: 
+        id: 88b1bc7d-dd9d-43a1-957c-d8f0b13b18e2
+        position: {x: 1023, y: 930}
+        node:
+          rid: 2752642924918866024
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866025
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - c5cf72af-6bc2-4e9c-b57a-8d0b091491fa
+        childIds: []
+    - name: Eat
+      id: c133402e-3e4b-403c-a524-a24fb2c94483
+      graph:
+        rid: 2752642924918866008
+      nodes:
+      - name: 
+        id: ab607f2d-40ea-4e52-8ba9-acdc0bfa3024
+        position: {x: 1003.9501, y: 254.15001}
+        node:
+          rid: 2752642924918866010
+        references: []
+        parentIds: []
+        childIds:
+        - 9101182a-9025-4405-95fa-555d9c147a7d
+      - name: HasFood
+        id: 9101182a-9025-4405-95fa-555d9c147a7d
+        position: {x: 1006, y: 431}
+        node:
+          rid: 2752642924918866011
+        references:
+        - fieldName: Perception
+          value:
+            rid: 2752642924918866013
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - ab607f2d-40ea-4e52-8ba9-acdc0bfa3024
+        childIds:
+        - 2fe80dab-db99-4fed-8f88-159a89263aad
+      - name: 
+        id: 2fe80dab-db99-4fed-8f88-159a89263aad
+        position: {x: 1010, y: 633}
+        node:
+          rid: 2752642924918866014
+        references: []
+        parentIds:
+        - 9101182a-9025-4405-95fa-555d9c147a7d
+        childIds:
+        - 0884552a-0942-4aeb-83bd-41d50b472bb4
+        - 5b36c711-bf92-4ccf-8934-79197899b43d
+      - name: 
+        id: 0884552a-0942-4aeb-83bd-41d50b472bb4
+        position: {x: 756, y: 830}
+        node:
+          rid: 2752642924918866015
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866018
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 2fe80dab-db99-4fed-8f88-159a89263aad
+        childIds: []
+      - name: 
+        id: 5b36c711-bf92-4ccf-8934-79197899b43d
+        position: {x: 1313, y: 857}
+        node:
+          rid: 2752642924918866016
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642924918866019
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 2fe80dab-db99-4fed-8f88-159a89263aad
+        childIds: []
     pushPerceptions: []
-  bee: {fileID: 0}
+  bee: {fileID: 1240629465472281751}
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2752642923302748160
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642923302748161
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: 
+        update:
+          componentName: Bee
+          methodName: WalkPartner
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918865969
+      type: {class: UtilitySystem, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        Inertia: 1.3
+    - rid: 2752642924918865970
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865971
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Bee
+        methodName: Health
+    - rid: 2752642924918865972
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865973
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Bee
+        methodName: Energy
+    - rid: 2752642924918865974
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865975
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Bee
+        methodName: Hunger
+    - rid: 2752642924918865976
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865977
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: TimerReader
+        methodName: Hour
+    - rid: 2752642924918865978
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865979
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: TimeReader
+        methodName: Temperture
+    - rid: 2752642924918865980
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 2752642924918865981
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: Bee
+        methodName: IsAwake
+    - rid: 2752642924918865982
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: -13
+        Midpoint: 0.28
+    - rid: 2752642924918865983
+      type: {class: ExponentialCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Exponent: 0.5
+        DespX: 0
+        DespY: 0
+    - rid: 2752642924918865984
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: -20.88
+        Midpoint: 0.5
+    - rid: 2752642924918865985
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: 13.64
+        Midpoint: 0.5
+    - rid: 2752642924918865986
+      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        PullingEnabled: 1
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 2752642924918865987
+      type: {class: UnityCurveFactor, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        PullingEnabled: 1
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 2752642924918865988
+      type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        GrownRate: 44.74
+        Midpoint: 0.5
+    - rid: 2752642924918865989
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: -1
+        YIntercept: 1
+    - rid: 2752642924918865990
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.6
+        - 0.6
+    - rid: 2752642924918865991
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.3
+        - 0.7
+    - rid: 2752642924918865992
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.2
+        - 0.8
+    - rid: 2752642924918865993
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 0.3
+        - 0.7
+    - rid: 2752642924918865994
+      type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Slope: -1
+        YIntercept: 1
+    - rid: 2752642924918865995
+      type: {class: ConstantFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        value: 0.35
+    - rid: 2752642924918865996
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918865997
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918865998
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918865999
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918866000
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918866001
+      type: {class: MinFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+    - rid: 2752642924918866002
+      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        FinishSystemOnComplete: 0
+    - rid: 2752642924918866003
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Bee
+          methodName: StartWalkToNest
+        update:
+          componentName: Bee
+          methodName: WalkObjetive
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918866004
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866005
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866006
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 2e733e59-7527-4eea-8c6f-610b19abb437
+    - rid: 2752642924918866007
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 7c3d8f8e-43cd-4889-8961-0886ac6ddae0
+    - rid: 2752642924918866008
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866010
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 2752642924918866011
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866013
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Bee
+          methodName: FoodNear
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918866014
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 2752642924918866015
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866016
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866018
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Bee
+          methodName: StartWalkToNest
+        update:
+          componentName: Bee
+          methodName: WalkObjetive
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918866019
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Bee
+          methodName: Eat
+    - rid: 2752642924918866020
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 2752642924918866021
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866022
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: 
+        update:
+          componentName: 
+          methodName: Rest
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918866023
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 2752642924918866024
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642924918866025
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: Bee
+          methodName: StartSleep
+        update:
+          componentName: Bee
+          methodName: Sleep
+        stop:
+          componentName: 
+          methodName: ExitSleepStatus
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642924918866026
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Bee
+          methodName: WakeUp
+    - rid: 2752642924918866027
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: c133402e-3e4b-403c-a524-a24fb2c94483
     - rid: 5137887122736545828
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
