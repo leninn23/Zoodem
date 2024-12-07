@@ -9,7 +9,11 @@ namespace World
             Meat,
             Vegetable,
             Fruit,
+            Berry,
             Insect,
+            Flower,
+            Beehive,
+            Nest,
             Other
         }
         

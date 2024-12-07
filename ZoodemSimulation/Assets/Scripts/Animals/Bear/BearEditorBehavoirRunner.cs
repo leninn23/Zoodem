@@ -8,6 +8,23 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
 {
     public Bear bear;
 
+    public void EnterBeingCourtedState()
+    {
+        bear.display.PushStatus(StatusDisplay.Statuses.Courting);
+    }
+    public void ExitHuntingStatus()
+    {
+        bear.display.RemoveStatus(StatusDisplay.Statuses.Hunting);
+    }
+    public void EnterHuntingStatus()
+    {
+        
+        bear.display.PushStatus(StatusDisplay.Statuses.Hunting);
+    }
+    public void ExitSleepStatus()
+    {
+        bear.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
+    }
     #region CreateBurrowBT
 
     public bool IsInBiome()
@@ -28,7 +45,10 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     {
         bear.StartWalkToBiome();
     }
-    
+    public Status Rest()
+    {
+        return bear.Rest();
+    }
     public Status TravelBiome() {
         return bear.WalkObjective();
     }
@@ -112,7 +132,20 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
         bear.Court(bear);
     }
     
+    public void StartCourt()
+    {
+        bear.StartCourt();
+    }
+    
 
+    public Status Courting()
+    {
+        return bear.Courting();
+    }
+    public bool IsBeingCourted()
+    {
+        return bear.IsBeingCourtedBool();
+    }
     #endregion
 
     #region HuntBT
@@ -157,4 +190,9 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     }
 
     #endregion
+
+    public void EmptyAction()
+    {
+        //Do nothing
+    }
 }

@@ -21,6 +21,7 @@ namespace Animals
         public float maxFood;
         public float attackDamage;
         public float moveSpeed;
+        public float maxLongevity;
 
         [Space(7)] [Header("Advanced settings")]
         public float maxDenRange;
@@ -37,6 +38,7 @@ namespace Animals
         public float health;
         public float energy;
         public bool isSleeping;
+        public float age;
 
         private float _timer;
         // [Space(15)]
@@ -107,6 +109,11 @@ namespace Animals
 
         private void Update()
         {
+            age += Time.deltaTime;
+            if (age >= maxLongevity)
+            {
+                Die();
+            }
             if (food <= 0.15f * maxFood)
             {
                 health -= 0.5f * Time.deltaTime;

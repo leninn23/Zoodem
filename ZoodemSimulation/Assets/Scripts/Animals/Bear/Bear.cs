@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using Animals;
 using BehaviourAPI.Core;
 using UnityEngine;
+using World;
 
 public class Bear : ABasicAnimal
 {
+    public List<TimeManager.Season> huntingSeasons;
+    public bool IsHuntingSeason()
+    {
+        return huntingSeasons.Contains(TimeManager.Instance.currentSeason);
+    }
     void Start()
     {
         animalType = AnimalType.Bear;

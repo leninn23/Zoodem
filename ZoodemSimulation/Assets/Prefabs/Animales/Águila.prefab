@@ -134,6 +134,7 @@ MonoBehaviour:
   maxFood: 100
   attackDamage: 20
   moveSpeed: 10
+  maxLongevity: 360
   maxDenRange: 10
   walkEnergyDrain: 0.3
   huntEnergyDrain: 0.6
@@ -147,6 +148,7 @@ MonoBehaviour:
   health: 0
   energy: 0
   isSleeping: 0
+  age: 0
   gender: 2
   partner: {fileID: 0}
   isDom: 0

@@ -69,6 +69,12 @@ public class CameraFocus : MonoBehaviour
         // StartCoroutine(MoveCamera(_fixedCameraPos, _fixedCameraRot));
     }
 
+
+    private void OnDestroy()
+    {
+        ResetCamera();
+    }
+
     private void Update()
     {
         // if (_focused)
