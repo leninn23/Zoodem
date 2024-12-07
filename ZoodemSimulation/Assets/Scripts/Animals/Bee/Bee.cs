@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Bee : ABasicAnimal
 {
+    private float _nectar;
+
+    public Nido colmena;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +23,13 @@ public class Bee : ABasicAnimal
 
     public bool HasNectar()
     {
-        throw new System.NotImplementedException();
+        return _nectar > 0;
     }
 
     public void PutNectar()
     {
-        throw new System.NotImplementedException();
+        colmena.food += _nectar;
+        _nectar = 0;
     }
 
     public void StartCollect()
