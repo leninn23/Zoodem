@@ -77,6 +77,7 @@ public class Bush : MonoBehaviour, IFood
         if (currentBerries <= 0)
         {
             _collider.enabled = false;
+            currentBerries = 0;
         }
         if(currentBerries >= 0)
         {

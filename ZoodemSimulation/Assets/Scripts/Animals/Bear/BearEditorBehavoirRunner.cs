@@ -95,7 +95,7 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     public bool ExistsMate() 
     {
         Debug.Log("Detectando si hay pareja");
-        return bear.HasPartner();
+        return bear.FindPartner();
     }
     ///
 

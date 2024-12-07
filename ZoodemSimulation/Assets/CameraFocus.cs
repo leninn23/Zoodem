@@ -72,7 +72,8 @@ public class CameraFocus : MonoBehaviour
 
     private void OnDestroy()
     {
-        ResetCamera();
+        if(_focused)
+            ResetCamera();
     }
 
     private void Update()

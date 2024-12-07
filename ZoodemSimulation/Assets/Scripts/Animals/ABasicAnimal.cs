@@ -666,8 +666,8 @@ namespace Animals
             if (_prey.TryGetComponent<ABasicAnimal>(out var animal))
             {
                 animal.GetAttacked(attackDamage);
-                _timer = 1f;
-                return Status.Running;
+                _timer = 00.5f;
+                return Status.Success;
             }
             return Status.Failure;
         }

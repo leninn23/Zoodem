@@ -34,6 +34,7 @@ public class StatusDisplay : MonoBehaviour
         Hurt,
         GoingHome,
         Sleeping,
+        Wander
     }
     
     void Start()

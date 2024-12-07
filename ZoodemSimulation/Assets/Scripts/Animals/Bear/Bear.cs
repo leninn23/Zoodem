@@ -10,6 +10,11 @@ public class Bear : ABasicAnimal
     public List<TimeManager.Season> huntingSeasons;
     public bool IsHuntingSeason()
     {
+        Debug.Log($"It's {TimeManager.Instance.seasonNames[(int)TimeManager.Instance.currentSeason]}");
+        foreach (var huntingSeason in huntingSeasons)
+        {
+            Debug.Log($"{name} hunts in {TimeManager.Instance.seasonNames[(int)huntingSeason]}");
+        }
         return huntingSeasons.Contains(TimeManager.Instance.currentSeason);
     }
     void Start()
