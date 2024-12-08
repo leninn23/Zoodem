@@ -42,6 +42,10 @@ namespace Animals
         public float age;
 
         private float _timer;
+
+        private Transform _model;
+
+        private List<Animator> _animators;
         // [Space(15)]
 
 
@@ -104,6 +108,20 @@ namespace Animals
             health = maxHealth;
             energy = maxEnergy;
 
+            _animators = new List<Animator>();
+            
+            _model = transform.Find("Modelo");
+            if (_model)
+            {
+                foreach (Transform transform1 in _model)
+                {
+                    if (transform1.TryGetComponent<Animator>(out var component))
+                    {
+                        _animators.Add(component);
+                        component.speed = moveSpeed;
+                    }
+                }
+            }
             display = GetComponentInChildren<StatusDisplay>();
             // terrainGenerator = FindObjectOfType<TerrainGenerator>();
         }
@@ -114,10 +132,12 @@ namespace Animals
             if (food <= hungryThreshold * maxFood)
             {
                 health -= 0.5f * Time.deltaTime;
-                if (health <= 0)
-                {
-                    
-                }
+                if(health > 0)
+                    display.SetMainBars();
+                // if (health <= 0)
+                // {
+                //     Die();
+                // }
                 display.PushStatus(StatusDisplay.Statuses.Hungry);
             }
             age += Time.deltaTime;
@@ -201,6 +221,8 @@ namespace Animals
             var dist = Vector3.Distance(position, preyPosition);
             currentWalkDir = preyPosition - position;
             currentWalkDir.y = 0;
+            if(_model)
+                _model.LookAt(preyPosition);
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy = Mathf.Clamp(energy - huntEnergyDrain * Time.deltaTime, 0, maxEnergy);
@@ -233,6 +255,8 @@ namespace Animals
             var dist = Vector3.Distance(position, partnerPosition);
             currentWalkDir = partnerPosition - position;
             currentWalkDir.y = 0;
+            if(_model)
+                _model.LookAt(partnerPosition);
             var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
             trans.Translate(currentWalkDir * maxDist);
             energy = Mathf.Clamp(energy - walkEnergyDrain * Time.deltaTime, 0, maxEnergy);
@@ -254,6 +278,8 @@ namespace Animals
             var fixedDir = walkObjective - position;
             fixedDir.y = 0;
             currentWalkDir = fixedDir.normalized;
+            if(_model)
+                _model.LookAt(walkObjective);
         }
         public void StartWalkFood()
         {
@@ -444,6 +470,7 @@ namespace Animals
         }
         public Status Rest()
         {
+            display.PushStatus(StatusDisplay.Statuses.Rest);
             energy = Mathf.Clamp(energy + sleepEnergyGain* Time.deltaTime, 0, maxEnergy);
             // health = Mathf.Clamp(health + sleepEnergyGain* Time.deltaTime, 0, maxHealth);
             return Status.Running;
@@ -716,6 +743,7 @@ namespace Animals
         private void GetAttacked(float damage)
         {
             health -= damage;
+            display.SetMainBars();
             if (health <= 0)
             {
                 Die();
@@ -756,6 +784,7 @@ namespace Animals
             energy = Mathf.Clamp(energy + sleepEnergyGain*Time.deltaTime, 0, maxEnergy);
             health = Mathf.Clamp(health + sleepHealthGain*Time.deltaTime, 0, maxHealth);
             food = Mathf.Clamp(food - sleepFoodDrain*Time.deltaTime, 0, maxFood);
+            display.SetMainBars();
             return Status.Running;
         }
     }

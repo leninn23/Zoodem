@@ -66,7 +66,7 @@ public class StatusDisplay : MonoBehaviour
         _conflictingStatuses.Add(_movementStatuses);
     }
 
-    private void SetMainBars()
+    public void SetMainBars()
     {
         healthBar.SetCurrentValue(_animal.health);
         energyBar.SetCurrentValue(_animal.energy);
@@ -76,7 +76,7 @@ public class StatusDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetMainBars();
+        // SetMainBars();
     }
 
     public void PushStatus(Statuses status)

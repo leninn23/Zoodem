@@ -21,7 +21,10 @@ public class Flower : MonoBehaviour, IFood
     // Update is called once per frame
     void Update()
     {
-        
+        if (TimeManager.Instance.currentSeason is TimeManager.Season.Spring)
+        {
+            currentPollen += 0.1f * Time.deltaTime;
+        }
     }
 
     public float GetFoodValue()

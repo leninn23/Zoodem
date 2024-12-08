@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BehaviourAPI.Core;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEngine;
+using World;
 
 public class BearEditorBehavoirRunner : EditorBehaviourRunner
 {
@@ -84,6 +85,13 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     {
         bear.StartWalkRandomNest(StatusDisplay.Statuses.Hunting);
     }
+
+
+    public float Hour()
+    {
+        return TimeManager.Instance.TimeOfTheDay / TimeManager.LenghtOfDay;
+    }
+    
     public Status Walk() {
 
         Debug.Log("Deambulando");
