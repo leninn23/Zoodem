@@ -137,7 +137,13 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
         Debug.Log("Viajando a nido");
         bear.StartWalkToNest();
     }
-
+    public void StartWalkToNest()
+    {
+        Debug.Log("Viajando a nido");
+        bear.StartWalkToNest();
+    }
+    
+    
     public void FeedOffspring()
     {
         Debug.Log("Ha llegado al nido");

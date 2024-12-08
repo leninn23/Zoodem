@@ -15,11 +15,20 @@ public class Nido : MonoBehaviour
     public ABasicAnimal owner;
 
     public ABasicAnimal animalPrefab;
+    private bool _incubated;
+
+    protected Action _onBorn;
+    protected Action _onIncubated;
     // public IAnimal owner;
 
     private void Update()
     {
         if(offspringCount <= 0) return;
+        if (!_incubated)
+        {
+            _onIncubated?.Invoke();
+        }
+        _incubated = true;
         
         timeLeftForSpawn -= Time.deltaTime;
         food -= foodDrain * Time.deltaTime;
@@ -35,6 +44,8 @@ public class Nido : MonoBehaviour
                 Instantiate(animalPrefab, transform.position, transform.rotation);
             }
 
+            _incubated = false;
+            _onBorn?.Invoke();
             offspringCount = 0;
         }
         

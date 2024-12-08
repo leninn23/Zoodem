@@ -191,7 +191,10 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
         return eagle.WalkPrey();
     }
 
-
+    public void StartWalkRandomFleeing()
+    {
+        eagle.StartWalkRandomNest(StatusDisplay.Statuses.Fleeing);
+    }
         public void StartWalkFleeing()
         {
             eagle.StartWalkRandomNest(StatusDisplay.Statuses.Fleeing);

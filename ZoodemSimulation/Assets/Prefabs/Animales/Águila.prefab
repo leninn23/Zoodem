@@ -156,7 +156,7 @@ MonoBehaviour:
   isDom: 0
   relationshipState: 0
   den: {fileID: 0}
-  nidoPrefab: {fileID: 8278214411429633431, guid: eabb38182efee334cb4bac25196c713b, type: 3}
+  nidoPrefab: {fileID: 3029804146351828289, guid: eabb38182efee334cb4bac25196c713b, type: 3}
   courtTime: 20
   minDistanceNest: 6
   gestationTime: 35
@@ -2918,10 +2918,10 @@ MonoBehaviour:
       data:
         start:
           componentName: Eagle
-          methodName: StartWalkPrey
+          methodName: StartFollowPrey
         update:
-          componentName: 
-          methodName: WalkToPrey
+          componentName: Eagle
+          methodName: FollowPrey
         stop:
           componentName: 
           methodName: ExitHuntingStatus

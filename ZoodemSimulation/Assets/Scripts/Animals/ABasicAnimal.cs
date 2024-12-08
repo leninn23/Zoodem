@@ -211,6 +211,10 @@ namespace Animals
         {
             display.PushStatus(StatusDisplay.Statuses.WalkingPrey);
         }
+        public void StartFollowPrey()
+        {
+            display.PushStatus(StatusDisplay.Statuses.Fleeing);
+        }
         public Status WalkPrey()
         {
             // display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
@@ -240,7 +244,35 @@ namespace Animals
 
             return result;
         }
+        public Status FollowPrey()
+        {
+            // display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
+            if (!_prey)
+            {
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPrey);
+                return Status.Failure;
+            }
+            
+            var trans = transform;
+            var preyPosition = _prey.position;
+            var position = trans.position;
+            var dist = Vector3.Distance(position, preyPosition);
+            currentWalkDir = preyPosition - position;
+            currentWalkDir.y = 0;
+            if(_model)
+                _model.LookAt(preyPosition);
+            var maxDist = Mathf.Min(moveSpeed * Time.deltaTime, dist);
+            trans.Translate(currentWalkDir * maxDist);
+            energy = Mathf.Clamp(energy - huntEnergyDrain * Time.deltaTime, 0, maxEnergy);
+            food = Mathf.Clamp(food - foodDrain* Time.deltaTime, 0, maxFood);
+            var result = Mathf.Abs(maxDist - dist) <= 2f ? Status.Success : Status.Running;
+            if (result is Status.Success)
+            {
+                display.RemoveStatus(StatusDisplay.Statuses.WalkingPrey);
+            }
 
+            return result;
+        }
         public void StartWalkPartner()
         {
             display.PushStatus(StatusDisplay.Statuses.WalkingPartner);
@@ -415,6 +447,11 @@ namespace Animals
 
         public bool HasPartner()
         {
+            if (!partner)
+            {
+                relationshipState = RelationshipStatus.Single;
+                gender = GenderAnimal.unassigned;
+            }
             return relationshipState == RelationshipStatus.Enganged;
         }
         
