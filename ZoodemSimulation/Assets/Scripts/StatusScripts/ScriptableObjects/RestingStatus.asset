@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b49ad0fb8340f4bd740d196d82050f, type: 3}
-  m_Name: SleepingStatus 1
+  m_Name: RestingStatus
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 93fdcf241a864a5409d9db8ec1dc8075, type: 3}
   description: Resting

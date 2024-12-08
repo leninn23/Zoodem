@@ -29,6 +29,7 @@ Shader "Examples/TextureExample"
                   {
                         float2 uv : TEXCOORD0;
                         float4 positionOS : POSITION;
+                        float4 vertex : VERTE
                   };
                   struct v2f
                   {
@@ -52,7 +53,7 @@ Shader "Examples/TextureExample"
                         v2f o;
                         o.positionCS = o.positionCS = UnityObjectToClipPos(v.positionOS);
                         o.uv = TRANSFORM_TEX(v.uv, _BaseTex);
-                        //o.worldPos = mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)).xyz;
+                        o.worldPos = mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)).xyz;
                         return o;
                   }
                   
