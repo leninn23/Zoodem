@@ -384,7 +384,7 @@ MonoBehaviour:
         - 91052aca-4787-4e91-a26c-046bf3a039da
       - name: NothingImportantToDo
         id: a1eb4dc6-1652-4a09-890a-197718e1c756
-        position: {x: 1225, y: 979}
+        position: {x: 1207, y: 1216}
         node:
           rid: 3799616545139982354
         references: []
@@ -1948,7 +1948,7 @@ MonoBehaviour:
         PullingEnabled: 1
         Weights:
         - 0.3
-        - 0.7
+        - 0.8
     - rid: 3799616545139982354
       type: {class: ConstantFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:

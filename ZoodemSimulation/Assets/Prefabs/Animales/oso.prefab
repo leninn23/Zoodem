@@ -1912,7 +1912,7 @@ MonoBehaviour:
         PullingEnabled: 1
         Weights:
         - 0.3
-        - 0.7
+        - 0.8
     - rid: 2752642922066477088
       type: {class: MinFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
