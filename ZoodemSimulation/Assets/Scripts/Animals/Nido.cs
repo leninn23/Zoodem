@@ -33,6 +33,7 @@ public class Nido : MonoBehaviour
         food -= foodDrain * Time.deltaTime;
         if (food <= 0)
         {
+            Debug.LogWarning("Matando hijos");
             offspringCount = 0;
         }
 

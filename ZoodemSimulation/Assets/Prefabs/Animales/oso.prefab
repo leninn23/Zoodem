@@ -266,8 +266,8 @@ MonoBehaviour:
   nidoPrefab: {fileID: 2254550935864109007, guid: d5f0ecad0c7707f47a83424f2bfb8bbe, type: 3}
   courtTime: 0
   minDistanceNest: 5
-  gestationTime: 90
-  babyBirthTime: 240
+  gestationTime: 10
+  babyBirthTime: 1200
   offspringNRange: {x: 1, y: 2}
   foodPerChild: 5
   wanderDistance: 6

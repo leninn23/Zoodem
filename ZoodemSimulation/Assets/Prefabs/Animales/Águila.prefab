@@ -274,7 +274,7 @@ MonoBehaviour:
         references: []
         parentIds:
         - c417495c-9ab8-4e44-82c7-1399d54f1abb
-        - f40e59d0-0054-417f-9bb4-72ff009e62fa
+        - 9a749edf-ad7b-4e89-a697-07aa528d426a
         childIds:
         - dbdf8c37-7ab6-4d85-9faa-3ff93ec05d93
       - name: Vigor
@@ -379,6 +379,7 @@ MonoBehaviour:
         references: []
         parentIds:
         - 0b72bf6b-8aee-47c6-9233-918c90fb9e5a
+        - 9a749edf-ad7b-4e89-a697-07aa528d426a
         childIds:
         - 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
         - 91052aca-4787-4e91-a26c-046bf3a039da
@@ -404,7 +405,7 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds: []
         childIds:
-        - 66495b0f-8672-4f14-b603-8adde610c744
+        - 9a749edf-ad7b-4e89-a697-07aa528d426a
       - name: Rest
         id: eaacf56e-35cd-4155-a0c3-ab2af6dd4bb2
         position: {x: 1593, y: 498}
@@ -421,7 +422,7 @@ MonoBehaviour:
         - c417495c-9ab8-4e44-82c7-1399d54f1abb
       - name: Sleep
         id: 0b72bf6b-8aee-47c6-9233-918c90fb9e5a
-        position: {x: 1569, y: 946}
+        position: {x: 1716, y: 954}
         node:
           rid: 3799616545139982359
         references:
@@ -575,6 +576,17 @@ MonoBehaviour:
         parentIds:
         - ca378bad-3063-4b1a-bcb6-a1c52e9f958a
         childIds: []
+      - name: 
+        id: 9a749edf-ad7b-4e89-a697-07aa528d426a
+        position: {x: 1245, y: 371}
+        node:
+          rid: 3799616617968041984
+        references: []
+        parentIds:
+        - f40e59d0-0054-417f-9bb4-72ff009e62fa
+        childIds:
+        - 66495b0f-8672-4f14-b603-8adde610c744
+        - fd829167-6820-4f50-8db0-08c9c07393dc
     - name: EagleNestBT
       id: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
       graph:
@@ -2393,6 +2405,13 @@ MonoBehaviour:
         ExecuteOnLoop: 0
         InterruptOptions: 2
         subgraphId: 35c3dd4d-1b66-49dc-a104-9f5369b047c7
+    - rid: 3799616617968041984
+      type: {class: WeightedFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        Weights:
+        - 1
+        - -0.5
     - rid: 5264634693250449442
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:

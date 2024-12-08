@@ -486,6 +486,9 @@ namespace Animals
         public void GenerateOffspring()
         {
             _offspring = Random.Range(offspringNRange.x, offspringNRange.y);
+            Debug.LogWarning("Poniendo hijos " + _offspring + ", " + name);
+            if(animalType != AnimalType.Bee)
+                den.food = 100;
             den.offspringCount = _offspring;
             den.timeLeftForSpawn = gestationTime;
         }
@@ -677,7 +680,27 @@ namespace Animals
 
         public bool IsPreyAlone()
         {
-            return (Physics.CheckSphere(_prey.position, 2f, LayerMask.GetMask("Animal")));
+            Debug.LogWarning("Comprobando la presa " + name);
+            var aux = Physics.OverlapSphere(_prey.position, 2f, LayerMask.GetMask(("Animal")));
+
+            if (aux.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                var a = aux.Where(aa =>
+                {
+                    if (aa.TryGetComponent<ABasicAnimal>(out var animal))
+                    {
+                        return animal == this;
+                    }
+
+                    return false;
+                }).ToList();
+                return a.Count == 0;
+            }
+            //return (Physics.CheckSphere(_prey.position, 2f, LayerMask.GetMask("Animal")));
         }
         
         public bool PreyNear()
@@ -689,6 +712,8 @@ namespace Animals
                 {
                     if (component.FoodState == IFood.FoodStates.Alive && foodPreferences.Contains(component.FoodType))
                     {
+                        if(c.transform == transform)    continue;
+                        
                         _prey = c.transform;
                         // display.PushStatus(StatusDisplay.Statuses.Hunting);
                         return true;
@@ -765,7 +790,7 @@ namespace Animals
         {
             
             display.PushStatus(StatusDisplay.Statuses.Hunting);
-            _timer = 0f;
+            _timer = 0.2f;
         }
         
         public Status Attack()
@@ -780,6 +805,7 @@ namespace Animals
             
             if (_prey.TryGetComponent<ABasicAnimal>(out var animal))
             {
+                Debug.Log($"{name} is attacking {_prey.name}");
                 animal.GetAttacked(attackDamage);
                 _timer = 00.5f;
                 return Status.Success;
@@ -791,6 +817,7 @@ namespace Animals
         
         private void GetAttacked(float damage)
         {
+            // Debug.LogWarning($"{name} was attacked!!");
             health -= damage;
             //display.SetMainBars();
             if (health <= 0)
