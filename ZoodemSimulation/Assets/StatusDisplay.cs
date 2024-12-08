@@ -76,7 +76,7 @@ public class StatusDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // SetMainBars();
+        SetMainBars();
     }
 
     public void PushStatus(Statuses status)

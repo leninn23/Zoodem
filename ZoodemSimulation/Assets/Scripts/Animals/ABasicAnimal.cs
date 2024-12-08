@@ -15,7 +15,7 @@ namespace Animals
         public Corpse corpse;
         public TerrainGenerator terrainGenerator;
         public AnimalType animalType;
-        [Space(7)][Header("Basic settings")]
+        // [Space(7)][Header("Basic settings")]
         public float maxHealth;
         public float maxEnergy;
         public float maxFood;
@@ -133,7 +133,7 @@ namespace Animals
             {
                 health -= 0.5f * Time.deltaTime;
                 if(health > 0)
-                    display.SetMainBars();
+                    //display.SetMainBars();
                 // if (health <= 0)
                 // {
                 //     Die();
@@ -743,7 +743,7 @@ namespace Animals
         private void GetAttacked(float damage)
         {
             health -= damage;
-            display.SetMainBars();
+            //display.SetMainBars();
             if (health <= 0)
             {
                 Die();
@@ -784,7 +784,7 @@ namespace Animals
             energy = Mathf.Clamp(energy + sleepEnergyGain*Time.deltaTime, 0, maxEnergy);
             health = Mathf.Clamp(health + sleepHealthGain*Time.deltaTime, 0, maxHealth);
             food = Mathf.Clamp(food - sleepFoodDrain*Time.deltaTime, 0, maxFood);
-            display.SetMainBars();
+            //display.SetMainBars();
             return Status.Running;
         }
     }

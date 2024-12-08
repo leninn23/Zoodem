@@ -46,7 +46,7 @@ public class StatusBar : MonoBehaviour
 
     public void SetCurrentValue(float current)
     {
-        _currentValue = Mathf.Clamp(current, 0, _maxValue);
+        _currentValue = Mathf.Clamp(current, 0.0001f, _maxValue);
         SetSizeAndPosition();
     }
 
