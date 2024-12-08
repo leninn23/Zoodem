@@ -4,11 +4,19 @@ using BehaviourAPI.Core;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEditor;
 using UnityEngine;
+using World;
 
 public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 {
     public Bee bee;
+    public bool reproducePerDay;
 
+    public void ResetReproduce(int f)
+    {
+        TimeManager.Instance.onDayChange -= ResetReproduce;
+        reproducePerDay = false;
+    }
+    
     public bool FoodNear()
     {
         return bee.den.food > 0;
@@ -18,7 +26,7 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 
     public bool NearWorkerBee()
     {
-        return bee.NearWorkerBee();
+        return !reproducePerDay && bee.NearWorkerBee();
     }
 
     public bool SpaceHive()
@@ -28,10 +36,14 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 
     public void StartCourt()
     {
+        TimeManager.Instance.onDayChange += ResetReproduce;
+        bee.FindPartner();
+        
+        reproducePerDay = true;
         bee.den.freeSpace--;
-        bee.Court(bee);
+        
     }
-
+    
     public Status Courting()
     {
         return bee.Courting();
@@ -42,13 +54,14 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
     }
     public void ExitSleepStatus()
     {
+        //reproducePerDay = false;
         bee.display.RemoveStatus(StatusDisplay.Statuses.Sleeping);
     }
 
     public void Eat()
     {
-        bee.den.food -= 0.5f;
-        bee.food += 0.5f;
+        bee.den.food -= 2f;
+        bee.food += 2f;
     }
     public void EmptyAction(){}
     public void StartWalkRandom()

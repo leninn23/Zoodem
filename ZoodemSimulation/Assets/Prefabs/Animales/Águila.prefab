@@ -160,7 +160,7 @@ MonoBehaviour:
   courtTime: 20
   minDistanceNest: 6
   gestationTime: 2
-  offspringNRange: {x: 1, y: 3}
+  offspringNRange: {x: 1, y: 1}
   foodPerChild: 5
   wanderDistance: 5
   biomePreferences: 030000000200000001000000
