@@ -449,6 +449,7 @@ namespace Animals
         }
         public void StartIncubate()
         {
+            Debug.LogError(gameObject.name+" : incuboo");
             _timer = gestationTime;
         }
         public Status Incubate()
@@ -547,7 +548,8 @@ namespace Animals
 
         private void EndCourt()
         {
-            AssignPartnersDen();
+            if(animalType !=AnimalType.Bee)
+                AssignPartnersDen();
         }
         
         //I am being courted!

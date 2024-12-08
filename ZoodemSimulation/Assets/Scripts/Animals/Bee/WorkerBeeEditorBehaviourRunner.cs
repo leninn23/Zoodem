@@ -13,7 +13,7 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     public Bee bee;
     public float food()
     {
-        return bee.food;
+        return 1 - bee.den.food/bee.maxFood;
     }
     public bool HasNectar()
     {

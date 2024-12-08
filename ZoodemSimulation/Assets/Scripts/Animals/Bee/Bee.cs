@@ -11,7 +11,10 @@ public class Bee : ABasicAnimal
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (den == null)
+        {
+            den = GameObject.Find("NidoAbeja").GetComponent<Nido>();
+        }
     }
 
     // Update is called once per frame

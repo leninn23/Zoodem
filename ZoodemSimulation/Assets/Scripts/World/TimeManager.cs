@@ -59,6 +59,7 @@ namespace World
         // Start is called before the first frame update
         void Start()
         {
+            DayOfTheYear = 9;
             if (Instance) Destroy(gameObject);
             else Instance = this;
         
