@@ -24,7 +24,10 @@ public class CameraFocus : MonoBehaviour
             _fixedCameraPos = _mainCamera.position;
         }
         _myCamera = transform.Find("PersonalCameraPosition");
-
+        if (_myCamera.childCount > 0)
+        {
+            Destroy(_myCamera.GetChild(0).gameObject);
+        }
     }
 
     private void Unfocus()
@@ -44,7 +47,7 @@ public class CameraFocus : MonoBehaviour
             }
             _focusedObject = this;
             _mainCamera.SetPositionAndRotation(_myCamera.position, _myCamera.rotation);
-            _mainCamera.SetParent(transform);
+            _mainCamera.SetParent(_myCamera);
         }else
         {
             _focusedObject = null;
@@ -72,7 +75,7 @@ public class CameraFocus : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(_focused)
+        if(_myCamera && _myCamera.childCount>0)
             ResetCamera();
     }
 

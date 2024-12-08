@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Animals.Bee;
 using BehaviourAPI.Core;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEditor;
@@ -77,4 +80,19 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
         bee.StartWalkRandomNest(StatusDisplay.Statuses.Wander);
     }
 
+    private void OnDestroy()
+    {
+        var abejas = FindObjectsByType<Bee>(FindObjectsSortMode.None);
+        Debug.LogError(abejas.Length);
+        foreach (var a in abejas)
+        {
+            if (gameObject != a.gameObject)
+            {
+               var reina = Instantiate(bee.den.GetComponent<colmena>().reinaPrefab,a.transform.position, a.transform.rotation).GetComponent<Bee>();
+               reina.den = bee.den;
+               Destroy(a.gameObject);
+               break;
+            }
+        }
+    }
 }

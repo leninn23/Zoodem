@@ -1525,7 +1525,6 @@ MonoBehaviour:
   corpse: {fileID: 5537803697179517075, guid: 98f3d6ea9816eb247954a2fe45a9903d, type: 3}
   terrainGenerator: {fileID: 0}
   animalType: 4
-  animalPrefab: {fileID: 1240629465472281751}
   maxHealth: 50
   maxEnergy: 30
   maxFood: 40
@@ -1556,6 +1555,7 @@ MonoBehaviour:
   courtTime: 0
   minDistanceNest: 5
   gestationTime: 1
+  babyBirthTime: 0
   offspringNRange: {x: 0, y: 0}
   foodPerChild: 0
   wanderDistance: 6

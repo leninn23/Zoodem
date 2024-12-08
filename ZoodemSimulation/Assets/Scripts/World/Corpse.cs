@@ -21,7 +21,7 @@ public class Corpse : MonoBehaviour, IFood
         if (foodAge >= 30f)
         {
             FoodState = IFood.FoodStates.Rotten;
-            GetComponent<MeshRenderer>().material.color = new Color(0.33f, 0.42f, 0.28f);
+            //GetComponent<MeshRenderer>().material.color = new Color(0.33f, 0.42f, 0.28f);
         }if (foodAge >= 60f)
         {
             Destroy(gameObject);

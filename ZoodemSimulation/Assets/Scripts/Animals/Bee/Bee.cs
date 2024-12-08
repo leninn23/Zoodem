@@ -17,12 +17,7 @@ public class Bee : ABasicAnimal
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public bool HasNectar()
     {
         return _nectar > 0;

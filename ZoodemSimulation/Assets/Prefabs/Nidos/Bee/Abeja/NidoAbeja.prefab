@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370101482330497059}
-  - component: {fileID: 532198393069034125}
+  - component: {fileID: -8089924604746491337}
   m_Layer: 9
   m_Name: NidoAbeja
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 2373206294843967831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &532198393069034125
+--- !u!114 &-8089924604746491337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5086981403803628663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a452a3bdf347e44bcc154a3bd35b0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 003abb880d814d74a587e10d53528b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offspringCount: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   freeSpace: 10
   owner: {fileID: 1240629465472281751, guid: c142d1b8685a3a64ead729caff447f54, type: 3}
   animalPrefab: {fileID: 1240629465472281751, guid: c142d1b8685a3a64ead729caff447f54, type: 3}
+  reinaPrefab: {fileID: 3263964894498413124, guid: d1fd8b074ad4d3743bcb34af27a8ba17, type: 3}
 --- !u!1001 &2838934557633818300
 PrefabInstance:
   m_ObjectHideFlags: 0
