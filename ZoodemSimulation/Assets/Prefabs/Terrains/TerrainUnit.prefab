@@ -125,7 +125,7 @@ MonoBehaviour:
   den: {fileID: 0}
   biomeMaterials:
   - {fileID: 2100000, guid: f904fb26a802c054fbbe7d23286b3cb3, type: 2}
-  - {fileID: 2100000, guid: 51f616761587874499d47c91070b5326, type: 2}
+  - {fileID: 2100000, guid: 8bc605ddbfd925c4b94d1419d9bb33e2, type: 2}
   - {fileID: 2100000, guid: 848fdca2d4d2fea4b8b016e6d0d21061, type: 2}
   - {fileID: 2100000, guid: 0d5eb1954cb32a246ae3e8c7b975b21d, type: 2}
   - {fileID: 2100000, guid: 0a749f9dcd572564688f007a2dcb8fbf, type: 2}

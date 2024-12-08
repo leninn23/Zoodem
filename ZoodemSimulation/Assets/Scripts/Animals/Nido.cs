@@ -35,5 +35,6 @@ public class Nido : MonoBehaviour
 
             offspringCount = 0;
         }
+        
     }
 }
