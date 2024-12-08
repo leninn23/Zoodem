@@ -20,7 +20,7 @@ public class StatusBar : MonoBehaviour
         _barTransform = _actualBar.transform;
         _backgroundBar = transform.Find("Background").GetComponent<SpriteRenderer>();
 
-        _startingSize = _actualBar.size.x;
+        _startingSize = 50;//_actualBar.size.x;
     }
 
     public void SetColors(Color colorFront, Color colorBack)
