@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370101482330497059}
   - component: {fileID: 532198393069034125}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NidoAbeja
   m_TagString: Untagged
   m_Icon: {fileID: 0}

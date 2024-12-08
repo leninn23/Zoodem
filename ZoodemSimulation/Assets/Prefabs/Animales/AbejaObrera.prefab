@@ -799,7 +799,7 @@ MonoBehaviour:
         childIds: []
       - name: 
         id: 5201b82d-2b9b-414e-9896-405958bb92d5
-        position: {x: -134, y: 617}
+        position: {x: -115, y: 644}
         node:
           rid: 2752642924918865964
         references:
@@ -1609,7 +1609,7 @@ Transform:
   m_GameObject: {fileID: 3307780005017966453}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 30.156906, y: 12.384636, z: -32.39302}
+  m_LocalPosition: {x: 0, y: 12.384636, z: -14.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

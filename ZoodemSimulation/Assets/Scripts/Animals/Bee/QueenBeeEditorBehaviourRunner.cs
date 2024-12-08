@@ -9,8 +9,12 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 {
     public Bee bee;
 
+    public bool FoodNear()
+    {
+        return bee.den.food > 0;
+    }
+
    
-    
 
     public bool NearWorkerBee()
     {
@@ -43,7 +47,21 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
 
     public void Eat()
     {
-        bee.Eat();
+        bee.den.food -= 0.5f;
+        bee.food += 0.5f;
     }
-    
+    public void EmptyAction(){}
+    public void StartWalkRandom()
+    {
+        bee.StartWalkRandom(StatusDisplay.Statuses.Wander);
+    }
+    public Status Walk()
+    {
+        return bee.WalkObjective();
+    }
+    public void StartWalkRandomNest()
+    {
+        bee.StartWalkRandomNest(StatusDisplay.Statuses.Wander);
+    }
+
 }

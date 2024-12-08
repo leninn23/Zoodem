@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 370103494903543529}
   - component: {fileID: 1240629465472281751}
   - component: {fileID: -7921379673294308249}
+  - component: {fileID: -6263540487946062765}
+  - component: {fileID: 8888611876594290797}
   m_Layer: 6
   m_Name: AbejaReina
   m_TagString: Untagged
@@ -30,10 +32,12 @@ Transform:
   m_GameObject: {fileID: 3263964894498413124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.97, y: 0.53, z: 43.578}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 864668376518117869}
+  - {fileID: 221417920042967169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3449831872824279565
@@ -121,24 +125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8c067577c226945bd3bd9b6ae23e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  display: {fileID: 0}
-  corpse: {fileID: 0}
+  display: {fileID: 6049728396119206445}
+  corpse: {fileID: 5537803697179517075, guid: 98f3d6ea9816eb247954a2fe45a9903d, type: 3}
   terrainGenerator: {fileID: 0}
-  animalType: 0
-  maxHealth: 0
-  maxEnergy: 0
-  maxFood: 0
-  attackDamage: 0
-  moveSpeed: 0
-  maxLongevity: 0
-  maxDenRange: 0
-  walkEnergyDrain: 0
-  huntEnergyDrain: 0
-  foodDrain: 0
-  sleepFoodDrain: 0
-  sleepEnergyGain: 0
-  sleepHealthGain: 0
-  foodValue: 0
+  animalType: 4
+  maxHealth: 50
+  maxEnergy: 30
+  maxFood: 40
+  attackDamage: 5
+  moveSpeed: 6
+  maxLongevity: 500
+  maxDenRange: 3
+  walkEnergyDrain: 0.3
+  huntEnergyDrain: 0.6
+  foodDrain: 0.3
+  sleepFoodDrain: 0.02
+  sleepEnergyGain: 1
+  sleepHealthGain: 1
+  foodValue: 90
   foodPreferences: 
   hungryThreshold: 0
   food: 0
@@ -151,15 +155,15 @@ MonoBehaviour:
   isDom: 0
   relationshipState: 0
   den: {fileID: 0}
-  nidoPrefab: {fileID: 0}
+  nidoPrefab: {fileID: 532198393069034125, guid: 892f69dc49f2ab14188e0d89aef1b2bc, type: 3}
   courtTime: 0
   minDistanceNest: 5
   gestationTime: 0
   offspringNRange: {x: 0, y: 0}
   foodPerChild: 0
-  wanderDistance: 0
+  wanderDistance: 5
   biomePreferences: 030000000200000004000000
-  rangeNearWorkerBee: 0
+  rangeNearWorkerBee: 10
 --- !u!114 &-7921379673294308249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,7 +432,7 @@ MonoBehaviour:
         references:
         - fieldName: Action
           value:
-            rid: -2
+            rid: 2752642943757582344
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -502,7 +506,7 @@ MonoBehaviour:
         - 3c48cca1-9f89-4db7-aa97-f0f7657b142d
       - name: Sleep
         id: 028665fa-ea6c-443e-91d8-376c215617ed
-        position: {x: 900, y: 465.55554}
+        position: {x: 916, y: 478}
         node:
           rid: 2752642924918866002
         references:
@@ -568,7 +572,8 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         parentIds:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
+        childIds:
+        - b9575fbd-75b5-4985-9888-97412f2a9fd7
       - name: SpaceHive
         id: a3744ee0-9259-483f-9609-ead7d66702b3
         position: {x: 0, y: 400}
@@ -582,7 +587,8 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         parentIds:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds: []
+        childIds:
+        - fbd01ea1-c1b8-47a1-9886-668a5df13c10
       - name: WalkPartner
         id: 85df7b40-28fd-4d92-8417-d271d087cb60
         position: {x: 342, y: 432}
@@ -596,6 +602,34 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
+        childIds: []
+      - name: 
+        id: b9575fbd-75b5-4985-9888-97412f2a9fd7
+        position: {x: -298, y: 625}
+        node:
+          rid: 2752642943659802624
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642943659802626
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
+        childIds: []
+      - name: 
+        id: fbd01ea1-c1b8-47a1-9886-668a5df13c10
+        position: {x: 16, y: 625}
+        node:
+          rid: 2752642943659802625
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642943659802627
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - a3744ee0-9259-483f-9609-ead7d66702b3
         childIds: []
     - name: Rest
       id: 2e733e59-7527-4eea-8c6f-610b19abb437
@@ -660,16 +694,16 @@ MonoBehaviour:
       nodes:
       - name: 
         id: ab607f2d-40ea-4e52-8ba9-acdc0bfa3024
-        position: {x: 1003.9501, y: 254.15001}
+        position: {x: 0, y: 0}
         node:
           rid: 2752642924918866010
         references: []
         parentIds: []
         childIds:
-        - 9101182a-9025-4405-95fa-555d9c147a7d
+        - 95c0bab0-6dfe-45fc-9e25-1302a570dd7b
       - name: HasFood
         id: 9101182a-9025-4405-95fa-555d9c147a7d
-        position: {x: 1006, y: 431}
+        position: {x: -150, y: 400}
         node:
           rid: 2752642924918866011
         references:
@@ -679,12 +713,12 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         parentIds:
-        - ab607f2d-40ea-4e52-8ba9-acdc0bfa3024
+        - 95c0bab0-6dfe-45fc-9e25-1302a570dd7b
         childIds:
         - 2fe80dab-db99-4fed-8f88-159a89263aad
       - name: 
         id: 2fe80dab-db99-4fed-8f88-159a89263aad
-        position: {x: 1010, y: 633}
+        position: {x: -150, y: 600}
         node:
           rid: 2752642924918866014
         references: []
@@ -695,7 +729,7 @@ MonoBehaviour:
         - 5b36c711-bf92-4ccf-8934-79197899b43d
       - name: 
         id: 0884552a-0942-4aeb-83bd-41d50b472bb4
-        position: {x: 756, y: 830}
+        position: {x: -300, y: 800}
         node:
           rid: 2752642924918866015
         references:
@@ -709,7 +743,7 @@ MonoBehaviour:
         childIds: []
       - name: 
         id: 5b36c711-bf92-4ccf-8934-79197899b43d
-        position: {x: 1313, y: 857}
+        position: {x: 0, y: 800}
         node:
           rid: 2752642924918866016
         references:
@@ -721,13 +755,104 @@ MonoBehaviour:
         parentIds:
         - 2fe80dab-db99-4fed-8f88-159a89263aad
         childIds: []
+      - name: 
+        id: 95c0bab0-6dfe-45fc-9e25-1302a570dd7b
+        position: {x: 0, y: 200}
+        node:
+          rid: 2752642943757582429
+        references: []
+        parentIds:
+        - ab607f2d-40ea-4e52-8ba9-acdc0bfa3024
+        childIds:
+        - 9101182a-9025-4405-95fa-555d9c147a7d
+        - c78c5e89-5290-46eb-86a4-e8f93666f913
+      - name: 
+        id: c78c5e89-5290-46eb-86a4-e8f93666f913
+        position: {x: 150, y: 400}
+        node:
+          rid: 2752642943757582430
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642943757582431
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 95c0bab0-6dfe-45fc-9e25-1302a570dd7b
+        childIds: []
+    - name: WalkRandom
+      id: 1b63f271-5eb4-4f92-aed9-71ffbbb191f9
+      graph:
+        rid: 2752642943659802628
+      nodes:
+      - name: 
+        id: 524bd58b-4121-4520-beb9-af464bbd74bb
+        position: {x: 0, y: 0}
+        node:
+          rid: 2752642943757582336
+        references: []
+        parentIds: []
+        childIds:
+        - 4a4db6ac-96a4-48ed-9465-653c9debfcdb
+      - name: 
+        id: 4a4db6ac-96a4-48ed-9465-653c9debfcdb
+        position: {x: 0, y: 200}
+        node:
+          rid: 2752642943757582337
+        references: []
+        parentIds:
+        - 524bd58b-4121-4520-beb9-af464bbd74bb
+        childIds:
+        - 8d22f4f5-7e6d-4a4d-b3be-6861e34111f9
+        - e0aaa082-a72d-4b86-867a-425dbcf2974c
+      - name: 
+        id: e0aaa082-a72d-4b86-867a-425dbcf2974c
+        position: {x: 167, y: 416}
+        node:
+          rid: 2752642943757582338
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642943757582343
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 4a4db6ac-96a4-48ed-9465-653c9debfcdb
+        childIds: []
+      - name: 
+        id: 929c69bc-b02f-4f45-855d-2e847ff023fe
+        position: {x: -150, y: 600}
+        node:
+          rid: 2752642943757582339
+        references:
+        - fieldName: Action
+          value:
+            rid: 2752642943757582342
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 8d22f4f5-7e6d-4a4d-b3be-6861e34111f9
+        childIds: []
+      - name: 
+        id: 8d22f4f5-7e6d-4a4d-b3be-6861e34111f9
+        position: {x: -150, y: 400}
+        node:
+          rid: 2752642943757582340
+        references:
+        - fieldName: Perception
+          value:
+            rid: 2752642943757582341
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 4a4db6ac-96a4-48ed-9465-653c9debfcdb
+        childIds:
+        - 929c69bc-b02f-4f45-855d-2e847ff023fe
     pushPerceptions: []
   bee: {fileID: 1240629465472281751}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 2752642923302748160
       type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -795,7 +920,7 @@ MonoBehaviour:
     - rid: 2752642924918865977
       type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
-        componentName: TimerReader
+        componentName: TimeReader
         methodName: Hour
     - rid: 2752642924918865978
       type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
@@ -807,7 +932,7 @@ MonoBehaviour:
       type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         componentName: TimeReader
-        methodName: Temperture
+        methodName: Temperature
     - rid: 2752642924918865980
       type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -1002,7 +1127,7 @@ MonoBehaviour:
           componentName: 
           methodName: 
         check:
-          componentName: Bee
+          componentName: 
           methodName: FoodNear
         reset:
           componentName: 
@@ -1045,7 +1170,7 @@ MonoBehaviour:
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
-          componentName: Bee
+          componentName: 
           methodName: Eat
     - rid: 2752642924918866020
       type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
@@ -1109,6 +1234,129 @@ MonoBehaviour:
         ExecuteOnLoop: 0
         InterruptOptions: 2
         subgraphId: c133402e-3e4b-403c-a524-a24fb2c94483
+    - rid: 2752642943659802624
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943659802625
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943659802626
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: 
+          methodName: EmptyAction
+    - rid: 2752642943659802627
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: 
+          methodName: EmptyAction
+    - rid: 2752642943659802628
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943757582336
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 2752642943757582337
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 2752642943757582338
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943757582339
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943757582340
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943757582341
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Bee
+          methodName: HasDenBool
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642943757582342
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkRandom
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642943757582343
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkRandom
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 2752642943757582344
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 1b63f271-5eb4-4f92-aed9-71ffbbb191f9
+    - rid: 2752642943757582429
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 2752642943757582430
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 2752642943757582431
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkRandomNest
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
     - rid: 5137887122736545828
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
@@ -1183,3 +1431,131 @@ MonoBehaviour:
         unpause:
           componentName: 
           methodName: 
+--- !u!114 &-6263540487946062765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f96cb786c96b44a850c65c4416a3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8888611876594290797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263964894498413124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624a8bc2c44bd7c45bb94174d4e028ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4233312249161885199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221417920042967169}
+  m_Layer: 6
+  m_Name: PersonalCameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221417920042967169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233312249161885199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 12.384636, z: -14.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5194410964923949931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4539102215226049671
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5194410964923949931}
+    m_Modifications:
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695808722177343108, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+      propertyPath: m_Name
+      value: StatusDisplay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+--- !u!4 &864668376518117869 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3819556218299256170, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+  m_PrefabInstance: {fileID: 4539102215226049671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6049728396119206445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7857323973002636970, guid: cea5a3ad979e7b54fb4194df238189ff, type: 3}
+  m_PrefabInstance: {fileID: 4539102215226049671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ef0d28c0fddc84db2c8ee300d0a680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

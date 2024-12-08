@@ -55,10 +55,7 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
         bee.StartWalkRandom(StatusDisplay.Statuses.Protecting);
     }
 
-    public void StartWalkRandom()
-    {
-        bee.StartWalkRandom(StatusDisplay.Statuses.Wander);
-    }
+   
     public void StartWalkHunting()
     {
         bee.StartWalkRandom(StatusDisplay.Statuses.Hunting);
@@ -74,6 +71,10 @@ public class WorkerBeeEditorBehaviourRunner : EditorBehaviourRunner
     }    public void StartWalkRandomNestHunt()
     {
         bee.StartWalkRandomNest(StatusDisplay.Statuses.Hunting);
+    }
+    public void StartWalkRandom()
+    {
+        bee.StartWalkRandom(StatusDisplay.Statuses.Wander);
     }
 
     public Status Walk()
