@@ -130,7 +130,6 @@ MonoBehaviour:
   corpse: {fileID: 5537803697179517075, guid: 98f3d6ea9816eb247954a2fe45a9903d, type: 3}
   terrainGenerator: {fileID: 0}
   animalType: 4
-  animalPrefab: {fileID: 1240629465472281751}
   maxHealth: 50
   maxEnergy: 30
   maxFood: 20
@@ -160,7 +159,8 @@ MonoBehaviour:
   nidoPrefab: {fileID: 532198393069034125, guid: 892f69dc49f2ab14188e0d89aef1b2bc, type: 3}
   courtTime: 0
   minDistanceNest: 5
-  gestationTime: 2
+  gestationTime: 150
+  babyBirthTime: 0
   offspringNRange: {x: 1, y: 3}
   foodPerChild: 5
   wanderDistance: 5
@@ -563,14 +563,13 @@ MonoBehaviour:
         - 368e5ec3-48e6-433d-b525-22d319a6be1a
         childIds:
         - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
-        - a3744ee0-9259-483f-9609-ead7d66702b3
         - 85df7b40-28fd-4d92-8417-d271d087cb60
         - 60afe4be-1c71-49ee-8740-ad9f22a19c37
         - badd24cf-765e-4650-be22-12af4a367c75
         - 09d3818d-a594-4693-9d3f-5842f7f4e60b
       - name: NearWorkerBee
         id: 7d876ac1-027d-474f-aed3-8e30e8b3ba46
-        position: {x: -900, y: 600}
+        position: {x: -567, y: 616}
         node:
           rid: 5137887122736545831
         references:
@@ -583,21 +582,6 @@ MonoBehaviour:
         - 16c964d2-1699-4bde-8767-d26ab58c78af
         childIds:
         - b9575fbd-75b5-4985-9888-97412f2a9fd7
-      - name: SpaceHive
-        id: a3744ee0-9259-483f-9609-ead7d66702b3
-        position: {x: -600, y: 600}
-        node:
-          rid: 5137887122736545832
-        references:
-        - fieldName: Perception
-          value:
-            rid: 5137887122736545836
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 16c964d2-1699-4bde-8767-d26ab58c78af
-        childIds:
-        - fbd01ea1-c1b8-47a1-9886-668a5df13c10
       - name: WalkPartner
         id: 85df7b40-28fd-4d92-8417-d271d087cb60
         position: {x: -300, y: 600}
@@ -614,7 +598,7 @@ MonoBehaviour:
         childIds: []
       - name: 
         id: b9575fbd-75b5-4985-9888-97412f2a9fd7
-        position: {x: -900, y: 800}
+        position: {x: -567, y: 816}
         node:
           rid: 2752642943659802624
         references:
@@ -625,20 +609,6 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds:
         - 7d876ac1-027d-474f-aed3-8e30e8b3ba46
-        childIds: []
-      - name: 
-        id: fbd01ea1-c1b8-47a1-9886-668a5df13c10
-        position: {x: -600, y: 800}
-        node:
-          rid: 2752642943659802625
-        references:
-        - fieldName: Action
-          value:
-            rid: 2752642943659802627
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - a3744ee0-9259-483f-9609-ead7d66702b3
         childIds: []
       - name: WalkToNest
         id: badd24cf-765e-4650-be22-12af4a367c75
@@ -1401,16 +1371,7 @@ MonoBehaviour:
     - rid: 2752642943659802624
       type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
-    - rid: 2752642943659802625
-      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
-      data: 
     - rid: 2752642943659802626
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: 
-          methodName: EmptyAction
-    - rid: 2752642943659802627
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
@@ -1612,9 +1573,6 @@ MonoBehaviour:
     - rid: 5137887122736545831
       type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
-    - rid: 5137887122736545832
-      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
-      data: 
     - rid: 5137887122736545834
       type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
@@ -1628,24 +1586,6 @@ MonoBehaviour:
         check:
           componentName: 
           methodName: NearWorkerBee
-        reset:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 5137887122736545836
-      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        init:
-          componentName: 
-          methodName: 
-        check:
-          componentName: 
-          methodName: SpaceHive
         reset:
           componentName: 
           methodName: 

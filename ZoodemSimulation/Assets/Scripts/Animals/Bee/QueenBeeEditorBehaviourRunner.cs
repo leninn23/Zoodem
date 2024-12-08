@@ -31,19 +31,13 @@ public class QueenBeeEditorBehaviourRunner : EditorBehaviourRunner
     {
         return !reproducePerDay && bee.NearWorkerBee();
     }
-
-    public bool SpaceHive()
-    {
-        return bee.SpaceHive();
-    }
-
+    
     public void StartCourt()
     {
         TimeManager.Instance.onDayChange += ResetReproduce;
         bee.FindPartner();
         
         reproducePerDay = true;
-        bee.den.freeSpace--;
         
     }
     

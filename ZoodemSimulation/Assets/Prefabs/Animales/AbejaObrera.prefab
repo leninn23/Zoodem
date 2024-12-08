@@ -389,7 +389,7 @@ MonoBehaviour:
         childIds: []
       - name: Run away
         id: 07a58786-da85-48e3-add6-b3facf4de4b7
-        position: {x: 912, y: -139}
+        position: {x: 928, y: -122}
         node:
           rid: 2752642924918865936
         references:
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   offspringNRange: {x: 0, y: 0}
   foodPerChild: 0
   wanderDistance: 6
-  biomePreferences: 030000000200000004000000
+  biomePreferences: 0200000004000000
   rangeNearWorkerBee: 0
 --- !u!114 &8906532931805985789
 MonoBehaviour:

@@ -62,11 +62,6 @@ public class Bee : ABasicAnimal
         return false;
     }
 
-    public bool SpaceHive()
-    {
-        return den.freeSpace > 0;
-    }
-
     public void Eatt()
     {
         Eat();
