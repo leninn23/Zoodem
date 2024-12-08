@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f66899151be8034caa3a0cd0c42ba85, type: 2}
+  - {fileID: 2100000, guid: a6ef04c5a7bfcaf49bb2b84f1c17a58a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   maxFood: 100
   attackDamage: 20
   moveSpeed: 10
-  maxLongevity: 360
+  maxLongevity: 12000
   maxDenRange: 10
   walkEnergyDrain: 0.3
   huntEnergyDrain: 0.6
@@ -159,8 +159,9 @@ MonoBehaviour:
   nidoPrefab: {fileID: 8278214411429633431, guid: eabb38182efee334cb4bac25196c713b, type: 3}
   courtTime: 20
   minDistanceNest: 6
-  gestationTime: 2
-  offspringNRange: {x: 1, y: 1}
+  gestationTime: 35
+  babyBirthTime: 1200
+  offspringNRange: {x: 1, y: 3}
   foodPerChild: 5
   wanderDistance: 5
   biomePreferences: 030000000200000001000000
@@ -265,21 +266,6 @@ MonoBehaviour:
         parentIds:
         - 13eff97e-e149-42b5-a976-fc47569ee37a
         childIds: []
-      - name: Temperature
-        id: 2e1ecf1a-11f4-4177-88bf-f87576a02480
-        position: {x: 104, y: 1530}
-        node:
-          rid: 5264634918441582611
-        references:
-        - fieldName: Variable
-          value:
-            rid: 5264634918441582612
-          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        parentIds:
-        - ca378bad-3063-4b1a-bcb6-a1c52e9f958a
-        childIds: []
       - name: Life need
         id: 66495b0f-8672-4f14-b603-8adde610c744
         position: {x: 481, y: 316}
@@ -350,7 +336,7 @@ MonoBehaviour:
         parentIds:
         - 87d22ca2-2168-4ba1-b4da-7f316636f7d8
         childIds:
-        - 2e1ecf1a-11f4-4177-88bf-f87576a02480
+        - 97ca91ac-6c7b-455d-b187-f0faaede11da
       - name: Lack of strenght
         id: c417495c-9ab8-4e44-82c7-1399d54f1abb
         position: {x: 843, y: 477}
@@ -398,7 +384,7 @@ MonoBehaviour:
         - 91052aca-4787-4e91-a26c-046bf3a039da
       - name: NothingImportantToDo
         id: a1eb4dc6-1652-4a09-890a-197718e1c756
-        position: {x: 1229, y: 1169}
+        position: {x: 1225, y: 979}
         node:
           rid: 3799616545139982354
         references: []
@@ -413,7 +399,7 @@ MonoBehaviour:
         references:
         - fieldName: Action
           value:
-            rid: 3799616545139982356
+            rid: 3799616613058084884
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -563,35 +549,6 @@ MonoBehaviour:
         - 6849e53f-c1d6-4c6a-9070-b85661675bba
         childIds:
         - c417495c-9ab8-4e44-82c7-1399d54f1abb
-      - name: BEing courted
-        id: 868901b3-bc41-4798-936a-ab5b0a993924
-        position: {x: 598, y: 1786}
-        node:
-          rid: 3799616545139982376
-        references:
-        - fieldName: Action
-          value:
-            rid: 3799616545139982377
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds: []
-        childIds:
-        - bfb73805-18be-4306-800c-9d1a43b42c10
-      - name: BeingCourted
-        id: bfb73805-18be-4306-800c-9d1a43b42c10
-        position: {x: 251, y: 1802}
-        node:
-          rid: 3799616545139982378
-        references:
-        - fieldName: Variable
-          value:
-            rid: 3799616545139982379
-          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        parentIds:
-        - 868901b3-bc41-4798-936a-ab5b0a993924
-        childIds: []
       - name: 
         id: 2bc21f12-c3ae-4fe7-93d6-23d4fa68cf6d
         position: {x: 455, y: 665}
@@ -603,6 +560,21 @@ MonoBehaviour:
         - c417495c-9ab8-4e44-82c7-1399d54f1abb
         childIds:
         - 1de666b3-0997-4142-9858-3b97d5801850
+      - name: Temperature
+        id: 97ca91ac-6c7b-455d-b187-f0faaede11da
+        position: {x: 136, y: 1582}
+        node:
+          rid: 3799616613058084864
+        references:
+        - fieldName: Variable
+          value:
+            rid: 3799616613058084865
+          fieldType: System.Func`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        parentIds:
+        - ca378bad-3063-4b1a-bcb6-a1c52e9f958a
+        childIds: []
     - name: EagleNestBT
       id: aa2e0a53-373c-4f94-8d89-c4d3088e07cb
       graph:
@@ -1478,10 +1450,10 @@ MonoBehaviour:
         references: []
         parentIds: []
         childIds:
-        - e8556e86-acd2-47b2-801b-fb4784c1c8a7
+        - f1874032-9404-47b1-8acb-1abfa6581fb1
       - name: 
         id: e8556e86-acd2-47b2-801b-fb4784c1c8a7
-        position: {x: 0, y: 200}
+        position: {x: 299, y: 348}
         node:
           rid: 3799616502097772681
         references:
@@ -1491,7 +1463,32 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
+        - f1874032-9404-47b1-8acb-1abfa6581fb1
+        childIds: []
+      - name: 
+        id: f1874032-9404-47b1-8acb-1abfa6581fb1
+        position: {x: 26, y: 145}
+        node:
+          rid: 3799616613058084868
+        references: []
+        parentIds:
         - 729c86b3-de54-436c-80c3-74797cb5941d
+        childIds:
+        - 10ec834a-6457-47ff-a9f4-bcdf610003c3
+        - e8556e86-acd2-47b2-801b-fb4784c1c8a7
+      - name: Go nest
+        id: 10ec834a-6457-47ff-a9f4-bcdf610003c3
+        position: {x: -25, y: 340}
+        node:
+          rid: 3799616613058084869
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616613058084870
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - f1874032-9404-47b1-8acb-1abfa6581fb1
         childIds: []
     - name: BeingCourted
       id: 47b1f789-6bc8-4b65-b291-09c4ca7b1b99
@@ -1588,6 +1585,34 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds:
         - 1588b1d7-1905-4d42-8408-501b3750542d
+        childIds: []
+    - name: RunAway
+      id: 35c3dd4d-1b66-49dc-a104-9f5369b047c7
+      graph:
+        rid: 3799616613058084879
+      nodes:
+      - name: 
+        id: f74f839f-6098-420d-b867-5d4df31f8c51
+        position: {x: 923.15283, y: 444.48096}
+        node:
+          rid: 3799616613058084881
+        references: []
+        parentIds: []
+        childIds:
+        - 1f41b1fd-6b58-4e63-8b5f-b262228185e8
+      - name: 
+        id: 1f41b1fd-6b58-4e63-8b5f-b262228185e8
+        position: {x: 913, y: 585}
+        node:
+          rid: 3799616613058084882
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616613058084883
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - f74f839f-6098-420d-b867-5d4df31f8c51
         childIds: []
     pushPerceptions: []
   eagle: {fileID: 8747803331283776312}
@@ -1934,24 +1959,6 @@ MonoBehaviour:
       data:
         PullingEnabled: 1
         FinishSystemOnComplete: 0
-    - rid: 3799616545139982356
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: 
-          methodName: StartWalkRandom
-        update:
-          componentName: Eagle
-          methodName: WalkObjective
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
     - rid: 3799616545139982357
       type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -2015,13 +2022,13 @@ MonoBehaviour:
     - rid: 3799616545139982369
       type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
-        PullingEnabled: 1
+        PullingEnabled: 0
         FinishSystemOnComplete: 0
     - rid: 3799616545139982370
       type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         ExecuteOnLoop: 0
-        InterruptOptions: 2
+        InterruptOptions: 0
         subgraphId: f6605e51-4723-4f89-b569-3c123b15c728
     - rid: 3799616545139982371
       type: {class: MinFusionFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
@@ -2050,28 +2057,6 @@ MonoBehaviour:
         PullingEnabled: 1
         Slope: -1
         YIntercept: 1
-    - rid: 3799616545139982376
-      type: {class: UtilityAction, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 0
-        FinishSystemOnComplete: 0
-    - rid: 3799616545139982377
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 0
-        subgraphId: 47b1f789-6bc8-4b65-b291-09c4ca7b1b99
-    - rid: 3799616545139982378
-      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        min: 0
-        max: 10
-    - rid: 3799616545139982379
-      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        componentName: Eagle
-        methodName: IsBeingCourted
     - rid: 3799616545139982380
       type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
@@ -2338,6 +2323,76 @@ MonoBehaviour:
       type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
         IsRandomized: 0
+    - rid: 3799616613058084864
+      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
+      data:
+        PullingEnabled: 1
+        min: 0
+        max: 1
+    - rid: 3799616613058084865
+      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        componentName: 
+        methodName: TemperatureTer
+    - rid: 3799616613058084868
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 3799616613058084869
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084870
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkToNest
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616613058084879
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084881
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 3799616613058084882
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084883
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkRandomFleeing
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616613058084884
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 35c3dd4d-1b66-49dc-a104-9f5369b047c7
     - rid: 5264634693250449442
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -2403,17 +2458,6 @@ MonoBehaviour:
       data:
         componentName: Eagle
         methodName: HasNest
-    - rid: 5264634918441582611
-      type: {class: VariableFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
-      data:
-        PullingEnabled: 1
-        min: 0
-        max: 1
-    - rid: 5264634918441582612
-      type: {class: SerializedContextMethod, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        componentName: TimeReader
-        methodName: Temperature
     - rid: 5264634918441582613
       type: {class: SigmoidCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:

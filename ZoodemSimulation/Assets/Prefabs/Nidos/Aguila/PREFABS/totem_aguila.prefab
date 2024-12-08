@@ -137,3 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a452a3bdf347e44bcc154a3bd35b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offspringCount: 0
+  timeLeftForSpawn: 0
+  food: 0
+  foodDrain: 0.01
+  freeSpace: 0
+  owner: {fileID: 0}
+  animalPrefab: {fileID: 8747803331283776312, guid: 691c25a21bf32114eb8f2d0c6655ae32, type: 3}

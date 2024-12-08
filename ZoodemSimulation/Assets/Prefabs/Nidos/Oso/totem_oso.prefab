@@ -126,7 +126,9 @@ MonoBehaviour:
   timeLeftForSpawn: 0
   food: 0
   foodDrain: 0.01
+  freeSpace: 0
   owner: {fileID: 0}
+  animalPrefab: {fileID: 6017457931663132661, guid: a22b0549c4030f6499843b24c63abd4b, type: 3}
 --- !u!1001 &3334179496179059642
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class Nido : MonoBehaviour
     public int freeSpace;
 
     public ABasicAnimal owner;
+
+    public ABasicAnimal animalPrefab;
     // public IAnimal owner;
 
     private void Update()
@@ -30,7 +32,7 @@ public class Nido : MonoBehaviour
         {
             for (int i = 0; i < offspringCount; i++)
             {
-                Instantiate(owner);
+                Instantiate(animalPrefab, transform.position, transform.rotation);
             }
 
             offspringCount = 0;

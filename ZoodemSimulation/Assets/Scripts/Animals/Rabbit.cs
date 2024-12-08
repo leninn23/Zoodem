@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Animals
 {
-    public class Rabbit : ABasicAnimal, IFood
+    public class Rabbit : ABasicAnimal
     {
         private int _numberOfTurns;
 
@@ -26,8 +26,7 @@ namespace Animals
                 }
             }
             StartWalkRandom(StatusDisplay.Statuses.Wander);
-            FoodState = IFood.FoodStates.Alive;
-            FoodType = IFood.FoodTypes.Meat;
+
             _numberOfTurns = Random.Range(0, 4);
 
             onDeath += SpawnRandomRabbit;
@@ -51,16 +50,7 @@ namespace Animals
                 StartWalkRandom(StatusDisplay.Statuses.Wander);
             }
         }
-
-        public float GetFoodValue()
-        {
-            return 10f;
-        }
-
-        public void GetEaten()
-        {
-            //I they dont get eaten alive :(
-        }
+        
 
         public void SpawnRandomRabbit()
         {
@@ -71,7 +61,5 @@ namespace Animals
             newRabbit.name = "Rabbit";
         }
         
-        public IFood.FoodTypes FoodType { get; private set; }
-        public IFood.FoodStates FoodState { get; private set;}
     }
 }

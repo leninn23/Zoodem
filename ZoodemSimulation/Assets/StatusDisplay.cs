@@ -60,7 +60,7 @@ public class StatusDisplay : MonoBehaviour
 
         _movementStatuses = new List<Statuses>()
         {
-            Statuses.Sleeping, Statuses.GoingHome, Statuses.Hunting, Statuses.Fleeing, Statuses.Wander, Statuses.WalkingFood, Statuses.WalkingPartner, Statuses.WalkingPrey, Statuses.Rest, Statuses.WalkingToBiome
+            Statuses.Sleeping, Statuses.GoingHome, Statuses.Hunting, Statuses.Fleeing, Statuses.Wander, Statuses.WalkingFood, Statuses.WalkingPartner, Statuses.WalkingPrey, Statuses.Rest, Statuses.WalkingToBiome, Statuses.Courting
         };
         _conflictingStatuses = new List<List<Statuses>>();
         _conflictingStatuses.Add(_movementStatuses);

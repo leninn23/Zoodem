@@ -9,12 +9,13 @@ using Random = UnityEngine.Random;
 
 namespace Animals
 {
-    public class ABasicAnimal : MonoBehaviour
+    public class ABasicAnimal : MonoBehaviour, IFood
     {
         public StatusDisplay display;
         public Corpse corpse;
         public TerrainGenerator terrainGenerator;
         public AnimalType animalType;
+
         // [Space(7)][Header("Basic settings")]
         public float maxHealth;
         public float maxEnergy;
@@ -62,6 +63,7 @@ namespace Animals
         [Space(7)][Header("Relationship settings")]
         public float minDistanceNest = 5f;
         public float gestationTime; //in years
+        public float babyBirthTime;
         public Vector2Int offspringNRange;
         [Tooltip("How much food to give each child in the den")] public float foodPerChild;
         private int _offspring;
@@ -101,6 +103,9 @@ namespace Animals
         }
         private void Awake()
         {
+            FoodState = IFood.FoodStates.Alive;
+            FoodType = IFood.FoodTypes.Meat;
+            
             terrainGenerator = FindObjectOfType<TerrainGenerator>();
             _aBasicAnimals = new Collider[10];
             
@@ -449,7 +454,7 @@ namespace Animals
         }
         public void StartIncubate()
         {
-            Debug.LogError(gameObject.name+" : incuboo");
+            // Debug.LogError(gameObject.name+" : incuboo");
             _timer = gestationTime;
         }
         public Status Incubate()
@@ -633,6 +638,11 @@ namespace Animals
 
         #region Hunt perceptions
 
+        public bool IsPreyAlone()
+        {
+            return (Physics.CheckSphere(_prey.position, 2f, LayerMask.GetMask("Animal")));
+        }
+        
         public bool PreyNear()
         {
             var foodNear = Physics.OverlapSphere(transform.position, 5.0f, LayerMask.GetMask("Animal"));
@@ -789,5 +799,18 @@ namespace Animals
             //display.SetMainBars();
             return Status.Running;
         }
+
+        public float GetFoodValue()
+        {
+            return foodValue;
+        }
+
+        public void GetEaten()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFood.FoodTypes FoodType { get; set; }
+        public IFood.FoodStates FoodState { get; set; }
     }
 }

@@ -53,6 +53,7 @@ MonoBehaviour:
   foodDrain: 0.01
   freeSpace: 10
   owner: {fileID: 1240629465472281751, guid: c142d1b8685a3a64ead729caff447f54, type: 3}
+  animalPrefab: {fileID: 1240629465472281751, guid: c142d1b8685a3a64ead729caff447f54, type: 3}
 --- !u!1001 &2838934557633818300
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class BearEditorBehavoirRunner : EditorBehaviourRunner
     }
     public void StartWalkRandomFleeing()
     {
-        bear.StartWalkRandom(StatusDisplay.Statuses.Fleeing);
+        bear.StartWalkRandomNest(StatusDisplay.Statuses.Fleeing);
     }
 
     public void StartWalkRandomNest()

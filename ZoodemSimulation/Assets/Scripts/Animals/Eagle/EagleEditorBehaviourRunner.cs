@@ -4,6 +4,7 @@ using Animals.Eagle;
 using BehaviourAPI.Core;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEngine;
+using World;
 
 public class EagleEditorBehaviourRunner : EditorBehaviourRunner
 {
@@ -148,10 +149,19 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
     {
         Debug.Log("Detectando si presa sola");
         //Look for animals of same type as prey in a distance x around prey
-        return true;
+        return eagle.IsPreyAlone();
     }
     ///
+    public float Hour()
+    {
+        return TimeManager.Instance.TimeOfTheDay / TimeManager.LenghtOfDay;
+    }
+    public float TemperatureTer()
+    {
+        Debug.LogWarning("Temperatura: " + (TimeManager.Instance.Temperature + 10) / 45f);
+        return (TimeManager.Instance.Temperature + 10) / 45f;
 
+    }
     public void Eat()
     {
         Debug.Log("Comiendo");
@@ -184,7 +194,7 @@ public class EagleEditorBehaviourRunner : EditorBehaviourRunner
 
         public void StartWalkFleeing()
         {
-            eagle.StartWalkRandom(StatusDisplay.Statuses.Fleeing);
+            eagle.StartWalkRandomNest(StatusDisplay.Statuses.Fleeing);
         }
     public void StartWalkProtect()
     {

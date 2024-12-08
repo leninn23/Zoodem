@@ -237,12 +237,12 @@ MonoBehaviour:
   corpse: {fileID: 5537803697179517075, guid: 98f3d6ea9816eb247954a2fe45a9903d, type: 3}
   terrainGenerator: {fileID: 0}
   animalType: 2
-  maxHealth: 50
+  maxHealth: 70
   maxEnergy: 30
-  maxFood: 40
+  maxFood: 100
   attackDamage: 5
   moveSpeed: 6
-  maxLongevity: 500
+  maxLongevity: 30000
   maxDenRange: 10
   walkEnergyDrain: 0.3
   huntEnergyDrain: 0.6
@@ -266,9 +266,10 @@ MonoBehaviour:
   nidoPrefab: {fileID: 2254550935864109007, guid: d5f0ecad0c7707f47a83424f2bfb8bbe, type: 3}
   courtTime: 0
   minDistanceNest: 5
-  gestationTime: 1
-  offspringNRange: {x: 0, y: 0}
-  foodPerChild: 0
+  gestationTime: 90
+  babyBirthTime: 240
+  offspringNRange: {x: 1, y: 2}
+  foodPerChild: 5
   wanderDistance: 6
   biomePreferences: 030000000200000004000000
   huntingSeasons: 0000000003000000
@@ -562,13 +563,13 @@ MonoBehaviour:
         childIds: []
       - name: Run away
         id: 8e114387-768b-4049-830d-0c14d6ee617b
-        position: {x: 824, y: 117}
+        position: {x: 809, y: 98}
         node:
           rid: 2752642922066477090
         references:
         - fieldName: Action
           value:
-            rid: 2752642922066477098
+            rid: 3799616613058084885
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds: []
@@ -604,7 +605,7 @@ MonoBehaviour:
         - 7c4ccff1-f683-4aa4-88a8-e6c5a7cedf0a
       - name: Sleep
         id: 6664c74e-8de3-4170-b55e-74609b9424c9
-        position: {x: 1124, y: 401}
+        position: {x: 1164, y: 416}
         node:
           rid: 2752642922066477093
         references:
@@ -1469,16 +1470,16 @@ MonoBehaviour:
       nodes:
       - name: 
         id: de346b86-28c2-4e0d-804e-554bae452ae2
-        position: {x: 941, y: 293}
+        position: {x: 0, y: 0}
         node:
           rid: 2752642922066477112
         references: []
         parentIds: []
         childIds:
-        - 5120f007-5a42-4cc2-a639-8e1be6ddc962
+        - 98c0752a-0333-45df-9ab1-e0e8fff1a527
       - name: 
         id: 5120f007-5a42-4cc2-a639-8e1be6ddc962
-        position: {x: 925, y: 457}
+        position: {x: 257, y: 379}
         node:
           rid: 2752642922066477111
         references:
@@ -1488,8 +1489,33 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
-        - de346b86-28c2-4e0d-804e-554bae452ae2
+        - 98c0752a-0333-45df-9ab1-e0e8fff1a527
         childIds: []
+      - name: 
+        id: b60d01b2-bf34-42e5-949b-a887e832c1a0
+        position: {x: 5, y: 382}
+        node:
+          rid: 3799616613058084871
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616613058084874
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 98c0752a-0333-45df-9ab1-e0e8fff1a527
+        childIds: []
+      - name: 
+        id: 98c0752a-0333-45df-9ab1-e0e8fff1a527
+        position: {x: 66, y: 211}
+        node:
+          rid: 3799616613058084873
+        references: []
+        parentIds:
+        - de346b86-28c2-4e0d-804e-554bae452ae2
+        childIds:
+        - b60d01b2-bf34-42e5-949b-a887e832c1a0
+        - 5120f007-5a42-4cc2-a639-8e1be6ddc962
     - name: Eat
       id: 5f246428-6af3-46ac-8903-e03fc065a205
       graph:
@@ -1625,6 +1651,34 @@ MonoBehaviour:
             Culture=neutral, PublicKeyToken=null
         parentIds:
         - e6a537fc-f61f-47a7-b142-a75c506fd927
+        childIds: []
+    - name: RunAway
+      id: 895580c1-2cf2-4cc1-b612-bbe887ba187f
+      graph:
+        rid: 3799616613058084875
+      nodes:
+      - name: 
+        id: e8b443d3-caba-471a-901e-003909a8dae9
+        position: {x: 663, y: 254}
+        node:
+          rid: 3799616613058084876
+        references: []
+        parentIds: []
+        childIds:
+        - 1d20764f-dcdb-4d90-8eee-9641d9e2726b
+      - name: 
+        id: 1d20764f-dcdb-4d90-8eee-9641d9e2726b
+        position: {x: 666, y: 429}
+        node:
+          rid: 3799616613058084877
+        references:
+        - fieldName: Action
+          value:
+            rid: 3799616613058084878
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - e8b443d3-caba-471a-901e-003909a8dae9
         childIds: []
     pushPerceptions: []
   bear: {fileID: 6017457931663132661}
@@ -1908,24 +1962,6 @@ MonoBehaviour:
       data:
         PullingEnabled: 1
         FinishSystemOnComplete: 0
-    - rid: 2752642922066477098
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: 
-          methodName: StartWalkRandomFleeing
-        update:
-          componentName: Bear
-          methodName: WalkObjective
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
     - rid: 2752642922066477099
       type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -2310,6 +2346,65 @@ MonoBehaviour:
         PullingEnabled: 1
         Slope: 1
         YIntercept: 0
+    - rid: 3799616613058084871
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084873
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 3799616613058084874
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkToNest
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616613058084875
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084876
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 3799616613058084877
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 3799616613058084878
+      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        start:
+          componentName: 
+          methodName: StartWalkRandomFleeing
+        update:
+          componentName: 
+          methodName: Walk
+        stop:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 3799616613058084885
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 2
+        subgraphId: 895580c1-2cf2-4cc1-b612-bbe887ba187f
     - rid: 5137887140953194496
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
