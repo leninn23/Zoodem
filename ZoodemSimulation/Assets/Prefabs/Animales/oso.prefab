@@ -486,7 +486,7 @@ MonoBehaviour:
         references: []
         parentIds:
         - b40cf2e2-4f20-484b-b922-62a6ab4b4c32
-        - 6fa65e53-f4f2-4175-b99e-727ce0efa26f
+        - fa7a6677-e301-4f58-85e6-2c2e708eb45e
         childIds:
         - c852c2e3-14d4-40c4-a859-10a84a3183cd
       - name: Homeless
@@ -539,7 +539,7 @@ MonoBehaviour:
         - 6664c74e-8de3-4170-b55e-74609b9424c9
         childIds:
         - 032c3fe3-34cf-4837-ae04-b0a08d00de6f
-        - 6fa65e53-f4f2-4175-b99e-727ce0efa26f
+        - fa7a6677-e301-4f58-85e6-2c2e708eb45e
       - name: 
         id: f1a2f11e-5f3b-4c8a-a391-33c445a7d0fb
         position: {x: 1124, y: 601}
@@ -672,11 +672,11 @@ MonoBehaviour:
         parentIds: []
         childIds:
         - f1a2f11e-5f3b-4c8a-a391-33c445a7d0fb
-      - name: Night time
-        id: 6fa65e53-f4f2-4175-b99e-727ce0efa26f
-        position: {x: 556, y: 1098}
+      - name: 
+        id: fa7a6677-e301-4f58-85e6-2c2e708eb45e
+        position: {x: 594, y: 1045}
         node:
-          rid: 3799616606486134784
+          rid: 3799616608649609218
         references: []
         parentIds:
         - cae68c06-529d-40c5-a906-5964f3e8b66b
@@ -2304,12 +2304,12 @@ MonoBehaviour:
       type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
         IsRandomized: 0
-    - rid: 3799616606486134784
+    - rid: 3799616608649609218
       type: {class: LinearCurveFactor, ns: BehaviourAPI.UtilitySystems, asm: BehaviourAPI.UtilitySystems}
       data:
         PullingEnabled: 1
-        Slope: -1
-        YIntercept: 1
+        Slope: 1
+        YIntercept: 0
     - rid: 5137887140953194496
       type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data: 
